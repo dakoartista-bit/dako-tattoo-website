@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { FormEvent, useState } from "react";
+
+const whatsappNumber = "34600000000";
 
 const gallery = [
   { src: "/gallery/IMG_3331.jpeg", title: "Japanese Mandala Sleeve", category: "Black & Grey" },
@@ -20,6 +22,24 @@ const specialties = [
 
 export default function Home() {
   const [selected, setSelected] = useState<(typeof gallery)[number] | null>(null);
+
+  function sendBooking(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+
+    const message = [
+      "Hola Dako Tattoo, quiero pedir una cita.",
+      "",
+      `Nombre: ${data.get("name") || ""}`,
+      `WhatsApp: ${data.get("whatsapp") || ""}`,
+      `Instagram: ${data.get("instagram") || ""}`,
+      `Zona del cuerpo: ${data.get("bodyArea") || ""}`,
+      `Idea: ${data.get("idea") || ""}`,
+    ].join("\n");
+
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank");
+  }
 
   return (
     <main>
@@ -41,7 +61,7 @@ export default function Home() {
           </p>
           <div className="actions">
             <a className="button primary" href="#booking">Reservar consulta</a>
-            <a className="button" href="https://wa.me/34600000000">WhatsApp</a>
+            <a className="button" href={`https://wa.me/${whatsappNumber}`}>WhatsApp</a>
           </div>
         </div>
       </section>
@@ -93,20 +113,20 @@ export default function Home() {
             Envíame tu idea, zona del cuerpo, tamaño aproximado y referencias. Te responderé con una propuesta profesional.
           </p>
         </div>
-        <form className="form">
-          <input placeholder="Nombre completo" />
-          <input placeholder="WhatsApp" />
-          <input placeholder="Instagram" />
-          <input placeholder="Zona del cuerpo" />
-          <textarea placeholder="Describe tu idea" />
-          <button type="button">Enviar solicitud</button>
+        <form className="form" onSubmit={sendBooking}>
+          <input name="name" placeholder="Nombre completo" required />
+          <input name="whatsapp" placeholder="WhatsApp" required />
+          <input name="instagram" placeholder="Instagram" />
+          <input name="bodyArea" placeholder="Zona del cuerpo" required />
+          <textarea name="idea" placeholder="Describe tu idea" required />
+          <button type="submit">Enviar solicitud por WhatsApp</button>
         </form>
       </section>
 
       <section id="contact" className="section contact">
         <h2>Contacto</h2>
         <p>Para consultas rápidas, escribe por WhatsApp o Instagram.</p>
-        <a className="button primary" href="https://wa.me/34600000000">Abrir WhatsApp</a>
+        <a className="button primary" href={`https://wa.me/${whatsappNumber}`}>Abrir WhatsApp</a>
       </section>
 
       {selected && (
