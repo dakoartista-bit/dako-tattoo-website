@@ -2,7 +2,9 @@
 
 import { FormEvent, useState } from "react";
 
-const whatsappNumber = "34600000000";
+const whatsappNumber = "34643922673";
+const instagramUrl = "https://www.instagram.com/dako.tattoo.art?igsh=MTA3NWczMDllemp1ZA%3D%3D&utm_source=qr";
+const facebookUrl = "https://www.facebook.com/share/1BNmFXcvEQ/?mibextid=wwXIfr";
 
 const gallery = [
   { src: "/gallery/IMG_3331.jpeg", title: "Japanese Mandala Sleeve", category: "Black & Grey" },
@@ -50,6 +52,8 @@ export default function Home() {
             <a href="#gallery">Galería</a>
             <a href="#booking">Cita</a>
             <a href="#contact">Contacto</a>
+            <a href={instagramUrl} target="_blank" rel="noreferrer">Instagram</a>
+            <a href={facebookUrl} target="_blank" rel="noreferrer">Facebook</a>
           </div>
         </nav>
 
@@ -61,7 +65,8 @@ export default function Home() {
           </p>
           <div className="actions">
             <a className="button primary" href="#booking">Reservar consulta</a>
-            <a className="button" href={`https://wa.me/${whatsappNumber}`}>WhatsApp</a>
+            <a className="button" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer">WhatsApp</a>
+            <a className="button" href={instagramUrl} target="_blank" rel="noreferrer">Instagram</a>
           </div>
         </div>
       </section>
@@ -125,8 +130,17 @@ export default function Home() {
 
       <section id="contact" className="section contact">
         <h2>Contacto</h2>
-        <p>Para consultas rápidas, escribe por WhatsApp o Instagram.</p>
-        <a className="button primary" href={`https://wa.me/${whatsappNumber}`}>Abrir WhatsApp</a>
+        <p>Para consultas rápidas, escribe por WhatsApp, Instagram o Facebook.</p>
+        <div className="actions" style={{ justifyContent: "center" }}>
+          <a className="button primary" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer">WhatsApp</a>
+          <a className="button" href={instagramUrl} target="_blank" rel="noreferrer">Instagram</a>
+          <a className="button" href={facebookUrl} target="_blank" rel="noreferrer">Facebook</a>
+        </div>
+        <p style={{ marginTop: 24 }}>
+          WhatsApp: +34 643 922 673<br />
+          Instagram: @dako.tattoo.art<br />
+          Facebook: Yordan Georgiev
+        </p>
       </section>
 
       {selected && (
