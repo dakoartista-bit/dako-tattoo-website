@@ -17,7 +17,7 @@ const gallery = [
 
 const specialties = [
   "Black & Grey Realism",
-  "Cover Up",
+  "Polynesian / Tribal",
   "Fine Line",
   "Custom Tattoo Design",
 ];
@@ -39,7 +39,7 @@ export default function Home() {
       "📱 WhatsApp:",
       `${data.get("whatsapp") || ""}`,
       "",
-      "📸 Instagram:",
+      "📸 Instagram / Facebook:",
       `${data.get("instagram") || ""}`,
       "",
       "📍 Zona del cuerpo:",
@@ -55,7 +55,7 @@ export default function Home() {
       `${data.get("idea") || ""}`,
       "",
       "🖼️ Referencias:",
-      "Te las enviaré por este chat.",
+      "Te enviaré las fotos de referencia por este chat.",
     ].join("\n");
 
     window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank");
@@ -85,6 +85,7 @@ export default function Home() {
             <a className="button primary" href="#booking">Reservar consulta</a>
             <a className="button" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer">WhatsApp</a>
             <a className="button" href={instagramUrl} target="_blank" rel="noreferrer">Instagram</a>
+            <a className="button" href={facebookUrl} target="_blank" rel="noreferrer">Facebook</a>
           </div>
         </div>
       </section>
@@ -139,7 +140,7 @@ export default function Home() {
         <form className="form" onSubmit={sendBooking}>
           <input name="name" placeholder="Nombre completo" required />
           <input name="whatsapp" placeholder="WhatsApp" required />
-          <input name="instagram" placeholder="Instagram" />
+          <input name="instagram" placeholder="Instagram / Facebook" />
           <input name="bodyArea" placeholder="Zona del cuerpo" required />
           <input name="size" placeholder="Tamaño aproximado (ej. 15 cm)" required />
           <select name="style" required defaultValue="">
@@ -149,7 +150,6 @@ export default function Home() {
             <option>Fine Line</option>
             <option>Tribal</option>
             <option>Realismo</option>
-            <option>Cover Up</option>
             <option>Lettering</option>
             <option>Ornamental</option>
             <option>Personalizado</option>
