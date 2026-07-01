@@ -33,11 +33,29 @@ export default function Home() {
     const message = [
       "Hola Dako Tattoo, quiero pedir una cita.",
       "",
-      `Nombre: ${data.get("name") || ""}`,
-      `WhatsApp: ${data.get("whatsapp") || ""}`,
-      `Instagram: ${data.get("instagram") || ""}`,
-      `Zona del cuerpo: ${data.get("bodyArea") || ""}`,
-      `Idea: ${data.get("idea") || ""}`,
+      "👤 Nombre:",
+      `${data.get("name") || ""}`,
+      "",
+      "📱 WhatsApp:",
+      `${data.get("whatsapp") || ""}`,
+      "",
+      "📸 Instagram:",
+      `${data.get("instagram") || ""}`,
+      "",
+      "📍 Zona del cuerpo:",
+      `${data.get("bodyArea") || ""}`,
+      "",
+      "📏 Tamaño aproximado:",
+      `${data.get("size") || ""}`,
+      "",
+      "🎨 Estilo:",
+      `${data.get("style") || ""}`,
+      "",
+      "📝 Idea del tatuaje:",
+      `${data.get("idea") || ""}`,
+      "",
+      "🖼️ Referencias:",
+      "Te las enviaré por este chat.",
     ].join("\n");
 
     window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank");
@@ -123,8 +141,24 @@ export default function Home() {
           <input name="whatsapp" placeholder="WhatsApp" required />
           <input name="instagram" placeholder="Instagram" />
           <input name="bodyArea" placeholder="Zona del cuerpo" required />
+          <input name="size" placeholder="Tamaño aproximado (ej. 15 cm)" required />
+          <select name="style" required defaultValue="">
+            <option value="" disabled>Selecciona un estilo</option>
+            <option>Black & Grey</option>
+            <option>Color</option>
+            <option>Fine Line</option>
+            <option>Tribal</option>
+            <option>Realismo</option>
+            <option>Cover Up</option>
+            <option>Lettering</option>
+            <option>Ornamental</option>
+            <option>Personalizado</option>
+          </select>
           <textarea name="idea" placeholder="Describe tu idea" required />
           <button type="submit">Enviar solicitud por WhatsApp</button>
+          <p className="formNote">
+            Después de enviar la solicitud, envíame las fotos de referencia por WhatsApp para preparar un diseño personalizado.
+          </p>
         </form>
       </section>
 
