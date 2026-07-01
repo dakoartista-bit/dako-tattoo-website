@@ -8,7 +8,7 @@ const gallery = [
   { src: "/gallery/IMG_3927.jpeg", title: "Rose Neck Tattoo", category: "Floral" },
   { src: "/gallery/IMG_4085.jpeg", title: "Traditional Eagle Chest", category: "Color" },
   { src: "/gallery/IMG_5072.jpeg", title: "Razor Custom Tattoo", category: "Traditional" },
-  { src: "/gallery/IMG_6057.jpeg", title: "Floral Forearm", category: "Floral" },
+  { src: "/gallery/IMG_6057.jpeg", title: "Polynesian Tribal Sleeve", category: "Tribal" },
 ];
 
 const specialties = [
