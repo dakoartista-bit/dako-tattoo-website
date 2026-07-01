@@ -5,17 +5,10 @@ import { useState } from "react";
 const gallery = [
   { src: "/gallery/IMG_3331.jpeg", title: "Japanese Mandala Sleeve", category: "Black & Grey" },
   { src: "/gallery/IMG_3790.jpeg", title: "Eagle Forearm", category: "Black & Grey" },
-  { src: "/gallery/IMG_3250.jpeg", title: "Rose Neck Tattoo", category: "Fine Line" },
   { src: "/gallery/IMG_3927.jpeg", title: "Rose Neck Tattoo", category: "Floral" },
   { src: "/gallery/IMG_4085.jpeg", title: "Traditional Eagle Chest", category: "Color" },
   { src: "/gallery/IMG_5072.jpeg", title: "Razor Custom Tattoo", category: "Traditional" },
   { src: "/gallery/IMG_6057.jpeg", title: "Floral Forearm", category: "Floral" },
-  { src: "/gallery/IMG_9843.jpeg", title: "Neck Custom Piece", category: "Custom" },
-  { src: "/gallery/IMG_1971.jpeg", title: "Family Realism", category: "Black & Grey" },
-  { src: "/gallery/IMG_3009.jpeg", title: "Custom Tattoo", category: "Custom" },
-  { src: "/gallery/IMG_3871.jpeg", title: "Tattoo Detail", category: "Portfolio" },
-  { src: "/gallery/IMG_3880.jpeg", title: "Tattoo Detail", category: "Portfolio" },
-  { src: "/gallery/IMG_4673.jpeg", title: "Tattoo Detail", category: "Portfolio" },
 ];
 
 const specialties = [
@@ -62,7 +55,14 @@ export default function Home() {
         <div className="masonry">
           {gallery.map((item) => (
             <button className="galleryItem" key={item.src} onClick={() => setSelected(item)}>
-              <img src={item.src} alt={item.title} loading="lazy" />
+              <img
+                src={item.src}
+                alt={item.title}
+                loading="lazy"
+                onError={(event) => {
+                  event.currentTarget.parentElement?.remove();
+                }}
+              />
               <span className="galleryOverlay">
                 <b>{item.title}</b>
                 <small>{item.category}</small>
