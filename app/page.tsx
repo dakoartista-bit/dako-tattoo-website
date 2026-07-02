@@ -51,6 +51,9 @@ export default function Home() {
       "🎨 Estilo:",
       `${data.get("style") || ""}`,
       "",
+      "📌 ¿Cómo conociste Dako Tattoo?",
+      `${data.get("source") || ""}`,
+      "",
       "📝 Idea del tatuaje:",
       `${data.get("idea") || ""}`,
       "",
@@ -153,6 +156,16 @@ export default function Home() {
             <option>Lettering</option>
             <option>Ornamental</option>
             <option>Personalizado</option>
+          </select>
+          <select name="source" required defaultValue="">
+            <option value="" disabled>¿Cómo conociste Dako Tattoo?</option>
+            <option>Instagram</option>
+            <option>Facebook</option>
+            <option>TikTok</option>
+            <option>Google</option>
+            <option>Un amigo me recomendó</option>
+            <option>Ya soy cliente</option>
+            <option>Otro</option>
           </select>
           <textarea name="idea" placeholder="Describe tu idea" required />
           <button type="submit">Enviar solicitud por WhatsApp</button>
