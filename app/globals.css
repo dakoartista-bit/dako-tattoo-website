@@ -28,13 +28,88 @@ a { color: inherit; text-decoration: none; }
 }
 .nav {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 20px;
 }
+.brandColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  min-width: 0;
+  max-width: 470px;
+}
 .nav strong { letter-spacing: .18em; font-size: 18px; }
-.nav div { display: flex; gap: 20px; color: var(--muted); font-size: 18px; line-height: 1.25; }
-.heroContent { max-width: 760px; padding: 120px 0 80px; }
+.navLinks { display: flex; gap: 20px; color: var(--muted); font-size: 18px; line-height: 1.25; }
+
+.heroCredentials {
+  display: grid;
+  gap: 12px;
+  width: min(100%, 430px);
+}
+.credentialEyebrow {
+  margin: 0;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  font-size: 11px;
+  font-weight: 800;
+}
+.certificatePreview,
+.sanitaryBadge {
+  width: 100%;
+  min-height: 0;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 18px;
+  background: rgba(10,10,10,.7);
+  color: var(--text);
+  box-shadow: 0 12px 34px rgba(0,0,0,.22);
+}
+.certificatePreview {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  align-items: center;
+  gap: 14px;
+  padding: 10px;
+  text-align: left;
+  cursor: pointer;
+}
+.certificatePreview img {
+  width: 120px;
+  aspect-ratio: 1.41 / 1;
+  object-fit: cover;
+  border-radius: 11px;
+  background: #fff;
+}
+.certificatePreview span,
+.sanitaryBadge > span:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.certificatePreview b,
+.sanitaryBadge b { font-size: 14px; line-height: 1.2; }
+.certificatePreview small,
+.sanitaryBadge small { color: var(--gold); font-size: 12px; line-height: 1.25; }
+.sanitaryBadge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+}
+.credentialSeal {
+  display: grid;
+  place-items: center;
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #090909;
+  font-weight: 900;
+}
+
+.heroContent { max-width: 760px; padding: 70px 0 80px; }
 .eyebrow {
   color: var(--gold);
   text-transform: uppercase;
@@ -71,10 +146,7 @@ h2 { font-size: clamp(38px, 7vw, 78px); margin-bottom: 22px; }
 .card p, .section p { color: var(--muted); line-height: 1.6; }
 
 .gallerySection { max-width: 1320px; }
-.masonry {
-  columns: 3 280px;
-  column-gap: 18px;
-}
+.masonry { columns: 3 280px; column-gap: 18px; }
 .galleryItem {
   width: 100%;
   display: inline-block;
@@ -88,12 +160,7 @@ h2 { font-size: clamp(38px, 7vw, 78px); margin-bottom: 22px; }
   break-inside: avoid;
   box-shadow: 0 18px 45px rgba(0,0,0,.35);
 }
-.galleryItem img {
-  display: block;
-  width: 100%;
-  height: auto;
-  transition: transform .45s ease, filter .45s ease;
-}
+.galleryItem img { display: block; width: 100%; height: auto; transition: transform .45s ease, filter .45s ease; }
 .galleryItem:hover img { transform: scale(1.04); filter: contrast(1.06); }
 .galleryOverlay {
   position: absolute;
@@ -174,19 +241,25 @@ select {
   background-repeat: no-repeat;
 }
 textarea { min-height: 130px; resize: vertical; }
-.formNote {
-  margin: 0;
-  font-size: 14px;
-  color: var(--muted);
-}
+.formNote { margin: 0; font-size: 14px; color: var(--muted); }
 .contact { text-align: center; }
 
 @media (max-width: 800px) {
   .nav { align-items: flex-start; }
+  .brandColumn { width: calc(100% - 128px); gap: 22px; }
   .nav strong { font-size: 19px; }
-  .nav div { flex-direction: column; gap: 12px; font-size: 18px; }
+  .navLinks { flex-direction: column; gap: 12px; font-size: 18px; flex: 0 0 112px; }
+  .heroCredentials { width: 100%; gap: 10px; }
+  .credentialEyebrow { font-size: 10px; }
+  .certificatePreview { grid-template-columns: 92px 1fr; gap: 10px; padding: 8px; border-radius: 15px; }
+  .certificatePreview img { width: 92px; border-radius: 9px; }
+  .certificatePreview b, .sanitaryBadge b { font-size: 12px; }
+  .certificatePreview small, .sanitaryBadge small { font-size: 10px; }
+  .sanitaryBadge { padding: 11px 12px; border-radius: 15px; gap: 9px; }
+  .credentialSeal { width: 29px; height: 29px; flex-basis: 29px; font-size: 13px; }
   .grid, .split { grid-template-columns: 1fr; }
   .hero { padding: 22px; }
+  .heroContent { padding: 58px 0 80px; }
   .section { padding: 70px 22px; }
   .masonry { columns: 1; }
   .galleryOverlay { opacity: 1; }
