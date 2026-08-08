@@ -71,9 +71,10 @@ export default function Home() {
           <strong>DAKO TATTOO</strong>
           <div>
             <a href="#gallery">Galería</a>
-            <a href="#retoques">Retoques</a>
             <a href="#booking">Cita</a>
             <a href="#contact">Contacto</a>
+            <a href="#retoques">Retoques</a>
+            <a href="#cuidados">Cuidados</a>
             <a href={instagramUrl} target="_blank" rel="noreferrer">Instagram</a>
             <a href={facebookUrl} target="_blank" rel="noreferrer">Facebook</a>
           </div>
@@ -133,31 +134,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="retoques" className="section">
-        <p className="eyebrow">Cuidados y seguimiento</p>
-        <h2>Política de retoques</h2>
-        <p className="sectionIntro">
-          El resultado final de un tatuaje se valora una vez que la piel ha cicatrizado por completo. Para mantener un criterio claro y justo, Dako Tattoo aplica las siguientes condiciones.
-        </p>
-        <div className="grid">
-          <article className="card">
-            <span>Retoque pequeño sin coste</span>
-            <p>
-              Incluye un retoque pequeño dentro de las 8 semanas posteriores a la sesión cuando el tatuaje haya cicatrizado con normalidad, se hayan seguido las instrucciones de cuidado y exista únicamente una pequeña pérdida de pigmento. Será necesario enviar una foto del tatuaje ya cicatrizado para valorarlo antes de reservar el retoque.
-            </p>
-          </article>
-          <article className="card">
-            <span>Retoque con coste</span>
-            <p>
-              El retoque será de pago cuando haya problemas relacionados con cuidados posteriores inadecuados, exposición prematura al sol o piscina, rascado o irritación importante, cuando se soliciten cambios o elementos nuevos en el diseño, o cuando la revisión se pida después del plazo de 8 semanas.
-            </p>
-          </article>
-        </div>
-        <p className="sectionIntro" style={{ marginTop: 24 }}>
-          Cada caso se revisará individualmente según el estado real de la piel y del tatuaje. El retoque gratuito no cubre cambios de diseño ni ampliaciones.
-        </p>
-      </section>
-
       <section id="booking" className="section split">
         <div>
           <p className="eyebrow">Reserva</p>
@@ -213,6 +189,68 @@ export default function Home() {
           WhatsApp: +34 643 922 673<br />
           Instagram: @dako.tattoo.art<br />
           Facebook: Yordan Georgiev
+        </p>
+      </section>
+
+      <section id="retoques" className="section">
+        <p className="eyebrow">Seguimiento</p>
+        <h2>Política de retoques</h2>
+        <p className="sectionIntro">
+          El resultado final de un tatuaje se valora una vez que la piel ha cicatrizado por completo. Para mantener un criterio claro y justo, Dako Tattoo aplica las siguientes condiciones.
+        </p>
+        <div className="grid">
+          <article className="card">
+            <span>Retoque pequeño sin coste</span>
+            <p>
+              Incluye un retoque pequeño dentro de las 8 semanas posteriores a la sesión cuando el tatuaje haya cicatrizado con normalidad, se hayan seguido las instrucciones de cuidado y exista únicamente una pequeña pérdida de pigmento. Será necesario enviar una foto del tatuaje ya cicatrizado antes de reservar el retoque.
+            </p>
+          </article>
+          <article className="card">
+            <span>Retoque con coste</span>
+            <p>
+              El retoque será de pago cuando haya problemas relacionados con cuidados posteriores inadecuados, exposición prematura al sol o piscina, rascado o irritación importante, cuando se soliciten cambios o elementos nuevos en el diseño, o cuando la revisión se pida después del plazo de 8 semanas.
+            </p>
+          </article>
+        </div>
+        <p className="sectionIntro" style={{ marginTop: 24 }}>
+          Cada caso se revisará individualmente según el estado real de la piel y del tatuaje. El retoque gratuito no cubre cambios de diseño ni ampliaciones.
+        </p>
+      </section>
+
+      <section id="cuidados" className="section">
+        <p className="eyebrow">Aftercare</p>
+        <h2>Cuidados después del tatuaje</h2>
+        <p className="sectionIntro">
+          Un buen cuidado durante la cicatrización ayuda a proteger la piel y a conservar mejor el resultado del tatuaje.
+        </p>
+        <div className="grid">
+          <article className="card">
+            <span>Limpieza</span>
+            <p>
+              Lava el tatuaje con las manos limpias y un jabón suave, sin frotar. Seca la zona con pequeños toques usando papel limpio o una toalla limpia, sin arrastrar sobre la piel.
+            </p>
+          </article>
+          <article className="card">
+            <span>Hidratación</span>
+            <p>
+              Cuando la piel esté seca, aplica una capa fina del producto de cuidado recomendado. Evita dejar una capa gruesa y húmeda sobre el tatuaje.
+            </p>
+          </article>
+          <article className="card">
+            <span>Durante la cicatrización</span>
+            <p>
+              No rasques, no arranques costras ni piel descamada y evita el roce innecesario. No sumerjas el tatuaje en piscina, jacuzzi, bañera o agua compartida hasta que la piel esté completamente cicatrizada.
+            </p>
+          </article>
+          <article className="card">
+            <span>Sol y resultado a largo plazo</span>
+            <p>
+              Evita la exposición directa al sol mientras el tatuaje está cicatrizando. Una vez curado, protege la zona del sol para ayudar a conservar el contraste y el pigmento durante más tiempo.
+            </p>
+          </article>
+        </div>
+        <p className="sectionIntro" style={{ marginTop: 24 }}>
+          Si el enrojecimiento, el dolor o la hinchazón empeoran en lugar de mejorar, aparece pus, fiebre o cualquier reacción que te preocupe, consulta con un profesional sanitario. Si tienes dudas sobre la cicatrización, envía una foto a Dako Tattoo antes de aplicar productos o hacer cambios en el cuidado.
         </p>
       </section>
 
