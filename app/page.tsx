@@ -223,7 +223,6 @@ export default function Home() {
           <article className="card"><span>Durante la cicatrización</span><p>No rasques, no arranques costras ni piel descamada y evita el roce innecesario. No sumerjas el tatuaje en piscina, jacuzzi, bañera o agua compartida hasta que la piel esté completamente cicatrizada.</p></article>
           <article className="card"><span>Sol y resultado a largo plazo</span><p>Evita la exposición directa al sol mientras el tatuaje está cicatrizando. Una vez curado, protege la zona del sol para ayudar a conservar el contraste y el pigmento durante más tiempo.</p></article>
         </div>
-        <p className="sectionIntro" style={{ marginTop: 24 }}>Si el enrojecimiento, el dolor o la hinchazón empeoran en lugar de mejorar, aparece pus, fiebre o cualquier reacción que te preocupe, consulta con un profesional sanitario. Si tienes dudas sobre la cicatrización, envía una foto a Dako Tattoo antes de aplicar productos o hacer cambios en el cuidado.</p>
       </section>
 
       {selected && (<div className="lightbox" onClick={() => setSelected(null)}><button className="closeLightbox" type="button" aria-label="Cerrar">×</button><img src={selected.src} alt={selected.title} /><div className="lightboxCaption"><b>{selected.title}</b><span>{selected.category}</span></div></div>)}
