@@ -71,6 +71,7 @@ export default function Home() {
           <strong>DAKO TATTOO</strong>
           <div>
             <a href="#gallery">Galería</a>
+            <a href="#retoques">Retoques</a>
             <a href="#booking">Cita</a>
             <a href="#contact">Contacto</a>
             <a href={instagramUrl} target="_blank" rel="noreferrer">Instagram</a>
@@ -130,6 +131,31 @@ export default function Home() {
             </article>
           ))}
         </div>
+      </section>
+
+      <section id="retoques" className="section">
+        <p className="eyebrow">Cuidados y seguimiento</p>
+        <h2>Política de retoques</h2>
+        <p className="sectionIntro">
+          El resultado final de un tatuaje se valora una vez que la piel ha cicatrizado por completo. Para mantener un criterio claro y justo, Dako Tattoo aplica las siguientes condiciones.
+        </p>
+        <div className="grid">
+          <article className="card">
+            <span>Retoque pequeño sin coste</span>
+            <p>
+              Incluye un retoque pequeño dentro de las 8 semanas posteriores a la sesión cuando el tatuaje haya cicatrizado con normalidad, se hayan seguido las instrucciones de cuidado y exista únicamente una pequeña pérdida de pigmento. Será necesario enviar una foto del tatuaje ya cicatrizado para valorarlo antes de reservar el retoque.
+            </p>
+          </article>
+          <article className="card">
+            <span>Retoque con coste</span>
+            <p>
+              El retoque será de pago cuando haya problemas relacionados con cuidados posteriores inadecuados, exposición prematura al sol o piscina, rascado o irritación importante, cuando se soliciten cambios o elementos nuevos en el diseño, o cuando la revisión se pida después del plazo de 8 semanas.
+            </p>
+          </article>
+        </div>
+        <p className="sectionIntro" style={{ marginTop: 24 }}>
+          Cada caso se revisará individualmente según el estado real de la piel y del tatuaje. El retoque gratuito no cubre cambios de diseño ni ampliaciones.
+        </p>
       </section>
 
       <section id="booking" className="section split">
