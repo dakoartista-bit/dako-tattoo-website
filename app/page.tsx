@@ -22,44 +22,84 @@ const specialties = [
   "Custom Tattoo Design",
 ];
 
+const allowedReferenceTypes = ["image/jpeg", "image/png", "image/webp"];
+const maxReferenceSize = 10 * 1024 * 1024;
+
 export default function Home() {
   const [selected, setSelected] = useState<(typeof gallery)[number] | null>(null);
+  const [photoError, setPhotoError] = useState("");
+  const [photoNames, setPhotoNames] = useState<string[]>([]);
 
-  function sendBooking(event: FormEvent<HTMLFormElement>) {
+  function validateReferenceFiles(files: File[]) {
+    if (files.length > 3) return "Puedes añadir un máximo de 3 fotos.";
+    if (files.some((file) => !allowedReferenceTypes.includes(file.type))) {
+      return "Las referencias deben ser JPG, PNG o WEBP.";
+    }
+    if (files.some((file) => file.size > maxReferenceSize)) {
+      return "Cada foto debe ocupar como máximo 10 MB.";
+    }
+    return "";
+  }
+
+  async function sendBooking(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     const data = new FormData(form);
+    const input = form.elements.namedItem("references") as HTMLInputElement | null;
+    const files = input?.files ? Array.from(input.files) : [];
+    const validationError = validateReferenceFiles(files);
+
+    if (validationError) {
+      setPhotoError(validationError);
+      return;
+    }
 
     const message = [
       "Hola Dako Tattoo, quiero pedir una cita.",
       "",
-      "👤 Nombre:",
+      "Nombre:",
       `${data.get("name") || ""}`,
       "",
-      "📱 WhatsApp:",
+      "WhatsApp:",
       `${data.get("whatsapp") || ""}`,
       "",
-      "📸 Instagram / Facebook:",
+      "Instagram / Facebook:",
       `${data.get("instagram") || ""}`,
       "",
-      "📍 Zona del cuerpo:",
+      "Zona del cuerpo:",
       `${data.get("bodyArea") || ""}`,
       "",
-      "📏 Tamaño aproximado:",
+      "Tamaño aproximado:",
       `${data.get("size") || ""}`,
       "",
-      "🎨 Estilo:",
+      "Estilo:",
       `${data.get("style") || ""}`,
       "",
-      "📌 ¿Cómo conociste Dako Tattoo?",
+      "¿Cómo conociste Dako Tattoo?",
       `${data.get("source") || ""}`,
       "",
-      "📝 Idea del tatuaje:",
+      "Idea del tatuaje:",
       `${data.get("idea") || ""}`,
       "",
-      "🖼️ Referencias:",
-      "Te enviaré las fotos de referencia por este chat.",
+      "Referencias:",
+      files.length > 0 ? `${files.length} foto(s) seleccionada(s) para compartir.` : "Sin fotos adjuntas.",
     ].join("\n");
+
+    if (files.length > 0) {
+      const shareData = { text: message, files };
+      try {
+        if (navigator.canShare?.(shareData)) {
+          await navigator.share(shareData);
+          return;
+        }
+      } catch (error) {
+        if (error instanceof DOMException && error.name === "AbortError") return;
+      }
+
+      window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank");
+      alert("Tu dispositivo no permite adjuntar las fotos automáticamente desde la web. WhatsApp se abrirá con el texto preparado; añade allí las fotos seleccionadas antes de enviarlo.");
+      return;
+    }
 
     window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank");
   }
@@ -170,9 +210,31 @@ export default function Home() {
             <option>Otro</option>
           </select>
           <textarea name="idea" placeholder="Describe tu idea" required />
-          <button type="submit">Enviar solicitud por WhatsApp</button>
+          <label style={{ display: "block" }}>
+            <span style={{ display: "block", marginBottom: 10 }}>Fotos de referencia (máximo 3)</span>
+            <input
+              name="references"
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+              multiple
+              onChange={(event) => {
+                const files = event.currentTarget.files ? Array.from(event.currentTarget.files) : [];
+                const error = validateReferenceFiles(files);
+                setPhotoError(error);
+                setPhotoNames(error ? [] : files.map((file) => file.name));
+                if (error) event.currentTarget.value = "";
+              }}
+            />
+          </label>
+          {photoNames.length > 0 && (
+            <p className="formNote">Seleccionadas: {photoNames.join(", ")}</p>
+          )}
+          {photoError && (
+            <p className="formNote" style={{ color: "#d9a2a2" }}>{photoError}</p>
+          )}
+          <button type="submit">Enviar solicitud y referencias</button>
           <p className="formNote">
-            Después de enviar la solicitud, envíame las fotos de referencia por WhatsApp para preparar un diseño personalizado.
+            Si añades fotos, tu teléfono abrirá el menú de compartir con el texto y las imágenes preparados. Selecciona WhatsApp y envíalos a Dako Tattoo. Sin fotos, WhatsApp se abrirá directamente con la solicitud escrita.
           </p>
         </form>
       </section>
