@@ -5,6 +5,7 @@ import { FormEvent, useState } from "react";
 const whatsappNumber = "34643922673";
 const instagramUrl = "https://www.instagram.com/dako.tattoo.art?igsh=MTA3NWczMDllemp1ZA%3D%3D&utm_source=qr";
 const facebookUrl = "https://www.facebook.com/share/1BNmFXcvEQ/?mibextid=wwXIfr";
+const vicmanCertificate = "data:image/webp;base64,UklGRrZUAABXRUJQVlA4IKpUAADwdQGdASqAAsUBPsFcp06npT+ppTOK8/AYCWdu/BQIAaYAFq0VNGmXN2F9P66f77g+jqWyvTxuHPMB5ufpk/tu/Begh0v/95yVD4R/kP7/+UPv2+NfsH+X/wXkX+N/T/5b/A/uH74X3v/r+XD0z+y8z/5R9yP339+/zX/j/xvtz/sP875E/LL/V/t3sC/lv9B/y39w8oHav7//v/+56hHsN9Y/ZT/I+Tb/h/6H1S/QP8B/uv8d+XH2A/z3+4/87/De33+z8MP8p/v/YH/nH+B/7v+i92D/A/+3/H9En6H/sP26+A3+gf4X6+OS8LEhpBJfCxDW8WSFteKhosoOUu0yNVwemo2UbKNk6x7v9n+vn7374QcaD3ldZkiPv2fnxvgWb2ElF+bJOK7pfTQxmitn+0ASi9NRso2UbSZLmDtgt4sbYNJERCeiZ7XBnOSI8myQTokC71J8kmjTom3tzIyfnB1V48MwrYL/4JrIb4BrAD+SAXlt0/CL144eDFncVASJ1sta1PDrHV/DzL8Flhb1Dr4d2+ImELZPDi/3pV73jtrAQG84nI3+Hc667BsSiqNpHwvaPzCpH6Hbrdbedcj62VMQVeJFXPfT0jzVcbQHXHvk7tB8JEJP/kCXofODbqmGJvI+KRxRhnFRkm/GRd4pvO5U9ed/UIyih9/pLbj0nhuBJ9+oZb2XifQb35GZ2bIp2zXnlk7m3vXD5Mu85rYdD8qIqJwgYMuvvSRMRAd3Rs6llhNL3qVoRjA9e3ZYgOGfAzdhdxmfIrBT0pE/Uqmnpd9E51fZSqy/e4RD6dOhR8z7pdVohsechV7mq9h0OplNNfA9TPCkx+G860iPT411iTXRVMoXt+HqH0VNMN1rq1Ft7vaODKNybL5tHGnHra0/Is4aS8WJ3xcaJBGr/Ll+zjgWdki/oNmbd2No4b5YH0c2jmDruLDofTpd6t05H0TLYP38s3IQkZzvUB2wheosa5jKy4EIzbI5v46unlN/rRT604aEHQBR4k7KZQu+yQeAppSP97ZCr3mL45xFH3ETcJDLr8Kq+bYQbJpJSUa9DfCQKpiyYqK+7dxjxRZ1Y2CkSq4z+mhHKQpPo0pyAW7hma7eVVmSXUHgp5xWmnRwz4fbVsmhlTMry5akOZt+f8bJiCA6UFetT2NoGuOKKkVGtQ58ez/aIlDiDE/YSmPKxCYEodAjVcHpqQF37KjhcSQuD01GxUbkzWCv+H0hPXJh+wurSG6e3y4M2iPrFaCd0UFULEWYXBodUyO/jYoEfSbfLLlYawQrDT77KsxEDlK4/o/tARuMduBX/CyS1V0TviCbAIn21WdEcgetJB0iECmYYqeuLPg5UA1/F88Qf+Ho4cuHpX7BA8T17OqqIVql0Hs1sU8lXDi+Iq+MNJ6CPzX9TlSiCvqxZ6EODjcOBbLVKpY2Sb4F3ce9nxYqKmBE4/H4JPN1rnK8Rty8e79chqa9ncEEnjowQo2/Pug6jByoWtDgbyj7EbU/s9jTS/guEHlNBbALV2wERlb41nviXTZXLtzfKCBckmat04JCdeo6DEvLdXa4VHPls83Dt+T/mhL9FzzuMgHeNICybq2zaZnSRrRPTjIgBMB1Q50PMZ1HMHNzfpKH2OLXiWwtvX7RXr4jzip3tLMxuMiaFNk8Ehn5qfFFB72Ia5wgkLSSt/QSKzk/3NCuLa9TAV5GpUTJa1gj/qlB/319Q2U4iRO31O9UySWpZM6pq4WH+X7RyxPuyTQvQnZlgB43Cd1OC48KjJ7ibBPy2+5cGHDAic1mgzdStlnjzk9CNQ8lPk2Atll8T2wADcu2ES5aOtfNDiZS6PeCOeZIXhNwSUYgMQGICr6DIrt10BGpKOMwy0i9/Xd83LBTX9VoRinWNJbp7idkfTI1XB3aLuo8d3Kemo2Mj1mewLK6v+zZQczsdDJxuQhueARjDdPKt2V9HrT1ujkaU8TW1fw5/diC+62mehI0c7SY7vZSRW7lunAudRING+eUaXaZH4vRhBWTCYTaieLL68WFrsfffxerDT+MLeHGMi8SzTygFZi+RHO0A2oNnERkKaQoUyXQhKz5V1lAIiz1hXlOmyZ5KAWeCPMKj+0/lmUM3LRHkL0S7vUA+QG9NRso2UbKNlBlUcD1AB5yy0VbI2/WlrzOcIBeTKoY1wCVZC/x5cHau9AUqeOeFhCFeHwjcjZEu+Z8X7Yu4O/7NY/Ar7LTtuxAqcki6kf++ZRCsOVaZjtwzjvmLUJWm1+cOiOCM4erC+dXgvbudBNhksxpdTOOxmqOxhUJYASZUjJNtwgh0Et+1I4k7NbEjmWDEJnYan6iEvQ/wQxHpVZsOwOkkxOFvrQdnlHUGXq8r2wONumBQ94nW5bPc9+SaWedwHK2WLkiCtrRN4rg24fulfeaCa55BdHca9ennS2UvmcAw4oofqUJw3m9zjohQ3JGBD2G/yeXj3Oz8h9y87i9d3oeFb50zCmUtpXVy9oSWA3X1+Ok5XR/XcviAobta5+LY1A9eSWu7A8Xsk+d+z/aRhF+HNQ70olb25cb6nsfxg1ZLwh6b+KWKZyQqKZJ3g28TgrCckvayRVDICPWz5Vr4nRrbTidc6CNLjiWja22WccqdTIRw4N0ZvKsZCbExSaqEzKmrCwqE/7Kx6RGr0uHQAEwMB6CjF29aCXb1hxJbAI9B7AYjCmcJ6+n/5IpgMbmgqbST71qgzddsITSrnYy4G0mRYVjnCCNTD299qqE1spsgRgdxXzpOg/t+A89cgqAje7f1/nrXE4qu4Fny5S3hxsYOjpt8VHvO6m+HKna1HU89Axri+r21ARuYEyen4b1w+2pFPzHyevrhuUoZcuBLSwJwJeEljwAvqzdZ5FeMyObCC/2gUtNEu5c7M1enG5rhyAqEyXHqcp0FoyhDqmzULn6rH7oEkOk8g/jVY6CHp93YOzmv5oLdOsh1+7Yy5/x8CAPuwx9Dwikh/RieE0D+708Dr9Q3yBh6xWr/4LsE2vJTgDg6WaiVdEwFlbEamBXtBxtsIkZRtxRbw+88XBYH7mFkl2l69bkY0P6DZoazxHE1/Fu3aYNXG5HESa2Z9tVvghvpzwKVyEFRXQJ4bBAGZpti62ftUIyKiwgR3IktB20A0MJYHIT6jWMPPRwltTzSLJ8pvqkS+omOhIKXW8j7go9ZX8fGwbRnyBmazVhc3opkFrKIQWgdREgL4oJIKVcaiQ+oQESvNxhqNlGnrcP6+2oqx2lJ8SMWM0GyjZRtpegyVn7E4Qn0sMYXTXM857bmOoMbHuDDUrXV3ivhqlIPbisXrhger0b2BxGe6QdYalkxyCekUuycZdCGGkfGm19hRNqJ4gijw0dOjVExRD52wNT/s/12/PcgW1JQ0Q2je2+cGcFCoygmlViMm8QrZsLj3ywgReIZDT9uHAYZU6jkGzKIk0AcOgskGsGmqMIF1UMeE36CQYosG+Wt31SDQVZ3kacSyUAe7coCk00+ANDAVEWFnyOzKzsKtxZTWbJI866tKYZKjmu/7HQzit2drNlFW6GfVzJSPfrNXUEN0LF9bLN7m9xUNleKJWkY87m7Wew4+OgFEPpj4blaeuUeYe7V9WLTfa5QxBHopoasGKrlPjM2JYlvd116/Hj45RId/VKNCq4pKe/VcoS4VccJ7BMkn+qUOtjQQqsJUFmAPl6+dDJPTHxv7Jn1wZOT9shF/psnhsvscSB06ehHT9COePSHfKF29lFQ6yhvY35IHwAFKv5XFDRQh9BR5gG9WQLv7hViWL2Fm4mMTrsj9Mr9b1b5PxPpyBitqFxLuzA1qv85X+z8O61A/VOGBWCpRu1HYwQbma+t7Ws4Jhgy/zGFuXGssw86vIVkuMsFpc9ZfQUq4GewtClnPX6Q+0F/i5F9GUGoxMLET6tqLq7zz98Tz/bMBcYhDHaIqZ5x9JWaORlw8CgB9QYr4+7vWQEGVag+1nlM5HXi/q3cp7Pr0TI8FKuDB9tXrEIdcOazgAA/vZ2z1EwGkcxZ5b+XbHj2eFKvoKPyTchiJ+YhM1jNKT4mhwB5TtTCu8BIIMQzJFAI2dpesKjOdDoS7PQqqSXUPzBfdp3HiwWFWv2a8S/HcNPQ2QvpBS13TDBHrGUNUhldKWURszsYgi4FF2N7Kj4AfqZ++MXbqvUOj3/9v3n7i5sJbrT6awW+qDns5jEBw2jHfvHqp7myaceY+wnqE2OL3ewvJIGAR5AYtmFxt12HyPBbwRgmHwx6jQ45Loc/RX7nwRf0GSmUY7ajf0S3CWAEGf+Ta4FfLh/rko2/bo95FTDG9IFpShkp8mutKoSB0hqTIzVDll05NPQXTC9DgwUKw5OWnZzmem72WOV8bCapM9JqNPSQq214w0uNlnpQhHjFei293dY/UpEuLJdWH3B6gkvQqF9Tn9Aaia6N/kY0fp7SXwKenby409h26P1hNYH+uWqZBSI51Qbw81Hbbqz3TosMFIpbKk1whbH2UWLkBCzZ68LUTEZ9Jidrs4u13ZNftmcXsytJh3OkWDX/JmnujpvzG/BTuCNQNxVzFbS6pxHfrezIhs43Wn0fMt6RC5NnJgYD9LESMYgq7sCeQN0P5/PabwgMgmdDIzA47Cc26mYDemFXgWiykNybQurieyl6q3yWM9+Q/DstavSOSKd0YB2z0MGZbnWkyU0uThYcjiq9c0C8kUrA7Xw381fQK2Z5ggTquKnDkQ52XeBWlqzU4KGRBs722zIOCuMuF91L5zXnA/wkXGa8HVsBIgGtCVJpH3niTvKbtGDOmyJUL1uPwL/vTNKeAlxyadYiIzzX9PeeGq2d8w/pzDTOWkO8OCXMusvly6T7p941ld8q924NjoviM3dQPSR8LsiRrqW30Z1m6rW42d+xO9wDJyVh8GsWH3ve4IZLUR9fwjSgo0rA2LfNEegVoOUv5mVojI306XcdI5W0f6vgzfT04f8E3+hWuf2iU9o5hOrkdI3jO6lLZvo27HEYTbznWLih83yDYZWoKarXv/UyCTnBf0W0yWik2KF+PDeFmd+VB92pFd9HKVndUekZ4Sv5rWZksXYQuoqBqoePeNJXWzg5vBrRbf6zDDSEdbzn09qMRZ0mtDTAW1LwLlqvnh9f9yPIDR2+f+WqSwlyBH03mv44uFz60uGCIlqX+uFb5bG1CvpiAjIdVjdKl21BFxy2KP+bJ1boDXATKmUBnVD27w8s8l+lHLt70aiyI3lPyR1ovGFKuYzis2Q4JBqvglMUBqPAm5L3MO7HykcNzCB3rNhYJHljSRPeCzLtFAr4pUXEij6HOYBxM9UWu0vwCMjb6YrFJJb25ntZbbUTZOKVpn1KY6IYZzvRjL9N9maDHaco5ED0UeQSGteDj0wUu0O4X3Zs7+o6Pr+G6lEnqKf1iR5JjCn9UzrQYYM+uWrMX79NHRUjrnC7QEWYUohhRQlKiP31bvlf+AKOcVoL/hL/cIFRx8NngBbx0PUCImfMd4yoXj9b9oljBQMUYGBnx6oLTKpx8R+l2alR8SOKcSTfPyay08/PkQiT1GrcBznHsJK9uCV7gqQNVTs1lIhhLxBM7P6mOVYMPv/RaVZ6tJCt3JjintnrrDZ41HAmcyvSyh6tTMBILeF/w5/CiP0kn/7Vleue4UPwbT5K8AMJREMsezGdqoM3wy+7nZd1SvHschrjNDOsR2YRckOWqPZCjhrUxbT2WRzJB7TXOpF26gZkILYBXSW0cNTf/ZHtsT4JeiTVUeRgFbRxXB/sTLomG8ohLcmmzZ0exptu7cYESlbbiLv/Yf3mzZ/qnoeK3PjRLj7nGwBBCsKXYjHNRY2YtTHcZ3rF1/AC0q8C/oS5QtR5gVHzxbvzhto/BKtJ9PXZ0HnWUI+k2pmMO3EMgO6qB2/Hh2PAqSZ21aU14gNe16k+h+WajGP0QO7Q9QVAeZhv4WO33CKaNTWTcwVWUfA98vKdnbSdt9w/vSeIjxxVnOyaGqF29xuxZBEA294/0o/kMbIYJ58FrYIBWfq8iGNjOw2Y/nEnIidf4PKgIjrRZTwcG6TBHOxCa3tmZ/P3pkyCt7OKtPhJeWgfwTJCC7ozJTHtRt9YDpjUqJdIKAGBc4/yVAfbPjmSqkxwHnTN5aeQ7z7YEux3jUS8OjlUsi1WqsaYnxM4zLF+nBqqEIjk/WlFFMwXAu7Fg5hY+9I6sBFzQvZ1bhI3tQKWUOYFWWXqLQle2EZTZF+n8IspiROpOC4WOxmsBejQoE69dBlExUyHIFza2cbz8Oe9vm9J0rHn9ULanOteU4EmlSoKPv40g6zzVLRSC7xbeGX3Af/3bxk9WKNnLIbAYMxINSDRiBdtiqN/4RgO/UkP/CNw9H1R+v4PySJ5Fh5U3YO9sEvP6DfbLaKmMGvHa1OZEKPhF5TwosOiKU4V0zVHAMchULyOmafrXwF2Sf9QK7OLypakrxiZquXFWtaBDKtH9jTLyJFMoSu0TtRBt8ssDlYVZJWBrG1cJ9VJwojttxK3YOx1bYdURAR/GiP8vmRldKzFuWP/Sesg14T5gKFEirfCL9kHapDCEnTJ0JS985/RxaSnPdiWjrh9GTmv7EmUrrZ3W7M2LWEF2RyAbF55IfPLwbzQKuCDJzUSxnbfnvl4Ey1eP/u/ZwJxyJUmS8nQlF0aq+jWwZadYh7tPMJawWPLqtW25ABI297b0EI1kxLMbt6Sh8Y5tcPWvoaV+T8zkzvqmdYASUwwQDc3E3LaRMZ+lC3AeWFUrluWweo6+G7viTz5LCxi81RGHo6VpPd2yR1oXtWZXx1akGQEaDzdZ1VIpy/MgW4KPmjG6+3rAjV+VX8ysNQrzZBb6KJSz9Bv3XPLVwD1mapeqcinaSYSYlcuTXIPxA3G8PsxrAtNnh+7jas5bDd3T0SdA5UmDe5KFHDRpguzI8ndA1OZ4zvNxAyGssLUXUq9dGeHEuDbIR5V8vS8wGB1KPsS4XRmEfAZrwNaJipf1aOIvxTCpY5DQLBSMxMW49QW0RHV449szWav8nLcl6z3seM0tn5GgNLTZZoH8z4jEbF278+Ia2cGzbE8C2ZG8d8VVnIhekn6warDtpXFKtf3YmNe5fhvTA/TeAWXfrrqR8F3MYeZvSvQblmo8YCR6TLYr7enPz3lIJXuLC//Zwxe/WRt8hNQsFn5Bl7a26/ECAjNNqL9t2G6J6SGKRaKEnVyeL543kne71t+w7V7dmBw0QjXX8MUOV33uRpFtm0EwTLY7K2BHttHvvPZZZSdtvJTr+9YP5lrPojjRuaXoHqBtJ1aZhed9KmTC1JsBWfJFuLIUbuN53xdlacpZqVoe7bGwwdEfpXluasMxLxFgnXXLQdeAagMMhEci0pXNcmxrfY6IgV6wOtpi5S2H/hld/frL4AN/xtA1omElgOt5QeqMV98rIcrsKHt3VbwHjqwY9IDXozwBUKVdwqebwsHWDSA+0m82gkrEfUVDUf8vugxOs6v3cCa+hSsWDgMarZkuUT96dK7LVVgMkwLci0D1ST/cNIDYHXv8yS1t1cd11QNywW4YnaS/cFooZvvR8MkdOL3tDHzQPV6kwG9xdjUyx4JlZR55eqTeDN3auB9qt1ednLOtuxKUxoQebn1yawctfUWxJIBegOZyAI3wSDpFF43RRmdAtiY7kmDqU1tZ+Nsvg+Pl0dOGKc3sNraD3lrrc5SYaEs1Z2Tcbc4dZ5pxECAtuZTHTe30evPdFrwD3ZLS5oXhh2X38GMwBbKuuEltgJ/Op1H/YrRK9V3tUyy2vrL7MIl+w0sDG1fjU45Gocsrro6wns9qYk91GgHV059d3JTxsXAZrB9bv5USF7Q0fqdRNLRl12S9pVirP+cHXlFTYXb1dIEwCCsBo2RWHzJ9eQKsQYPbOvopsRmHLngsTAniUKi2PIgu5ZPfZT7FOrzsNeD0J6oHBFQfutjnDy5lFU2OPWVK9MLkFqzroGHIUwqZLWkN2dRdpKOF69mq533c6eaB/0iOTRCI1bZwjFAk5ZCjtsYHhT027ZRLZuwuxvz3LBR/lqZN5RBdWw1wSXVhDNq9SyzWcprL4jm88L6kGQ06eBQTVz5EsTh9LhVzFWxJca2yNWkHPv2wu+sdBVu0u3EgnTACbWaRksUvRV9itUf71rdDheaSPo8TOsG6z5xAVsuKa791BGFWxkQn9yNhQDOOX8Iql77DQgFq94jNp8Xiqs7UCmd/qV2NztEBZRN0EdiwevztywTBzjKjVT0JXp1Oc8ycbkYsnrYYjEPZ3LL5RpKePQY9o4v6zNlljjzHfST6Nur1c9Au+KAaKMUhwUgkDh772mgK8PSJHVrWKT0jZC3wF+Gb0h1Jzj++cVJq2E8zDjTFgvcHRlse1sibInK3rY779P18qVr6wSSX87ItuaR1SuUbru475oLyCw3qQshAMZze82fgnWxNTSz5P+/TBn7qcyuXaBd+Eowb751GyLzgPduB9s/ZHyejzktugeYFng+UQtALS83TTWEaCUGXhAzDHSC+gUUnbZTWhSeruiD+eBsdDzShCPowXY5foafEsNlLJsut/VrAqicSzdeqjzvgWfh52QiaeWxswulWdWxdDSR581jqL/Dczn0xy82WoUm2+yxiH60IpW+SJe+Fk8F8xatvnLKv1TKM5U8+Pel6c6HssNqAro5bTmUOiVYQpttZGES/Klfyhq7E3IXw0G+bSqw7Gr9dsWQl3aTSdNYupegXSCYQjXyEm/NfIuRipzh+gKGcPJDph3bS7GnSc/rW4BzK0+ygqFu3pAbVdlKM3KKpO7BoseQEo8NXIAOn6FoPfcIvmqtGc+m0GbXV+nKw5OTrgta0dhGT6eji6TGfRwtJIJWbeS/YF/BWZEgQKBI7dAIAAAAA1FiL6TlCpL7UmkgnPakCPhmRctFQ6wgJvt+66/q4525D+AEgdFYd9a4FSaBwM5yV0QVcHWwgfyUv4jm81T+rh65pAmFawkWmT0DNlimAkUJ2k3cwHqe2avSORHVFg0rVD4m0Zrsxfn8nQ0tZUoR5tfKlOR/DNHj1OZo0oGQeg8XnLYaAhnuTv64pqPRuEntjKVQhrfkdIcpDnzn1TIVyQ+1r+ILd+y1Q2UkzmtQU4DVV27RmbHXy+UYHTpcFRs4sLauZmVrEIkkHUKqEZfkd7Ynp6ppWtx8d/XDnr4TkLGlVPWa+cYzcDXRuKZ+GKL5mu+eR8fpSAIAUi6DVq3LvH1bYflcHlpq4kU7Hrb6NwxbkQ8GRmWJt26mM97Lm97o7/qZiHwfEZK4VswpbWYeR+FnrFtBJG+ve+ykb51lEmxkmqwjIlkOybNvurRTy4+zVZOVw4QF1/iuNUdyghpxSVIjo5UNSgrIY2wPJX8yJTm+DPukshin7xcW9+FgG059b8CMXOB+0Olt7stXvsX1ug9gPZmB5STzYbBcJl7kS7PUO4XUldUtgJZyJWrCL/Dz038LsqD6IuIpO4ZVdsGgiVtcT5hO1mt/lUskJwkgxk293b7Sg1nu/RuiN4k2mw9XUS7brPmaRDa8Fb2jL4t8fBKnD7r2L/8r7Vc7Ww867bsuP9spXP6TNVhFkbzWgzlpr9kpjuJsrwDjRqcT306MhWWGWjvrbz1QSrNzX+k8DOhpTnj2BrkUBdSHbZt9MZYxdM7+Zl8QtEn6v8F34Z6aEzTchFVAU9GWgiUYt+vAY5MYcRaJaDK75wiYPWFzJduizEHcsOIqtm7ywCwyqsgkcsrutQv4IIJbLGD9w76meYp+XF3HLREcTAy4qR65CdJgc6HfI2TH/tP1tKc2bONjUWgVdUV6RD0mC6bhN5/s9NocKJJ9DQsjjCUoppmUXrjkS6DkFdy/3wCXBMKxCDcWix/prYJ9NL9cvZWM55wH93P4YsZ0WCFWVldIauNaVtqxnM1/nsJX5ixbgD+TzHli2YrBaLBjbKhtARbqmY4vJRkhLD/hBab1S/xW[... ELLIPSIZATION ...]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";
 
 const gallery = [
   { src: "/gallery/IMG_3331.jpeg", title: "Japanese Mandala Sleeve", category: "Black & Grey" },
@@ -15,29 +16,21 @@ const gallery = [
   { src: "/gallery/IMG_6057.jpeg", title: "Polynesian Tribal Sleeve", category: "Tribal" },
 ];
 
-const specialties = [
-  "Black & Grey Realism",
-  "Polynesian / Tribal",
-  "Fine Line",
-  "Custom Tattoo Design",
-];
-
+const specialties = ["Black & Grey Realism", "Polynesian / Tribal", "Fine Line", "Custom Tattoo Design"];
 const allowedReferenceTypes = ["image/jpeg", "image/png", "image/webp"];
 const maxReferenceSize = 10 * 1024 * 1024;
 
+type SelectedImage = { src: string; title: string; category: string };
+
 export default function Home() {
-  const [selected, setSelected] = useState<(typeof gallery)[number] | null>(null);
+  const [selected, setSelected] = useState<SelectedImage | null>(null);
   const [photoError, setPhotoError] = useState("");
   const [photoNames, setPhotoNames] = useState<string[]>([]);
 
   function validateReferenceFiles(files: File[]) {
     if (files.length > 3) return "Puedes añadir un máximo de 3 fotos.";
-    if (files.some((file) => !allowedReferenceTypes.includes(file.type))) {
-      return "Las referencias deben ser JPG, PNG o WEBP.";
-    }
-    if (files.some((file) => file.size > maxReferenceSize)) {
-      return "Cada foto debe ocupar como máximo 10 MB.";
-    }
+    if (files.some((file) => !allowedReferenceTypes.includes(file.type))) return "Las referencias deben ser JPG, PNG o WEBP.";
+    if (files.some((file) => file.size > maxReferenceSize)) return "Cada foto debe ocupar como máximo 10 MB.";
     return "";
   }
 
@@ -48,59 +41,23 @@ export default function Home() {
     const input = form.elements.namedItem("references") as HTMLInputElement | null;
     const files = input?.files ? Array.from(input.files) : [];
     const validationError = validateReferenceFiles(files);
-
-    if (validationError) {
-      setPhotoError(validationError);
-      return;
-    }
+    if (validationError) { setPhotoError(validationError); return; }
 
     const message = [
-      "Hola Dako Tattoo, quiero pedir una cita.",
-      "",
-      "Nombre:",
-      `${data.get("name") || ""}`,
-      "",
-      "WhatsApp:",
-      `${data.get("whatsapp") || ""}`,
-      "",
-      "Instagram / Facebook:",
-      `${data.get("instagram") || ""}`,
-      "",
-      "Zona del cuerpo:",
-      `${data.get("bodyArea") || ""}`,
-      "",
-      "Tamaño aproximado:",
-      `${data.get("size") || ""}`,
-      "",
-      "Estilo:",
-      `${data.get("style") || ""}`,
-      "",
-      "¿Cómo conociste Dako Tattoo?",
-      `${data.get("source") || ""}`,
-      "",
-      "Idea del tatuaje:",
-      `${data.get("idea") || ""}`,
-      "",
-      "Fotos para preparar el diseño:",
-      files.length > 0 ? `${files.length} foto(s) seleccionada(s): zona del cuerpo + referencias.` : "Sin fotos adjuntas.",
+      "Hola Dako Tattoo, quiero pedir una cita.", "", "Nombre:", `${data.get("name") || ""}`, "", "WhatsApp:", `${data.get("whatsapp") || ""}`, "", "Instagram / Facebook:", `${data.get("instagram") || ""}`, "", "Zona del cuerpo:", `${data.get("bodyArea") || ""}`, "", "Tamaño aproximado:", `${data.get("size") || ""}`, "", "Estilo:", `${data.get("style") || ""}`, "", "¿Cómo conociste Dako Tattoo?", `${data.get("source") || ""}`, "", "Idea del tatuaje:", `${data.get("idea") || ""}`, "", "Fotos para preparar el diseño:", files.length > 0 ? `${files.length} foto(s) seleccionada(s): zona del cuerpo + referencias.` : "Sin fotos adjuntas."
     ].join("\n");
 
     if (files.length > 0) {
       const shareData = { text: message, files };
       try {
-        if (navigator.canShare?.(shareData)) {
-          await navigator.share(shareData);
-          return;
-        }
+        if (navigator.canShare?.(shareData)) { await navigator.share(shareData); return; }
       } catch (error) {
         if (error instanceof DOMException && error.name === "AbortError") return;
       }
-
       window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank");
       alert("Tu dispositivo no permite adjuntar las fotos automáticamente desde la web. WhatsApp se abrirá con el texto preparado; añade allí las fotos seleccionadas antes de enviarlo.");
       return;
     }
-
     window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank");
   }
 
@@ -108,15 +65,22 @@ export default function Home() {
     <main>
       <section className="hero">
         <nav className="nav">
-          <strong>DAKO TATTOO</strong>
-          <div>
-            <a href="#gallery">Galería</a>
-            <a href="#booking">Cita</a>
-            <a href="#contact">Contacto</a>
-            <a href="#retoques">Retoques</a>
-            <a href="#cuidados">Cuidados</a>
-            <a href={instagramUrl} target="_blank" rel="noreferrer">Instagram</a>
-            <a href={facebookUrl} target="_blank" rel="noreferrer">Facebook</a>
+          <div className="brandColumn">
+            <strong>DAKO TATTOO</strong>
+            <div className="heroCredentials">
+              <p className="credentialEyebrow">Formación certificada</p>
+              <button className="certificatePreview" type="button" onClick={() => setSelected({ src: vicmanCertificate, title: "Secretos del Diseño y Composición del Tatuaje", category: "Vicman Tattoo · 2026" })}>
+                <img src={vicmanCertificate} alt="Certificado de diseño y composición del tatuaje" />
+                <span><b>Diseño y Composición del Tatuaje</b><small>Vicman Tattoo · 2026</small></span>
+              </button>
+              <div className="sanitaryBadge">
+                <span className="credentialSeal">✓</span>
+                <span><b>Formación Higiénico-Sanitaria</b><small>56 h · Homologado por EVES</small></span>
+              </div>
+            </div>
+          </div>
+          <div className="navLinks">
+            <a href="#gallery">Galería</a><a href="#booking">Cita</a><a href="#contact">Contacto</a><a href="#retoques">Retoques</a><a href="#cuidados">Cuidados</a><a href={instagramUrl} target="_blank" rel="noreferrer">Instagram</a><a href={facebookUrl} target="_blank" rel="noreferrer">Facebook</a>
           </div>
         </nav>
 
@@ -124,106 +88,35 @@ export default function Home() {
           <p className="eyebrow">Calatorao / Zaragoza</p>
           <h1>Black & Grey Tattoo Studio</h1>
           <p className="lead">Diseños personalizados, composición adaptada al cuerpo y tatuajes pensados para verse bien hoy y en el futuro.</p>
-          <div className="actions">
-            <a className="button primary" href="#booking">Reservar consulta</a>
-            <a className="button" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer">WhatsApp</a>
-            <a className="button" href={instagramUrl} target="_blank" rel="noreferrer">Instagram</a>
-            <a className="button" href={facebookUrl} target="_blank" rel="noreferrer">Facebook</a>
-          </div>
+          <div className="actions"><a className="button primary" href="#booking">Reservar consulta</a><a className="button" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer">WhatsApp</a><a className="button" href={instagramUrl} target="_blank" rel="noreferrer">Instagram</a><a className="button" href={facebookUrl} target="_blank" rel="noreferrer">Facebook</a></div>
         </div>
       </section>
 
       <section id="gallery" className="section gallerySection">
-        <p className="eyebrow">Portfolio</p>
-        <h2>Galería de trabajos</h2>
-        <p className="sectionIntro">Selección de tatuajes realizados por Dako Tattoo: piezas black & grey, floral, traditional, cuello y diseños personalizados.</p>
-        <div className="masonry">
-          {gallery.map((item) => (
-            <button className="galleryItem" key={item.src} onClick={() => setSelected(item)}>
-              <img src={item.src} alt={item.title} loading="lazy" onError={(event) => { event.currentTarget.parentElement?.remove(); }} />
-              <span className="galleryOverlay"><b>{item.title}</b><small>{item.category}</small></span>
-            </button>
-          ))}
-        </div>
+        <p className="eyebrow">Portfolio</p><h2>Galería de trabajos</h2><p className="sectionIntro">Selección de tatuajes realizados por Dako Tattoo: piezas black & grey, floral, traditional, cuello y diseños personalizados.</p>
+        <div className="masonry">{gallery.map((item) => (<button className="galleryItem" key={item.src} onClick={() => setSelected(item)}><img src={item.src} alt={item.title} loading="lazy" onError={(event) => { event.currentTarget.parentElement?.remove(); }} /><span className="galleryOverlay"><b>{item.title}</b><small>{item.category}</small></span></button>))}</div>
       </section>
 
-      <section className="section">
-        <p className="eyebrow">Especialidades</p>
-        <h2>Trabajo a medida</h2>
-        <div className="grid">
-          {specialties.map((item) => (<article className="card" key={item}><span>{item}</span><p>Composición limpia, contraste fuerte y lectura clara sobre piel.</p></article>))}
-        </div>
-      </section>
+      <section className="section"><p className="eyebrow">Especialidades</p><h2>Trabajo a medida</h2><div className="grid">{specialties.map((item) => (<article className="card" key={item}><span>{item}</span><p>Composición limpia, contraste fuerte y lectura clara sobre piel.</p></article>))}</div></section>
 
       <section id="booking" className="section split">
-        <div>
-          <p className="eyebrow">Reserva</p>
-          <h2>Solicitud de cita</h2>
-          <p>Envíame tu idea, zona del cuerpo, tamaño aproximado y referencias. Te responderé con una propuesta profesional.</p>
-        </div>
+        <div><p className="eyebrow">Reserva</p><h2>Solicitud de cita</h2><p>Envíame tu idea, zona del cuerpo, tamaño aproximado y referencias. Te responderé con una propuesta profesional.</p></div>
         <form className="form" onSubmit={sendBooking}>
-          <input name="name" placeholder="Nombre completo" required />
-          <input name="whatsapp" placeholder="WhatsApp" required />
-          <input name="instagram" placeholder="Instagram / Facebook" />
-          <input name="bodyArea" placeholder="Zona del cuerpo" required />
-          <input name="size" placeholder="Tamaño aproximado (ej. 15 cm)" required />
-          <select name="style" required defaultValue="">
-            <option value="" disabled>Selecciona un estilo</option><option>Black & Grey</option><option>Color</option><option>Fine Line</option><option>Tribal</option><option>Realismo</option><option>Lettering</option><option>Ornamental</option><option>Personalizado</option>
-          </select>
-          <select name="source" required defaultValue="">
-            <option value="" disabled>¿Cómo conociste Dako Tattoo?</option><option>Instagram</option><option>Facebook</option><option>TikTok</option><option>Google</option><option>Un amigo me recomendó</option><option>Ya soy cliente</option><option>Otro</option>
-          </select>
+          <input name="name" placeholder="Nombre completo" required /><input name="whatsapp" placeholder="WhatsApp" required /><input name="instagram" placeholder="Instagram / Facebook" /><input name="bodyArea" placeholder="Zona del cuerpo" required /><input name="size" placeholder="Tamaño aproximado (ej. 15 cm)" required />
+          <select name="style" required defaultValue=""><option value="" disabled>Selecciona un estilo</option><option>Black & Grey</option><option>Color</option><option>Fine Line</option><option>Tribal</option><option>Realismo</option><option>Lettering</option><option>Ornamental</option><option>Personalizado</option></select>
+          <select name="source" required defaultValue=""><option value="" disabled>¿Cómo conociste Dako Tattoo?</option><option>Instagram</option><option>Facebook</option><option>TikTok</option><option>Google</option><option>Un amigo me recomendó</option><option>Ya soy cliente</option><option>Otro</option></select>
           <textarea name="idea" placeholder="Describe tu idea" required />
-          <label style={{ display: "block" }}>
-            <span style={{ display: "block", marginBottom: 10 }}>Fotos para preparar el diseño (máximo 3)</span>
-            <p className="formNote" style={{ marginTop: 0, marginBottom: 12 }}>
-              Añade 1 foto clara de la zona del cuerpo donde irá el tatuaje y 1–2 imágenes de referencia de la idea. Esto me permite preparar mejor el diseño, el tamaño y la composición según tu anatomía.
-            </p>
-            <input name="references" type="file" accept="image/jpeg,image/png,image/webp" multiple onChange={(event) => {
-              const files = event.currentTarget.files ? Array.from(event.currentTarget.files) : [];
-              const error = validateReferenceFiles(files);
-              setPhotoError(error);
-              setPhotoNames(error ? [] : files.map((file) => file.name));
-              if (error) event.currentTarget.value = "";
-            }} />
-          </label>
-          {photoNames.length > 0 && (<p className="formNote">Seleccionadas: {photoNames.join(", ")}</p>)}
-          {photoError && (<p className="formNote" style={{ color: "#d9a2a2" }}>{photoError}</p>)}
-          <button type="submit">Enviar solicitud y referencias</button>
-          <p className="formNote">Si añades fotos, tu teléfono abrirá el menú de compartir con el texto y las imágenes preparados. Selecciona WhatsApp y envíalos a Dako Tattoo. Sin fotos, WhatsApp se abrirá directamente con la solicitud escrita.</p>
+          <label style={{ display: "block" }}><span style={{ display: "block", marginBottom: 10 }}>Fotos para preparar el diseño (máximo 3)</span><p className="formNote" style={{ marginTop: 0, marginBottom: 12 }}>Añade 1 foto clara de la zona del cuerpo donde irá el tatuaje y 1–2 imágenes de referencia de la idea. Esto me permite preparar mejor el diseño, el tamaño y la composición según tu anatomía.</p><input name="references" type="file" accept="image/jpeg,image/png,image/webp" multiple onChange={(event) => { const files = event.currentTarget.files ? Array.from(event.currentTarget.files) : []; const error = validateReferenceFiles(files); setPhotoError(error); setPhotoNames(error ? [] : files.map((file) => file.name)); if (error) event.currentTarget.value = ""; }} /></label>
+          {photoNames.length > 0 && (<p className="formNote">Seleccionadas: {photoNames.join(", ")}</p>)}{photoError && (<p className="formNote" style={{ color: "#d9a2a2" }}>{photoError}</p>)}
+          <button type="submit">Enviar solicitud y referencias</button><p className="formNote">Si añades fotos, tu teléfono abrirá el menú de compartir con el texto y las imágenes preparados. Selecciona WhatsApp y envíalos a Dako Tattoo. Sin fotos, WhatsApp se abrirá directamente con la solicitud escrita.</p>
         </form>
       </section>
 
-      <section id="contact" className="section contact">
-        <h2>Contacto</h2><p>Para consultas rápidas, escribe por WhatsApp, Instagram o Facebook.</p>
-        <div className="actions" style={{ justifyContent: "center" }}>
-          <a className="button primary" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer">WhatsApp</a>
-          <a className="button" href={instagramUrl} target="_blank" rel="noreferrer">Instagram</a>
-          <a className="button" href={facebookUrl} target="_blank" rel="noreferrer">Facebook</a>
-        </div>
-        <p style={{ marginTop: 24 }}>WhatsApp: +34 643 922 673<br />Instagram: @dako.tattoo.art<br />Facebook: Yordan Georgiev</p>
-      </section>
+      <section id="contact" className="section contact"><h2>Contacto</h2><p>Para consultas rápidas, escribe por WhatsApp, Instagram o Facebook.</p><div className="actions" style={{ justifyContent: "center" }}><a className="button primary" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer">WhatsApp</a><a className="button" href={instagramUrl} target="_blank" rel="noreferrer">Instagram</a><a className="button" href={facebookUrl} target="_blank" rel="noreferrer">Facebook</a></div><p style={{ marginTop: 24 }}>WhatsApp: +34 643 922 673<br />Instagram: @dako.tattoo.art<br />Facebook: Yordan Georgiev</p></section>
 
-      <section id="retoques" className="section">
-        <p className="eyebrow">Seguimiento</p><h2>Política de retoques</h2>
-        <p className="sectionIntro">El resultado final de un tatuaje se valora una vez que la piel ha cicatrizado por completo. Para mantener un criterio claro y justo, Dako Tattoo aplica las siguientes condiciones.</p>
-        <div className="grid">
-          <article className="card"><span>Retoque pequeño sin coste</span><p>Incluye un retoque pequeño dentro de las 8 semanas posteriores a la sesión cuando el tatuaje haya cicatrizado con normalidad, se hayan seguido las instrucciones de cuidado y exista únicamente una pequeña pérdida de pigmento. Será necesario enviar una foto del tatuaje ya cicatrizado antes de reservar el retoque.</p></article>
-          <article className="card"><span>Retoque con coste</span><p>El retoque será de pago cuando haya problemas relacionados con cuidados posteriores inadecuados, exposición prematura al sol o piscina, rascado o irritación importante, cuando se soliciten cambios o elementos nuevos en el diseño, o cuando la revisión se pida después del plazo de 8 semanas.</p></article>
-        </div>
-        <p className="sectionIntro" style={{ marginTop: 24 }}>Cada caso se revisará individualmente según el estado real de la piel y del tatuaje. El retoque gratuito no cubre cambios de diseño ni ampliaciones.</p>
-      </section>
+      <section id="retoques" className="section"><p className="eyebrow">Seguimiento</p><h2>Política de retoques</h2><p className="sectionIntro">El resultado final de un tatuaje se valora una vez que la piel ha cicatrizado por completo. Para mantener un criterio claro y justo, Dako Tattoo aplica las siguientes condiciones.</p><div className="grid"><article className="card"><span>Retoque pequeño sin coste</span><p>Incluye un retoque pequeño dentro de las 8 semanas posteriores a la sesión cuando el tatuaje haya cicatrizado con normalidad, se hayan seguido las instrucciones de cuidado y exista únicamente una pequeña pérdida de pigmento. Será necesario enviar una foto del tatuaje ya cicatrizado antes de reservar el retoque.</p></article><article className="card"><span>Retoque con coste</span><p>El retoque será de pago cuando haya problemas relacionados con cuidados posteriores inadecuados, exposición prematura al sol o piscina, rascado o irritación importante, cuando se soliciten cambios o elementos nuevos en el diseño, o cuando la revisión se pida después del plazo de 8 semanas.</p></article></div><p className="sectionIntro" style={{ marginTop: 24 }}>Cada caso se revisará individualmente según el estado real de la piel y del tatuaje. El retoque gratuito no cubre cambios de diseño ni ampliaciones.</p></section>
 
-      <section id="cuidados" className="section">
-        <p className="eyebrow">Aftercare</p><h2>Cuidados después del tatuaje</h2>
-        <p className="sectionIntro">Un buen cuidado durante la cicatrización ayuda a proteger la piel y a conservar mejor el resultado del tatuaje.</p>
-        <div className="grid">
-          <article className="card"><span>Limpieza</span><p>Lava el tatuaje con las manos limpias y un jabón suave, sin frotar. Seca la zona con pequeños toques usando papel limpio o una toalla limpia, sin arrastrar sobre la piel.</p></article>
-          <article className="card"><span>Hidratación</span><p>Cuando la piel esté seca, aplica una capa fina del producto de cuidado recomendado. Evita dejar una capa gruesa y húmeda sobre el tatuaje.</p></article>
-          <article className="card"><span>Durante la cicatrización</span><p>No rasques, no arranques costras ni piel descamada y evita el roce innecesario. No sumerjas el tatuaje en piscina, jacuzzi, bañera o agua compartida hasta que la piel esté completamente cicatrizada.</p></article>
-          <article className="card"><span>Sol y resultado a largo plazo</span><p>Evita la exposición directa al sol mientras el tatuaje está cicatrizando. Una vez curado, protege la zona del sol para ayudar a conservar el contraste y el pigmento durante más tiempo.</p></article>
-        </div>
-      </section>
+      <section id="cuidados" className="section"><p className="eyebrow">Aftercare</p><h2>Cuidados después del tatuaje</h2><p className="sectionIntro">Un buen cuidado durante la cicatrización ayuda a proteger la piel y a conservar mejor el resultado del tatuaje.</p><div className="grid"><article className="card"><span>Limpieza</span><p>Lava el tatuaje con las manos limpias y un jabón suave, sin frotar. Seca la zona con pequeños toques usando papel limpio o una toalla limpia, sin arrastrar sobre la piel.</p></article><article className="card"><span>Hidratación</span><p>Cuando la piel esté seca, aplica una capa fina del producto de cuidado recomendado. Evita dejar una capa gruesa y húmeda sobre el tatuaje.</p></article><article className="card"><span>Durante la cicatrización</span><p>No rasques, no arranques costras ni piel descamada y evita el roce innecesario. No sumerjas el tatuaje en piscina, jacuzzi, bañera o agua compartida hasta que la piel esté completamente cicatrizada.</p></article><article className="card"><span>Sol y resultado a largo plazo</span><p>Evita la exposición directa al sol mientras el tatuaje está cicatrizando. Una vez curado, protege la zona del sol para ayudar a conservar el contraste y el pigmento durante más tiempo.</p></article></div></section>
 
       {selected && (<div className="lightbox" onClick={() => setSelected(null)}><button className="closeLightbox" type="button" aria-label="Cerrar">×</button><img src={selected.src} alt={selected.title} /><div className="lightboxCaption"><b>{selected.title}</b><span>{selected.category}</span></div></div>)}
     </main>
