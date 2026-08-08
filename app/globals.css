@@ -32,8 +32,8 @@ a { color: inherit; text-decoration: none; }
   justify-content: space-between;
   gap: 20px;
 }
-.nav strong { letter-spacing: .18em; }
-.nav div { display: flex; gap: 18px; color: var(--muted); font-size: 14px; }
+.nav strong { letter-spacing: .18em; font-size: 18px; }
+.nav div { display: flex; gap: 20px; color: var(--muted); font-size: 18px; line-height: 1.25; }
 .heroContent { max-width: 760px; padding: 120px 0 80px; }
 .eyebrow {
   color: var(--gold);
@@ -183,7 +183,8 @@ textarea { min-height: 130px; resize: vertical; }
 
 @media (max-width: 800px) {
   .nav { align-items: flex-start; }
-  .nav div { flex-direction: column; gap: 10px; }
+  .nav strong { font-size: 19px; }
+  .nav div { flex-direction: column; gap: 12px; font-size: 18px; }
   .grid, .split { grid-template-columns: 1fr; }
   .hero { padding: 22px; }
   .section { padding: 70px 22px; }
