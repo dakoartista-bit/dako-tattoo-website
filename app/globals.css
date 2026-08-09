@@ -75,11 +75,15 @@ a { color: inherit; text-decoration: none; }
   cursor: pointer;
 }
 .certificatePreview img {
+  display: none;
+}
+.certificatePreview::before {
+  content: "";
   width: 120px;
   aspect-ratio: 1.41 / 1;
-  object-fit: cover;
+  display: block;
   border-radius: 11px;
-  background: #fff;
+  background: #fff url('/vicman-certificate.svg') center / contain no-repeat;
 }
 .certificatePreview span,
 .sanitaryBadge > span:last-child {
@@ -252,7 +256,7 @@ textarea { min-height: 130px; resize: vertical; }
   .heroCredentials { width: 100%; gap: 10px; }
   .credentialEyebrow { font-size: 10px; }
   .certificatePreview { grid-template-columns: 92px 1fr; gap: 10px; padding: 8px; border-radius: 15px; }
-  .certificatePreview img { width: 92px; border-radius: 9px; }
+  .certificatePreview::before { width: 92px; border-radius: 9px; }
   .certificatePreview b, .sanitaryBadge b { font-size: 12px; }
   .certificatePreview small, .sanitaryBadge small { font-size: 10px; }
   .sanitaryBadge { padding: 11px 12px; border-radius: 15px; gap: 9px; }
