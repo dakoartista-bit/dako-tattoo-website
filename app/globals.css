@@ -312,6 +312,21 @@ textarea { min-height: 130px; resize: vertical; }
 .retouchNotice b { color: var(--text); }
 .healingForm { min-height: 0; }
 .healingForm label { display: grid; gap: 9px; color: var(--text); font-size: 14px; font-weight: 700; }
+.healingPhotoUpload {
+  margin-top: 4px;
+  padding: 18px;
+  border: 2px solid rgba(200,169,106,.72);
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(200,169,106,.16), rgba(8,8,8,.94));
+  box-shadow: 0 14px 34px rgba(0,0,0,.25);
+}
+.healingPhotoTitle { display: grid; gap: 8px; }
+.healingPhotoTitle b { color: var(--gold); font-size: 19px; line-height: 1.2; letter-spacing: .025em; }
+.healingPhotoTitle small { color: var(--text); font-size: 15px; font-weight: 500; line-height: 1.45; }
+.healingPhotoUpload input[type="file"] { border-color: rgba(200,169,106,.34); }
+.healingSubmit { font-size: 16px; letter-spacing: .015em; }
+.healingReminder { font-size: 15px; line-height: 1.5; }
+.healingReminder b { color: var(--gold); }
 .formTitle { color: var(--gold); font-size: 21px; font-weight: 800; }
 .formError { color: #d9a2a2; }
 .retouchGrid { grid-template-columns: repeat(3, 1fr); }
