@@ -26,6 +26,8 @@ export default function Home() {
   const [selected, setSelected] = useState<SelectedImage | null>(null);
   const [photoError, setPhotoError] = useState("");
   const [photoNames, setPhotoNames] = useState<string[]>([]);
+  const [healingPhotoError, setHealingPhotoError] = useState("");
+  const [healingPhotoNames, setHealingPhotoNames] = useState<string[]>([]);
 
   function validateReferenceFiles(files: File[]) {
     if (files.length > 3) return "Puedes añadir un máximo de 3 fotos.";
@@ -61,6 +63,53 @@ export default function Home() {
     window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank");
   }
 
+  async function sendHealingCheck(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const input = form.elements.namedItem("healingPhotos") as HTMLInputElement | null;
+    const files = input?.files ? Array.from(input.files) : [];
+    const validationError = validateReferenceFiles(files);
+
+    if (files.length === 0) {
+      setHealingPhotoError("Añade al menos una foto clara del tatuaje.");
+      return;
+    }
+    if (validationError) {
+      setHealingPhotoError(validationError);
+      return;
+    }
+
+    const message = [
+      "Hola Dako Tattoo, te envío el seguimiento de cicatrización.",
+      "",
+      "Nombre:", `${data.get("healingName") || ""}`,
+      "",
+      "Fecha de la sesión:", `${data.get("sessionDate") || ""}`,
+      "",
+      "Zona tatuada:", `${data.get("tattooArea") || ""}`,
+      "",
+      "Control:", `${data.get("healingDay") || ""}`,
+      "",
+      "Observaciones:", `${data.get("healingNotes") || "Sin observaciones."}`,
+      "",
+      "Fotos adjuntas:", `${files.length} foto(s).`
+    ].join("\n");
+
+    const shareData = { text: message, files };
+    try {
+      if (navigator.canShare?.(shareData)) {
+        await navigator.share(shareData);
+        return;
+      }
+    } catch (error) {
+      if (error instanceof DOMException && error.name === "AbortError") return;
+    }
+
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank");
+    alert("WhatsApp se abrirá con el mensaje preparado. Añade allí las fotos seleccionadas antes de enviarlo.");
+  }
+
   return (
     <main>
       <section className="hero">
@@ -80,16 +129,53 @@ export default function Home() {
             </div>
           </div>
           <div className="navLinks">
-            <a href="#gallery">Galería</a><a href="#booking">Cita</a><a href="#contact">Contacto</a><a href="#retoques">Retoques</a><a href="#cuidados">Cuidados</a><a href={instagramUrl} target="_blank" rel="noreferrer">Instagram</a><a href={facebookUrl} target="_blank" rel="noreferrer">Facebook</a>
+            <a href="#gallery">Galería</a><a href="#booking">Cita</a><a href="#seguimiento">Seguimiento</a><a href="#retoques">Retoques</a><a href="#cuidados">Cuidados</a><a href="#contact">Contacto</a><a href={instagramUrl} target="_blank" rel="noreferrer">Instagram</a><a href={facebookUrl} target="_blank" rel="noreferrer">Facebook</a>
           </div>
         </nav>
 
         <div className="heroContent">
+          <a className="healingPrompt" href="#seguimiento">
+            <span className="healingPromptIcon">+</span>
+            <span><b>Seguimiento de tu tatuaje</b><small>Envíame fotos los días 3, 7, 14 y 30 para revisar cómo cicatriza.</small></span>
+            <strong>Enviar fotos →</strong>
+          </a>
           <p className="eyebrow">Calatorao / Zaragoza</p>
           <h1>Black & Grey Tattoo Studio</h1>
           <p className="lead">Diseños personalizados, composición adaptada al cuerpo y tatuajes pensados para verse bien hoy y en el futuro.</p>
           <div className="actions"><a className="button primary" href="#booking">Reservar consulta</a><a className="button" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer">WhatsApp</a><a className="button" href={instagramUrl} target="_blank" rel="noreferrer">Instagram</a><a className="button" href={facebookUrl} target="_blank" rel="noreferrer">Facebook</a></div>
         </div>
+      </section>
+
+      <section id="seguimiento" className="section healingSection">
+        <div className="healingIntro">
+          <p className="eyebrow">Cicatrización controlada</p>
+          <h2>Tu tatuaje no termina al salir del estudio</h2>
+          <p className="sectionIntro">Envíame una foto clara los días <b>3, 7, 14 y 30</b>. Así puedo comprobar la evolución, detectar a tiempo un cuidado incorrecto y valorar el resultado una vez cicatrizado.</p>
+          <div className="healingDays" aria-label="Días de seguimiento">
+            <span><b>03</b><small>Primer control</small></span>
+            <span><b>07</b><small>Evolución</small></span>
+            <span><b>14</b><small>Cicatrización</small></span>
+            <span><b>30</b><small>Resultado</small></span>
+          </div>
+          <div className="retouchNotice">
+            <p><b>Retoque pequeño gratuito:</b> dentro de las primeras 8 semanas, cuando se hayan seguido los cuidados indicados y se haya realizado el seguimiento con fotos.</p>
+            <p><b>Si no se cumplen los cuidados:</b> cuando el retoque sea necesario por rascado, sol, piscina, exceso de crema u otras indicaciones no respetadas, tendrá un coste del 50% del precio habitual del retoque.</p>
+          </div>
+        </div>
+
+        <form className="form healingForm" onSubmit={sendHealingCheck}>
+          <span className="formTitle">Enviar control de cicatrización</span>
+          <input name="healingName" placeholder="Nombre completo" required />
+          <label><span>Fecha de la sesión</span><input name="sessionDate" type="date" required /></label>
+          <input name="tattooArea" placeholder="Zona tatuada" required />
+          <select name="healingDay" required defaultValue=""><option value="" disabled>Selecciona el control</option><option>Día 3</option><option>Día 7</option><option>Día 14</option><option>Día 30</option><option>Otra revisión</option></select>
+          <textarea name="healingNotes" placeholder="Cuéntame si notas irritación, dolor, pérdida de pigmento u otra cosa" />
+          <label><span>Fotos del tatuaje (máximo 3)</span><input name="healingPhotos" type="file" accept="image/jpeg,image/png,image/webp" multiple required onChange={(event) => { const files = event.currentTarget.files ? Array.from(event.currentTarget.files) : []; const error = validateReferenceFiles(files); setHealingPhotoError(error); setHealingPhotoNames(error ? [] : files.map((file) => file.name)); if (error) event.currentTarget.value = ""; }} /></label>
+          {healingPhotoNames.length > 0 && (<p className="formNote">Seleccionadas: {healingPhotoNames.join(", ")}</p>)}
+          {healingPhotoError && (<p className="formNote formError">{healingPhotoError}</p>)}
+          <button type="submit">Preparar y enviar por WhatsApp</button>
+          <p className="formNote">El teléfono abrirá el menú de compartir. Selecciona WhatsApp y envía el mensaje con las fotos a Dako Tattoo.</p>
+        </form>
       </section>
 
       <section id="gallery" className="section gallerySection">
@@ -114,7 +200,7 @@ export default function Home() {
 
       <section id="contact" className="section contact"><h2>Contacto</h2><p>Para consultas rápidas, escribe por WhatsApp, Instagram o Facebook.</p><div className="actions" style={{ justifyContent: "center" }}><a className="button primary" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer">WhatsApp</a><a className="button" href={instagramUrl} target="_blank" rel="noreferrer">Instagram</a><a className="button" href={facebookUrl} target="_blank" rel="noreferrer">Facebook</a></div><p style={{ marginTop: 24 }}>WhatsApp: +34 643 922 673<br />Instagram: @dako.tattoo.art<br />Facebook: Yordan Georgiev</p></section>
 
-      <section id="retoques" className="section"><p className="eyebrow">Seguimiento</p><h2>Política de retoques</h2><p className="sectionIntro">El resultado final de un tatuaje se valora una vez que la piel ha cicatrizado por completo. Para mantener un criterio claro y justo, Dako Tattoo aplica las siguientes condiciones.</p><div className="grid"><article className="card"><span>Retoque pequeño sin coste</span><p>Incluye un retoque pequeño dentro de las 8 semanas posteriores a la sesión cuando el tatuaje haya cicatrizado con normalidad, se hayan seguido las instrucciones de cuidado y exista únicamente una pequeña pérdida de pigmento. Será necesario enviar una foto del tatuaje ya cicatrizado antes de reservar el retoque.</p></article><article className="card"><span>Retoque con coste</span><p>El retoque será de pago cuando haya problemas relacionados con cuidados posteriores inadecuados, exposición prematura al sol o piscina, rascado o irritación importante, cuando se soliciten cambios o elementos nuevos en el diseño, o cuando la revisión se pida después del plazo de 8 semanas.</p></article></div><p className="sectionIntro" style={{ marginTop: 24 }}>Cada caso se revisará individualmente según el estado real de la piel y del tatuaje. El retoque gratuito no cubre cambios de diseño ni ampliaciones.</p></section>
+      <section id="retoques" className="section"><p className="eyebrow">Condiciones claras</p><h2>Política de retoques</h2><p className="sectionIntro">El resultado final se valora cuando la piel está completamente cicatrizada. Cada caso se revisa mediante las fotos de seguimiento.</p><div className="grid retouchGrid"><article className="card"><span>Retoque pequeño gratuito</span><p>Incluye un pequeño retoque dentro de las 8 semanas posteriores a la sesión si el tatuaje ha cicatrizado con normalidad, se han respetado los cuidados y se han enviado las fotos de seguimiento.</p></article><article className="card"><span>Retoque al 50%</span><p>Si la pérdida de pigmento está relacionada con cuidados inadecuados —rascado, sol, piscina, exceso de crema o indicaciones no respetadas— el retoque tendrá un coste del 50% de su precio habitual.</p></article><article className="card"><span>No incluye cambios</span><p>El retoque gratuito no cubre modificaciones del diseño, elementos nuevos, ampliaciones ni solicitudes realizadas después de las primeras 8 semanas.</p></article></div><p className="sectionIntro" style={{ marginTop: 24 }}>La valoración final depende del estado real de la piel y del tatuaje. Si aparece dolor intenso, calor creciente, pus, fiebre o enrojecimiento que se extiende, consulta con un profesional sanitario.</p></section>
 
       <section id="cuidados" className="section"><p className="eyebrow">Aftercare</p><h2>Cuidados después del tatuaje</h2><p className="sectionIntro">Un buen cuidado durante la cicatrización ayuda a proteger la piel y a conservar mejor el resultado del tatuaje.</p><div className="grid"><article className="card"><span>Limpieza</span><p>Lava el tatuaje con las manos limpias y un jabón suave, sin frotar. Seca la zona con pequeños toques usando papel limpio o una toalla limpia, sin arrastrar sobre la piel.</p></article><article className="card"><span>Hidratación</span><p>Cuando la piel esté seca, aplica una capa fina del producto de cuidado recomendado. Evita dejar una capa gruesa y húmeda sobre el tatuaje.</p></article><article className="card"><span>Durante la cicatrización</span><p>No rasques, no arranques costras ni piel descamada y evita el roce innecesario. No sumerjas el tatuaje en piscina, jacuzzi, bañera o agua compartida hasta que la piel esté completamente cicatrizada.</p></article><article className="card"><span>Sol y resultado a largo plazo</span><p>Evita la exposición directa al sol mientras el tatuaje está cicatrizando. Una vez curado, protege la zona del sol para ayudar a conservar el contraste y el pigmento durante más tiempo.</p></article></div></section>
 
