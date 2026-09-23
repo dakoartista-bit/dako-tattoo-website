@@ -329,6 +329,59 @@ textarea { min-height: 130px; resize: vertical; }
 .healingReminder b { color: var(--gold); }
 .formTitle { color: var(--gold); font-size: 21px; font-weight: 800; }
 .formError { color: #d9a2a2; }
+.bookingIntro { position: sticky; top: 28px; }
+.bookingCallout {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+  padding: 18px;
+  border: 1px solid rgba(200,169,106,.42);
+  border-radius: 18px;
+  background: rgba(200,169,106,.1);
+  line-height: 1.4;
+}
+.bookingCallout span { font-size: 28px; }
+.bookingCallout b { font-size: 17px; }
+.bookingForm { border-color: rgba(200,169,106,.3); }
+.bookingPhotoUpload {
+  display: grid;
+  gap: 14px;
+  margin-top: 4px;
+  padding: 20px;
+  border: 2px solid rgba(200,169,106,.78);
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(200,169,106,.17), rgba(8,8,8,.96));
+  box-shadow: 0 14px 34px rgba(0,0,0,.28);
+}
+.bookingPhotoTitle { display: grid; gap: 9px; }
+.bookingPhotoTitle b {
+  color: var(--gold);
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: .025em;
+}
+.bookingPhotoTitle small {
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+.bookingPhotoUpload input[type="file"] { border-color: rgba(200,169,106,.38); }
+.bookingSubmit {
+  min-height: 58px;
+  font-size: 17px;
+  letter-spacing: .02em;
+  box-shadow: 0 10px 28px rgba(200,169,106,.18);
+}
+.bookingReminder {
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(200,169,106,.08);
+  font-size: 15px;
+  line-height: 1.55;
+}
+.bookingReminder b { color: var(--gold); }
 .retouchGrid { grid-template-columns: repeat(3, 1fr); }
 
 @media (max-width: 800px) {
@@ -345,6 +398,7 @@ textarea { min-height: 130px; resize: vertical; }
   .sanitaryBadge { padding: 11px 12px; border-radius: 15px; gap: 9px; }
   .credentialSeal { width: 29px; height: 29px; flex-basis: 29px; font-size: 13px; }
   .grid, .split, .healingSection, .retouchGrid { grid-template-columns: 1fr; }
+  .bookingIntro { position: static; }
   .hero { padding: 22px; }
   .heroContent { padding: 58px 0 80px; }
   .healingPrompt { grid-template-columns: auto 1fr; margin-bottom: 46px; }
