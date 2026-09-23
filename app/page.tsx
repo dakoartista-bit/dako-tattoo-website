@@ -171,11 +171,11 @@ export default function Home() {
           <input name="tattooArea" placeholder="Zona tatuada" required />
           <select name="healingDay" required defaultValue=""><option value="" disabled>Selecciona el control</option><option>Día 3</option><option>Día 7</option><option>Día 14</option><option>Día 30</option><option>Otra revisión</option></select>
           <textarea name="healingNotes" placeholder="Cuéntame si notas irritación, dolor, pérdida de pigmento u otra cosa" />
-          <label><span>Fotos del tatuaje (máximo 3)</span><input name="healingPhotos" type="file" accept="image/jpeg,image/png,image/webp" multiple required onChange={(event) => { const files = event.currentTarget.files ? Array.from(event.currentTarget.files) : []; const error = validateReferenceFiles(files); setHealingPhotoError(error); setHealingPhotoNames(error ? [] : files.map((file) => file.name)); if (error) event.currentTarget.value = ""; }} /></label>
+          <label className="healingPhotoUpload"><span className="healingPhotoTitle"><b>📸 ENVÍA FOTOS DEL TATUAJE</b><small>Es importante ver cómo está cicatrizando. Añade de 1 a 3 fotos claras, con buena luz y sin filtros.</small></span><input name="healingPhotos" type="file" accept="image/jpeg,image/png,image/webp" multiple required onChange={(event) => { const files = event.currentTarget.files ? Array.from(event.currentTarget.files) : []; const error = validateReferenceFiles(files); setHealingPhotoError(error); setHealingPhotoNames(error ? [] : files.map((file) => file.name)); if (error) event.currentTarget.value = ""; }} /></label>
           {healingPhotoNames.length > 0 && (<p className="formNote">Seleccionadas: {healingPhotoNames.join(", ")}</p>)}
           {healingPhotoError && (<p className="formNote formError">{healingPhotoError}</p>)}
-          <button type="submit">Preparar y enviar por WhatsApp</button>
-          <p className="formNote">El teléfono abrirá el menú de compartir. Selecciona WhatsApp y envía el mensaje con las fotos a Dako Tattoo.</p>
+          <button className="healingSubmit" type="submit">📲 ENVIAR FOTOS POR WHATSAPP</button>
+          <p className="formNote healingReminder"><b>Seguimiento importante:</b> las fotos permiten comprobar la evolución y valorar correctamente el resultado final.</p>
         </form>
       </section>
 
