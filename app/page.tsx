@@ -17,7 +17,6 @@ const gallery = [
   { src: "/gallery/IMG_6057.jpeg", title: "Polynesian Tribal Sleeve", category: "Tribal" },
 ];
 
-const specialties = ["Black & Grey Realism", "Polynesian / Tribal", "Fine Line", "Custom Tattoo Design"];
 const allowedReferenceTypes = ["image/jpeg", "image/png", "image/webp"];
 const maxReferenceSize = 10 * 1024 * 1024;
 
@@ -183,8 +182,6 @@ export default function Home() {
         <p className="eyebrow">Portfolio</p><h2>Galería de trabajos</h2><p className="sectionIntro">Selección de tatuajes realizados por Dako Tattoo: piezas black & grey, floral, traditional, cuello y diseños personalizados.</p>
         <div className="masonry">{gallery.map((item) => (<button className="galleryItem" key={item.src} onClick={() => setSelected(item)}><img src={item.src} alt={item.title} loading="lazy" onError={(event) => { event.currentTarget.parentElement?.remove(); }} /><span className="galleryOverlay"><b>{item.title}</b><small>{item.category}</small></span></button>))}</div>
       </section>
-
-      <section className="section"><p className="eyebrow">Especialidades</p><h2>Trabajo a medida</h2><div className="grid">{specialties.map((item) => (<article className="card" key={item}><span>{item}</span><p>Composición limpia, contraste fuerte y lectura clara sobre piel.</p></article>))}</div></section>
 
       <section id="booking" className="section split">
         <div><p className="eyebrow">Reserva</p><h2>Solicitud de cita</h2><p>Envíame tu idea, zona del cuerpo, tamaño aproximado y referencias. Te responderé con una propuesta profesional.</p></div>
