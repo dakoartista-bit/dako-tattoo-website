@@ -3,875 +3,506 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0c0c0d" />
+<meta name="theme-color" content="#0b0b0c" />
 <meta name="color-scheme" content="dark" />
 <meta name="robots" content="noindex,nofollow" />
-<title>DAKO Tattoo — Studio Log</title>
+<title>DAKO Tattoo — Studio</title>
 <style>
-:root {
-  color-scheme: dark;
-  --bg: #0b0b0c;
-  --panel: #161617;
-  --panel-2: #101011;
-  --line: #2c2c2f;
-  --text: #f6f6f7;
-  --muted: #9c9ca5;
-  --soft: #74747d;
-  --green: #82c89a;
-  --green-bg: rgba(130, 200, 154, .12);
-  --gold: #d2b36e;
-  --danger: #c96868;
-  --danger-bg: rgba(201, 104, 104, .12);
-  --nav-h: 84px;
+:root{
+  color-scheme:dark;
+  --bg:#0b0b0c;--panel:#171718;--panel2:#101011;--line:#2b2b2e;
+  --text:#f5f5f6;--muted:#9898a1;--soft:#72727b;--green:#86cf9f;
+  --greenBg:rgba(134,207,159,.12);--gold:#d6b66f;--danger:#c96f6f;
+  --nav:82px;
 }
-* { box-sizing: border-box; }
-html { background: var(--bg); }
-body {
-  margin: 0;
-  min-height: 100vh;
-  background: var(--bg);
-  color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Inter, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text)}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Inter,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit}
+button{color:inherit;-webkit-tap-highlight-color:transparent}
+.app{min-height:100vh;padding:max(16px,env(safe-area-inset-top)) 14px calc(var(--nav) + 34px + env(safe-area-inset-bottom))}
+.wrap{width:min(720px,100%);margin:0 auto}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.brand h1{margin:0;font-size:20px;letter-spacing:-.03em}
+.brand p{margin:4px 0 0;color:var(--muted);font-size:12px}
+.icon-btn{width:42px;height:42px;border-radius:14px;border:1px solid var(--line);background:var(--panel);display:grid;place-items:center;font-size:19px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:16px;margin-bottom:12px}
+.card h2{font-size:22px;margin:0 0 14px;letter-spacing:-.03em}
+.card h3{font-size:16px;margin:0 0 10px}
+.hero{padding:18px}
+.hero-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.hero h2{font-size:26px;margin:0 0 5px}
+.hero p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
+.primary,.secondary,.ghost,.danger,.chip-btn{
+  border:0;border-radius:14px;min-height:46px;padding:11px 14px;font-weight:800;cursor:pointer
 }
-button, input, select, textarea { font: inherit; }
-button { color: inherit; }
-button, .clickable { -webkit-tap-highlight-color: transparent; }
-.app-shell {
-  min-height: 100vh;
-  padding: max(18px, env(safe-area-inset-top)) 18px calc(var(--nav-h) + 38px + env(safe-area-inset-bottom));
+.primary{background:var(--text);color:#090909}
+.secondary{background:#242426;border:1px solid #353538}
+.ghost{background:transparent;border:1px solid var(--line);color:#d7d7da}
+.danger{background:var(--danger);color:white}
+.full{width:100%}
+.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:15px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.stat{background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:12px;min-width:0}
+.stat span{display:block;color:var(--muted);font-size:10px;margin-bottom:6px}
+.stat b{display:block;font-size:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.section-head h2{margin:0}
+.badge{display:inline-flex;align-items:center;min-height:26px;padding:4px 9px;border-radius:999px;border:1px solid #333337;background:#1e1e20;color:#c6c6cb;font-size:11px}
+.badge.green{color:var(--green);background:var(--greenBg);border-color:rgba(134,207,159,.25)}
+.search,.control{width:100%;min-height:48px;border-radius:14px;border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:10px 12px;outline:none}
+.search{margin-bottom:11px}
+.search:focus,.control:focus{border-color:#55555d;box-shadow:0 0 0 3px rgba(255,255,255,.035)}
+textarea.control{min-height:86px;resize:vertical}
+.list{display:grid;gap:9px}
+.client{
+  width:100%;text-align:left;border:1px solid var(--line);background:var(--panel2);
+  border-radius:17px;padding:14px;cursor:pointer
 }
-.container { width: min(760px, 100%); margin: 0 auto; }
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  margin-bottom: 18px;
+.client:active{transform:scale(.995)}
+.client-top,.session-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.client-name{font-size:17px;font-weight:850}
+.money{color:var(--green);font-weight:850;white-space:nowrap}
+.meta{color:var(--muted);font-size:12px;line-height:1.45;margin-top:5px}
+.pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.empty{color:var(--muted);text-align:center;padding:28px 12px;border:1px dashed var(--line);border-radius:17px}
+.back{border:0;background:transparent;color:var(--muted);padding:6px 0 10px;font-weight:750}
+.profile-title{font-size:28px;letter-spacing:-.04em;margin:0 0 6px}
+.profile-contact{color:var(--muted);font-size:13px;line-height:1.55}
+.profile-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.session{
+  background:var(--panel2);border:1px solid var(--line);border-radius:17px;padding:14px
 }
-.brand h1 { margin: 0; font-size: 21px; line-height: 1.1; letter-spacing: -.02em; }
-.brand p { margin: 5px 0 0; color: var(--muted); font-size: 13px; }
-.quick-add {
-  border: 0;
-  background: var(--text);
-  color: #080808;
-  border-radius: 14px;
-  padding: 11px 14px;
-  font-weight: 800;
-  white-space: nowrap;
+.session-title{font-size:15px;font-weight:850}
+.session-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:11px}
+.small-btn{min-height:38px;border-radius:11px;border:1px solid #36363a;background:#242426;padding:8px 10px;font-size:12px;font-weight:750}
+details.tech{border-top:1px solid #29292c;margin-top:11px;padding-top:10px}
+details.tech summary{color:var(--muted);font-size:12px;cursor:pointer}
+.tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;margin-top:10px}
+.tech-item span{display:block;color:var(--soft);font-size:9px;text-transform:uppercase;letter-spacing:.05em}
+.tech-item b{display:block;margin-top:3px;font-size:12px}
+.healed{margin-top:10px;padding:11px;border:1px solid #2c2c30;background:#171719;border-radius:13px}
+.healed-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.healed-score{color:var(--green);font-weight:850}
+.form-section{margin-top:16px;padding-top:15px;border-top:1px solid #29292c}
+.form-section:first-child{margin-top:0;padding-top:0;border-top:0}
+.form-title{font-size:13px;color:#d3d3d7;font-weight:850;margin-bottom:10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.field{display:block}
+.label{display:block;color:var(--muted);font-size:11px;margin:0 0 6px}
+.mt9{margin-top:9px}
+.advanced{margin-top:14px;border:1px solid var(--line);border-radius:15px;overflow:hidden}
+.advanced summary{padding:13px;background:#141416;color:#c8c8cc;font-weight:750;cursor:pointer}
+.advanced-body{padding:13px;border-top:1px solid var(--line)}
+.note{font-size:12px;color:var(--green);margin:8px 0 0;line-height:1.4}
+.bottom{
+  position:fixed;z-index:40;left:0;right:0;bottom:0;height:calc(var(--nav) + env(safe-area-inset-bottom));
+  padding:7px 10px calc(7px + env(safe-area-inset-bottom));border-top:1px solid #29292c;
+  background:rgba(11,11,12,.96);backdrop-filter:blur(18px);display:grid;grid-template-columns:repeat(3,1fr)
 }
-.month-strip {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 9px;
-  margin-bottom: 16px;
+.bottom button{border:0;background:transparent;color:#81818a;display:grid;place-items:center;align-content:center;gap:4px;font-size:11px}
+.bottom button.active{color:var(--text)}
+.nav-icon{font-size:22px;line-height:1}
+.center-add .nav-icon{width:36px;height:36px;border-radius:12px;background:var(--text);color:#090909;display:grid;place-items:center;font-size:23px}
+.modal-bg{position:fixed;z-index:80;inset:0;background:rgba(0,0,0,.74);display:flex;align-items:flex-end;justify-content:center}
+.modal{width:min(720px,100%);max-height:88vh;overflow:auto;background:#171719;border:1px solid #343438;border-bottom:0;border-radius:24px 24px 0 0;padding:17px 17px calc(22px + env(safe-area-inset-bottom))}
+.modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.modal-head h2{margin:0;font-size:21px}
+.close{width:38px;height:38px;border-radius:50%;border:1px solid #39393d;background:#242426;font-size:20px}
+.settings-list{display:grid;gap:8px}
+.settings-list button{width:100%}
+.score-row{display:grid;grid-template-columns:1fr 78px;gap:12px;align-items:center;margin-bottom:8px}
+.score-row span{color:var(--muted);font-size:12px}
+.score-row input{text-align:center}
+.toast{position:fixed;z-index:100;left:50%;bottom:calc(var(--nav) + 18px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#f2f2f3;color:#111;border-radius:12px;padding:9px 13px;font-size:12px;font-weight:800;box-shadow:0 12px 45px rgba(0,0,0,.35);white-space:nowrap}
+@media(max-width:560px){
+  .brand p{display:none}
+  .card{padding:14px;border-radius:18px}
+  .hero h2{font-size:24px}
+  .stats{gap:6px}
+  .stat{padding:10px 8px}
+  .stat b{font-size:14px}
+  .grid2{grid-template-columns:1fr}
+  .profile-actions{grid-template-columns:1fr 1fr}
+  .session-actions{grid-template-columns:1fr 1fr}
 }
-.mini-stat {
-  min-width: 0;
-  padding: 13px 12px;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-}
-.mini-stat span { display: block; color: var(--muted); font-size: 11px; margin-bottom: 6px; }
-.mini-stat b { display: block; font-size: 17px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.card {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 22px;
-  padding: 18px;
-  margin-bottom: 14px;
-}
-.card h2 { font-size: 24px; margin: 0 0 16px; letter-spacing: -.03em; }
-.card h3 { font-size: 17px; margin: 0 0 12px; }
-.section-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
-.section-head h2 { margin: 0; }
-.search {
-  width: 100%;
-  height: 50px;
-  border-radius: 15px;
-  border: 1px solid var(--line);
-  background: var(--panel-2);
-  color: var(--text);
-  padding: 0 15px;
-  outline: none;
-  margin-bottom: 12px;
-}
-.search:focus, .control:focus { border-color: #57575f; box-shadow: 0 0 0 3px rgba(255,255,255,.04); }
-.client-list { display: grid; gap: 10px; }
-.client-card {
-  width: 100%;
-  text-align: left;
-  background: var(--panel-2);
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 15px;
-  cursor: pointer;
-}
-.client-card:active { transform: scale(.995); }
-.client-top, .session-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
-.client-name { font-size: 18px; font-weight: 850; letter-spacing: -.02em; }
-.client-total, .money { color: var(--green); font-weight: 850; white-space: nowrap; }
-.subline { color: var(--muted); font-size: 13px; line-height: 1.45; margin-top: 5px; }
-.pill-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 10px; }
-.pill {
-  display: inline-flex;
-  align-items: center;
-  min-height: 27px;
-  border-radius: 999px;
-  padding: 5px 9px;
-  color: #c6c6cd;
-  background: #1d1d1f;
-  border: 1px solid #303034;
-  font-size: 11px;
-}
-.pill.green { color: var(--green); background: var(--green-bg); border-color: rgba(130,200,154,.25); }
-.empty {
-  color: var(--muted);
-  text-align: center;
-  padding: 32px 14px;
-  border: 1px dashed var(--line);
-  border-radius: 18px;
-}
-.back-btn {
-  border: 0;
-  padding: 8px 0;
-  margin-bottom: 10px;
-  background: transparent;
-  color: var(--muted);
-  font-weight: 700;
-}
-.profile-title { font-size: 30px; margin: 0 0 7px; letter-spacing: -.04em; }
-.profile-meta { color: var(--muted); font-size: 13px; line-height: 1.6; }
-.profile-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 9px;
-  margin: 16px 0 4px;
-}
-.profile-stat { padding: 12px; border-radius: 15px; border: 1px solid var(--line); background: var(--panel-2); }
-.profile-stat span { display: block; color: var(--muted); font-size: 11px; margin-bottom: 5px; }
-.profile-stat b { font-size: 16px; }
-.primary, .secondary, .danger, .tiny-btn {
-  border: 0;
-  border-radius: 15px;
-  min-height: 48px;
-  padding: 11px 15px;
-  font-weight: 800;
-  cursor: pointer;
-}
-.primary { width: 100%; background: var(--text); color: #090909; }
-.secondary { width: 100%; background: #252527; color: var(--text); border: 1px solid #343438; }
-.danger { width: 100%; background: var(--danger); color: #fff; }
-.tiny-btn { min-height: 36px; padding: 8px 11px; border-radius: 11px; background: #262629; border: 1px solid #38383c; font-size: 12px; }
-.session-list { display: grid; gap: 10px; }
-.session-card { border: 1px solid var(--line); background: var(--panel-2); border-radius: 18px; padding: 15px; }
-.session-title { font-size: 16px; font-weight: 850; }
-.session-money { color: var(--green); font-weight: 850; }
-.session-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
-details.tech-details { margin-top: 12px; border-top: 1px solid #27272a; padding-top: 11px; }
-details.tech-details summary { color: var(--muted); font-size: 13px; cursor: pointer; }
-.tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 14px; margin-top: 12px; }
-.tech-item span { display: block; color: var(--soft); font-size: 10px; text-transform: uppercase; letter-spacing: .05em; }
-.tech-item b { display: block; margin-top: 3px; font-size: 13px; font-weight: 700; }
-.healed-box { margin-top: 12px; padding: 12px; border-radius: 14px; background: #171719; border: 1px solid #2a2a2e; }
-.healed-head { display: flex; justify-content: space-between; gap: 12px; align-items: center; }
-.healed-head b { font-size: 13px; }
-.healed-score { color: var(--green); font-weight: 850; }
-.healed-mini { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 9px; }
-.healed-mini div { background: #111113; border-radius: 10px; padding: 8px 6px; text-align: center; border: 1px solid #27272a; }
-.healed-mini span { display: block; color: var(--soft); font-size: 9px; }
-.healed-mini b { display: block; font-size: 13px; margin-top: 3px; }
-.form-card { padding-bottom: 22px; }
-.form-section { margin-top: 18px; padding-top: 16px; border-top: 1px solid #28282b; }
-.form-section:first-of-type { margin-top: 0; padding-top: 0; border-top: 0; }
-.form-section-title { font-size: 14px; color: #d8d8dc; font-weight: 850; margin-bottom: 11px; }
-.grid2, .grid3 { display: grid; gap: 10px; }
-.grid2 { grid-template-columns: 1fr 1fr; }
-.grid3 { grid-template-columns: repeat(3, 1fr); }
-.field { display: block; }
-.label { display: block; color: var(--muted); font-size: 12px; margin: 0 0 6px; }
-.control {
-  width: 100%;
-  min-height: 48px;
-  background: var(--panel-2);
-  color: var(--text);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 10px 12px;
-  outline: none;
-}
-textarea.control { min-height: 86px; resize: vertical; }
-.mt10 { margin-top: 10px; }
-.match-note { margin: 9px 0 0; color: var(--green); font-size: 12px; line-height: 1.4; }
-.advanced { margin-top: 16px; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
-.advanced summary { padding: 14px; cursor: pointer; color: #c8c8ce; font-weight: 750; background: #141416; }
-.advanced .advanced-body { padding: 14px; border-top: 1px solid var(--line); }
-.score-grid { display: grid; gap: 10px; }
-.score-row { display: grid; grid-template-columns: 1fr 82px; gap: 12px; align-items: center; }
-.score-row span { color: var(--muted); font-size: 13px; }
-.score-row input { text-align: center; }
-.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.stat-box { padding: 15px; border-radius: 17px; background: var(--panel-2); border: 1px solid var(--line); }
-.stat-box span { color: var(--muted); display: block; font-size: 12px; margin-bottom: 8px; }
-.stat-box b { font-size: 23px; }
-.data-actions { display: grid; gap: 9px; margin-top: 14px; }
-.due-list { display: grid; gap: 8px; }
-.due-item { padding: 12px; border-radius: 14px; border: 1px solid var(--line); background: var(--panel-2); }
-.due-item b { display: block; font-size: 14px; }
-.due-item span { display: block; color: var(--muted); font-size: 12px; margin-top: 4px; }
-.danger-zone { margin-top: 14px; }
-.danger-zone summary { color: #d38b8b; cursor: pointer; font-size: 13px; }
-.warning { color: #d38b8b; font-size: 12px; line-height: 1.45; }
-.bottom-nav {
-  position: fixed;
-  z-index: 50;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: calc(var(--nav-h) + env(safe-area-inset-bottom));
-  padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
-  border-top: 1px solid #29292c;
-  background: rgba(12,12,13,.96);
-  backdrop-filter: blur(18px);
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-}
-.bottom-nav button {
-  border: 0;
-  background: transparent;
-  color: #85858e;
-  font-size: 12px;
-  display: grid;
-  place-items: center;
-  align-content: center;
-  gap: 4px;
-}
-.bottom-nav button.active { color: var(--text); }
-.nav-icon { font-size: 24px; line-height: 1; }
-.modal-backdrop {
-  position: fixed;
-  z-index: 100;
-  inset: 0;
-  background: rgba(0,0,0,.74);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}
-.modal {
-  width: min(760px, 100%);
-  max-height: 88vh;
-  overflow: auto;
-  border-radius: 24px 24px 0 0;
-  border: 1px solid #333338;
-  border-bottom: 0;
-  background: #171719;
-  padding: 18px 18px calc(22px + env(safe-area-inset-bottom));
-}
-.modal-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 15px; }
-.modal-head h2 { margin: 0; font-size: 21px; }
-.close-btn { width: 38px; height: 38px; border-radius: 50%; border: 1px solid #38383c; background: #222225; color: var(--text); font-size: 20px; }
-.toast {
-  position: fixed;
-  z-index: 130;
-  left: 50%;
-  bottom: calc(var(--nav-h) + 22px + env(safe-area-inset-bottom));
-  transform: translateX(-50%);
-  background: #f2f2f3;
-  color: #111;
-  padding: 10px 14px;
-  border-radius: 13px;
-  font-weight: 750;
-  font-size: 13px;
-  box-shadow: 0 12px 50px rgba(0,0,0,.35);
-}
-@media (max-width: 560px) {
-  .app-shell { padding-left: 14px; padding-right: 14px; }
-  .topbar { align-items: flex-start; }
-  .brand h1 { font-size: 19px; }
-  .brand p { display: none; }
-  .quick-add { padding: 10px 12px; font-size: 13px; }
-  .month-strip { gap: 7px; }
-  .mini-stat { padding: 11px 9px; }
-  .mini-stat b { font-size: 15px; }
-  .card { padding: 15px; border-radius: 19px; }
-  .grid2, .grid3 { grid-template-columns: 1fr; }
-  .profile-stats { grid-template-columns: repeat(3, 1fr); }
-  .profile-stat { padding: 10px 8px; }
-  .profile-stat b { font-size: 14px; }
-  .session-actions { grid-template-columns: 1fr; }
-  .stats-grid { grid-template-columns: 1fr 1fr; }
-  .stat-box b { font-size: 20px; }
-  .healed-mini { grid-template-columns: repeat(4, 1fr); }
-}
-
 </style>
 </head>
 <body>
 <div id="app"></div>
 <input id="backupInput" type="file" accept="application/json,.json" hidden />
 <script>
-(function () {
-  'use strict';
+(function(){
+'use strict';
 
-  var SESSION_KEY = 'dako_sessions_v1';
-  var HEALED_KEY = 'dako_healed_v1';
-  var root = document.getElementById('app');
-  var backupInput = document.getElementById('backupInput');
+var CLIENT_KEY='dako_clients_v3';
+var SESSION_KEY='dako_sessions_v3';
+var HEALED_KEY='dako_healed_v3';
+var app=document.getElementById('app');
+var backupInput=document.getElementById('backupInput');
 
-  var SOURCES = ['Препоръка','Instagram','TikTok','Facebook','Сайт','Лично познанство','Повторен клиент','Друго'];
-  var STYLES = ['Black & Grey','3D','Manga / Anime','Цветна','Blackwork','Traditional','Mandala','Biomechanical','New School','Lettering','Fine Line','Ornamental','Друго'];
-  var SKINS = ['Нормална','Тънка','Дебела','Суха','Мазна','Чувствителна'];
-  var MACHINES = ['Bishop Power Wand Advanced Packer 4.2','EZ P3 PRO','Dragonhawk','Друга'];
-  var NEEDLES = ['3RL','5RL','7RL','9RL','9RS','7RM','9RM','13RM','15RM','25RM','Друга'];
-  var TECHNIQUES = ['Линии','Whip shading','Pendulum shading','Circular shading','Brush shading','Pepper shading','Dotwork','Packing','Друго'];
+var SOURCES=['Препоръка','Instagram','TikTok','Facebook','Сайт','Лично познанство','Повторен клиент','Друго'];
+var STYLES=['Black & Grey','Realism','Lettering','Fine Line','Blackwork','Manga / Anime','Цветна','Traditional','Ornamental','Друго'];
+var MACHINES=['Bishop Power Wand Advanced Packer 4.2','EZ P3 PRO','Dragonhawk','Друга'];
+var NEEDLES=['3RL','5RL','7RL','9RL','9RS','7RM','9RM','13RM','15RM','25RM','Друга'];
+var TECHNIQUES=['Линии','Whip shading','Pendulum shading','Circular shading','Brush shading','Pepper shading','Dotwork','Packing','Друго'];
 
-  var state = {
-    tab: 'clients',
-    selectedClient: null,
-    sessionClient: '',
-    healedSessionId: null,
-    query: '',
-    toast: ''
+var state={
+  tab:'home',
+  selectedClientId:null,
+  preselectedClientId:null,
+  modal:null,
+  healedSessionId:null,
+  query:'',
+  toast:''
+};
+
+function read(key){
+  try{return JSON.parse(localStorage.getItem(key)||'[]')}catch(e){return[]}
+}
+function write(key,value){localStorage.setItem(key,JSON.stringify(value))}
+function clients(){return read(CLIENT_KEY)}
+function sessions(){return read(SESSION_KEY)}
+function healed(){return read(HEALED_KEY)}
+function today(){return new Date().toISOString().slice(0,10)}
+function addDays(date,days){
+  var d=new Date(date+'T12:00:00');d.setDate(d.getDate()+days);return d.toISOString().slice(0,10)
+}
+function esc(v){
+  return String(v==null?'':v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;')
+}
+function money(v){return (Number(v)||0).toFixed(2)+' €'}
+function norm(v){return String(v||'').trim().replace(/\s+/g,' ').toLocaleLowerCase('bg')}
+function formatDate(v){
+  if(!v)return '—';
+  try{return new Intl.DateTimeFormat('bg-BG',{day:'2-digit',month:'short',year:'numeric'}).format(new Date(v+'T12:00:00'))}catch(e){return v}
+}
+function uid(prefix){return prefix+Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
+function download(name,content,type){
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type:type}));a.download=name;a.click();
+  setTimeout(function(){URL.revokeObjectURL(a.href)},700)
+}
+function toast(msg){
+  state.toast=msg;render();
+  setTimeout(function(){if(state.toast===msg){state.toast='';render()}},1700)
+}
+function getClient(id){return clients().find(function(c){return c.id===id})||null}
+function getSession(id){return sessions().find(function(s){return s.id===id})||null}
+function clientSessions(id){
+  return sessions().filter(function(s){return s.clientId===id}).sort(function(a,b){return String(b.date).localeCompare(String(a.date))})
+}
+function sessionChecks(id){
+  return healed().filter(function(h){return h.sessionId===id}).sort(function(a,b){return String(b.date).localeCompare(String(a.date))})
+}
+function clientTotals(id){
+  var list=clientSessions(id);
+  return {
+    count:list.length,
+    total:list.reduce(function(sum,s){return sum+(Number(s.price)||0)},0),
+    profit:list.reduce(function(sum,s){return sum+(Number(s.profit)||0)},0)
+  }
+}
+function currentMonthSessions(){
+  var p=today().slice(0,7);
+  return sessions().filter(function(s){return String(s.date||'').slice(0,7)===p})
+}
+function dueSessions(){
+  var done=new Set(healed().map(function(h){return h.sessionId}));
+  return sessions().filter(function(s){return s.healedDue&&s.healedDue<=today()&&!done.has(s.id)}).sort(function(a,b){return String(a.healedDue).localeCompare(String(b.healedDue))})
+}
+function option(values,selected){
+  return values.map(function(v){return '<option value="'+esc(v)+'"'+(v===selected?' selected':'')+'>'+esc(v)+'</option>'}).join('')
+}
+function field(label,html){return '<label class="field"><span class="label">'+label+'</span>'+html+'</label>'}
+function input(name,value,type,placeholder,extra){
+  return '<input class="control" name="'+name+'" type="'+(type||'text')+'" value="'+esc(value==null?'':value)+'" placeholder="'+esc(placeholder||'')+'" '+(extra||'')+' />'
+}
+function select(name,values,selected){
+  return '<select class="control" name="'+name+'">'+option(values,selected)+'</select>'
+}
+function topbar(){
+  return '<div class="topbar"><div class="brand"><h1>DAKO Tattoo — Studio</h1><p>Бърз дневник за клиенти и сесии</p></div><button class="icon-btn" data-action="settings" aria-label="Настройки">⚙︎</button></div>'
+}
+function nav(){
+  return '<nav class="bottom">'+
+    '<button data-action="tab" data-tab="home" class="'+(state.tab==='home'?'active':'')+'"><span class="nav-icon">⌂</span>Начало</button>'+
+    '<button data-action="new-session" class="center-add '+(state.tab==='session'?'active':'')+'"><span class="nav-icon">＋</span>Сесия</button>'+
+    '<button data-action="tab" data-tab="clients" class="'+(state.tab==='clients'?'active':'')+'"><span class="nav-icon">◉</span>Клиенти</button>'+
+  '</nav>'
+}
+function statsRow(){
+  var list=currentMonthSessions();
+  var revenue=list.reduce(function(sum,s){return sum+(Number(s.price)||0)},0);
+  var due=dueSessions().length;
+  return '<div class="stats">'+
+    '<div class="stat"><span>Този месец</span><b>'+list.length+' сесии</b></div>'+
+    '<div class="stat"><span>Оборот</span><b>'+money(revenue)+'</b></div>'+
+    '<div class="stat"><span>Healed</span><b>'+due+' за проверка</b></div>'+
+  '</div>'
+}
+function clientCard(c){
+  var t=clientTotals(c.id);
+  var list=clientSessions(c.id);
+  var last=list[0]||null;
+  return '<button class="client" data-action="open-client" data-id="'+esc(c.id)+'">'+
+    '<div class="client-top"><div><div class="client-name">'+esc(c.name)+'</div>'+
+    '<div class="meta">'+(last?'Последно: '+formatDate(last.date)+' · '+esc(last.zone||'без зона'):'Още няма сесии')+'</div></div>'+
+    '<div class="money">'+money(t.total)+'</div></div>'+
+    '<div class="pills"><span class="badge">'+t.count+' сесии</span>'+
+    (c.instagram?'<span class="badge">'+esc(c.instagram)+'</span>':'')+
+    (c.phone?'<span class="badge">'+esc(c.phone)+'</span>':'')+
+    '</div></button>'
+}
+function homeView(){
+  var cs=clients().slice().sort(function(a,b){return String(b.updatedAt||b.createdAt||'').localeCompare(String(a.updatedAt||a.createdAt||''))});
+  var recent=cs.slice(0,5).map(clientCard).join('');
+  var due=dueSessions().slice(0,4);
+  var dueHtml=due.map(function(s){
+    var c=getClient(s.clientId);
+    return '<button class="client" data-action="open-client" data-id="'+esc(s.clientId)+'"><div class="client-top"><div><div class="client-name">'+esc(c?c.name:'Клиент')+'</div><div class="meta">'+formatDate(s.healedDue)+' · '+esc(s.zone||'без зона')+'</div></div><span class="badge green">Healed</span></div></button>'
+  }).join('');
+  return topbar()+
+    '<section class="card hero"><div class="hero-row"><div><h2>Всичко на едно място.</h2><p>Добавяш клиента веднъж. После от профила му виждаш всички сесии, настройки, цени и healed проверки.</p></div></div>'+
+    '<div class="quick-grid"><button class="primary" data-action="new-client">＋ Нов клиент</button><button class="secondary" data-action="new-session">＋ Нова сесия</button></div></section>'+
+    statsRow()+
+    '<section class="card"><div class="section-head"><h2>Последни клиенти</h2><button class="ghost chip-btn" data-action="tab" data-tab="clients">Всички</button></div><div class="list">'+(recent||'<div class="empty">Още няма клиенти. Започни с „Нов клиент“.</div>')+'</div></section>'+
+    (due.length?'<section class="card"><div class="section-head"><h2>За healed проверка</h2><span class="badge green">'+dueSessions().length+'</span></div><div class="list">'+dueHtml+'</div></section>':'')
+}
+function clientsView(){
+  var q=norm(state.query);
+  var list=clients().filter(function(c){
+    if(!q)return true;
+    return norm(c.name).includes(q)||norm(c.phone).includes(q)||norm(c.instagram).includes(q)
+  }).sort(function(a,b){return String(b.updatedAt||b.createdAt||'').localeCompare(String(a.updatedAt||a.createdAt||''))});
+  return topbar()+
+    '<section class="card"><div class="section-head"><h2>Клиенти</h2><button class="primary chip-btn" data-action="new-client">＋ Клиент</button></div>'+
+    '<input id="clientSearch" class="search" type="search" placeholder="Търси по име, телефон или Instagram" value="'+esc(state.query)+'" />'+
+    '<div class="list">'+(list.map(clientCard).join('')||'<div class="empty">Няма намерени клиенти.</div>')+'</div></section>'
+}
+function clientView(){
+  var c=getClient(state.selectedClientId);
+  if(!c){state.selectedClientId=null;return clientsView()}
+  var list=clientSessions(c.id);
+  var t=clientTotals(c.id);
+  var sessionHtml=list.map(function(s){
+    var checks=sessionChecks(s.id);
+    var latest=checks[0]||null;
+    return '<div class="session">'+
+      '<div class="session-top"><div><div class="session-title">'+esc(s.tattoo||s.style||'Татуировка')+'</div><div class="meta">'+formatDate(s.date)+' · '+esc(s.zone||'без зона')+(s.size?' · '+esc(s.size):'')+'</div></div><div class="money">'+money(s.price)+'</div></div>'+
+      (s.notes?'<div class="meta">'+esc(s.notes)+'</div>':'')+
+      (latest?'<div class="healed"><div class="healed-row"><b>Healed '+formatDate(latest.date)+'</b><span class="healed-score">'+(Number(latest.overall)||0)+'/10</span></div>'+(latest.notes?'<div class="meta">'+esc(latest.notes)+'</div>':'')+'</div>':'')+
+      '<div class="session-actions"><button class="small-btn" data-action="add-healed" data-id="'+esc(s.id)+'">'+(latest?'＋ Нова healed':'＋ Healed проверка')+'</button><button class="small-btn" data-action="duplicate-session" data-id="'+esc(s.id)+'">Повтори настройки</button></div>'+
+      '<details class="tech"><summary>Технически данни</summary><div class="tech-grid">'+
+        tech('Стил',s.style)+tech('Машина',s.machine)+tech('Игла',s.needle)+tech('Волтаж',s.voltage?s.voltage+'V':'—')+
+        tech('Техника',s.technique)+tech('Кожа',s.skin)+tech('Hand speed',s.handSpeed)+tech('Минавания',s.passes||'—')+
+        tech('Капаро',money(s.deposit))+tech('Разходи',money((Number(s.consumables)||0)+(Number(s.otherCosts)||0)))+
+      '</div></details>'+
+    '</div>'
+  }).join('');
+  return topbar()+
+    '<button class="back" data-action="back-clients">← Клиенти</button>'+
+    '<section class="card"><div class="section-head"><div><h1 class="profile-title">'+esc(c.name)+'</h1><div class="profile-contact">'+
+      (c.phone?esc(c.phone)+'<br>':'')+(c.instagram?esc(c.instagram)+'<br>':'')+(c.source?'Откъде: '+esc(c.source):'')+
+    '</div></div><button class="icon-btn" data-action="edit-client" data-id="'+esc(c.id)+'">✎</button></div>'+
+    '<div class="stats"><div class="stat"><span>Сесии</span><b>'+t.count+'</b></div><div class="stat"><span>Общо</span><b>'+money(t.total)+'</b></div><div class="stat"><span>Печалба</span><b>'+money(t.profit)+'</b></div></div>'+
+    (c.notes?'<div class="meta">'+esc(c.notes)+'</div>':'')+
+    '<div class="profile-actions"><button class="primary" data-action="new-for-client" data-id="'+esc(c.id)+'">＋ Сесия</button><button class="secondary" data-action="edit-client" data-id="'+esc(c.id)+'">Редактирай</button></div></section>'+
+    '<section class="card"><div class="section-head"><h2>Сесии</h2><span class="badge">'+list.length+'</span></div><div class="list">'+(sessionHtml||'<div class="empty">Този клиент още няма сесии.</div>')+'</div></section>'
+}
+function tech(label,value){
+  return '<div class="tech-item"><span>'+label+'</span><b>'+esc(value==null||value===''?'—':value)+'</b></div>'
+}
+function sessionFormView(){
+  var pre=state.preselectedClientId?getClient(state.preselectedClientId):null;
+  var opts='<option value="">Избери клиент</option>'+clients().slice().sort(function(a,b){return a.name.localeCompare(b.name,'bg')}).map(function(c){
+    return '<option value="'+esc(c.id)+'"'+(pre&&c.id===pre.id?' selected':'')+'>'+esc(c.name)+'</option>'
+  }).join('');
+  var duplicate=state.duplicateFrom?getSession(state.duplicateFrom):null;
+  var d=duplicate||{};
+  return topbar()+
+    '<section class="card"><h2>Нова сесия</h2><form id="sessionForm">'+
+      '<div class="form-section"><div class="form-title">Основно</div>'+
+        '<div class="grid2">'+field('Клиент','<select id="sessionClientSelect" class="control" name="clientId" required>'+opts+'</select>')+field('Дата',input('date',today(),'date','','required'))+'</div>'+
+        '<div id="clientMissing" class="mt9"></div>'+
+        '<div class="grid2 mt9">'+field('Зона',input('zone',d.zone||'','text','напр. предмишница','required'))+field('Размер',input('size',d.size||'','text','напр. 18 × 10 cm',''))+'</div>'+
+        '<div class="mt9">'+field('Какво татуирах',input('tattoo',d.tattoo||'','text','напр. портрет, кръст, cover-up','required'))+'</div>'+
+        '<div class="grid2 mt9">'+field('Цена €',input('price',d.price||0,'number','0','step="0.01"'))+field('Капаро €',input('deposit',0,'number','0','step="0.01"'))+'</div>'+
+        '<div class="mt9">'+field('Бележка','<textarea class="control" name="notes" placeholder="Само важните неща за тази сесия"></textarea>')+'</div>'+
+      '</div>'+
+      '<details class="advanced"'+(duplicate?' open':'')+'><summary>Технически настройки</summary><div class="advanced-body">'+
+        '<div class="grid2">'+field('Стил',select('style',STYLES,d.style||'Black & Grey'))+field('Машина',select('machine',MACHINES,d.machine||MACHINES[0]))+'</div>'+
+        '<div class="grid2 mt9">'+field('Игла',select('needle',NEEDLES,d.needle||'7RL'))+field('Волтаж',input('voltage',d.voltage||'','number','6.4','step="0.1"'))+'</div>'+
+        '<div class="grid2 mt9">'+field('Техника',select('technique',TECHNIQUES,d.technique||'Whip shading'))+field('Тип кожа',select('skin',['Нормална','Тънка','Дебела','Суха','Мазна','Чувствителна'],d.skin||'Нормална'))+'</div>'+
+        '<div class="grid2 mt9">'+field('Hand speed',select('handSpeed',['Бавна','Средна','Бърза'],d.handSpeed||'Средна'))+field('Минавания',input('passes',d.passes||1,'number','','min="1"'))+'</div>'+
+        '<div class="grid2 mt9">'+field('Консумативи €',input('consumables',d.consumables||0,'number','0','step="0.01"'))+field('Други разходи €',input('otherCosts',0,'number','0','step="0.01"'))+'</div>'+
+      '</div></details>'+
+      '<button class="primary full" type="submit" style="margin-top:15px">ЗАПАЗИ СЕСИЯТА</button>'+
+    '</form></section>'
+}
+function clientModal(editId){
+  var c=editId?getClient(editId):null;
+  return '<div class="modal-bg" data-action="close-modal"><div class="modal" data-modal="1"><div class="modal-head"><h2>'+(c?'Редактирай клиент':'Нов клиент')+'</h2><button class="close" data-action="close-modal">×</button></div>'+
+    '<form id="clientForm"><input type="hidden" name="id" value="'+esc(c?c.id:'')+'" />'+
+      field('Име',input('name',c?c.name:'','text','Име на клиента','required'))+
+      '<div class="grid2 mt9">'+field('Телефон',input('phone',c?c.phone:'','tel','по желание',''))+field('Instagram',input('instagram',c?c.instagram:'','text','@профил',''))+'</div>'+
+      '<div class="mt9">'+field('Откъде дойде',select('source',SOURCES,c?c.source:SOURCES[0]))+'</div>'+
+      '<div class="mt9">'+field('Бележка','<textarea class="control" name="notes" placeholder="Предпочитания, важни детайли...">'+esc(c?c.notes:'')+'</textarea>')+'</div>'+
+      '<button class="primary full" type="submit" style="margin-top:14px">'+(c?'ЗАПАЗИ ПРОМЕНИТЕ':'ДОБАВИ КЛИЕНТА')+'</button>'+
+    '</form></div></div>'
+}
+function healedModal(){
+  var s=getSession(state.healedSessionId);if(!s)return '';
+  var c=getClient(s.clientId);
+  return '<div class="modal-bg" data-action="close-modal"><div class="modal" data-modal="1"><div class="modal-head"><div><h2>Healed проверка</h2><div class="meta">'+esc(c?c.name:'Клиент')+' · '+esc(s.zone||'без зона')+'</div></div><button class="close" data-action="close-modal">×</button></div>'+
+    '<form id="healedForm"><input type="hidden" name="sessionId" value="'+esc(s.id)+'" />'+
+      field('Дата',input('date',today(),'date','','required'))+
+      '<div style="margin-top:12px">'+score('Общо заздравяване','overall',8,1)+score('Черно','black',8,1)+score('Сиво','grey',8,1)+score('Линии','lines',8,1)+score('Петна (0 = няма)','patch',0,0)+score('Белези (0 = няма)','scar',0,0)+'</div>'+
+      field('Бележки','<textarea class="control" name="notes" placeholder="Как е заздравяла татуировката"></textarea>')+
+      '<button class="primary full" type="submit" style="margin-top:14px">ЗАПАЗИ ПРОВЕРКАТА</button>'+
+    '</form></div></div>'
+}
+function score(label,name,value,min){
+  return '<label class="score-row"><span>'+label+'</span><input class="control" type="number" min="'+min+'" max="10" name="'+name+'" value="'+value+'" /></label>'
+}
+function settingsModal(){
+  var all=sessions();
+  var rev=all.reduce(function(sum,s){return sum+(Number(s.price)||0)},0);
+  return '<div class="modal-bg" data-action="close-modal"><div class="modal" data-modal="1"><div class="modal-head"><div><h2>Данни и настройки</h2><div class="meta">'+clients().length+' клиенти · '+all.length+' сесии · '+money(rev)+'</div></div><button class="close" data-action="close-modal">×</button></div>'+
+    '<div class="settings-list"><button class="secondary" data-action="export-csv">Експорт CSV</button><button class="secondary" data-action="backup">Backup JSON</button><button class="secondary" data-action="import">Импортирай backup</button></div>'+
+    '<details class="advanced"><summary>Опасна зона</summary><div class="advanced-body"><p class="meta">Това изтрива само данните от новия Studio Log на този телефон. Старият тестов лог не се засяга.</p><button class="danger full" data-action="delete-all">Изтрий данните на Studio Log</button></div></details>'+
+  '</div></div>'
+}
+function modalHtml(){
+  if(state.modal==='new-client')return clientModal(null);
+  if(state.modal&&state.modal.indexOf('edit-client:')===0)return clientModal(state.modal.split(':')[1]);
+  if(state.modal==='settings')return settingsModal();
+  if(state.healedSessionId)return healedModal();
+  return ''
+}
+function render(){
+  var content='';
+  if(state.selectedClientId)content=clientView();
+  else if(state.tab==='home')content=homeView();
+  else if(state.tab==='clients')content=clientsView();
+  else if(state.tab==='session')content=sessionFormView();
+  app.innerHTML='<div class="app"><div class="wrap">'+content+'</div></div>'+nav()+modalHtml()+(state.toast?'<div class="toast">'+esc(state.toast)+'</div>':'');
+  bind()
+}
+function bind(){
+  var search=document.getElementById('clientSearch');
+  if(search)search.addEventListener('input',function(e){
+    state.query=e.target.value;var pos=e.target.selectionStart;render();
+    var next=document.getElementById('clientSearch');if(next){next.focus();try{next.setSelectionRange(pos,pos)}catch(err){}}
+  });
+  var cf=document.getElementById('clientForm');if(cf)cf.addEventListener('submit',saveClient);
+  var sf=document.getElementById('sessionForm');if(sf)sf.addEventListener('submit',saveSession);
+  var hf=document.getElementById('healedForm');if(hf)hf.addEventListener('submit',saveHealed);
+  var sel=document.getElementById('sessionClientSelect');
+  if(sel)sel.addEventListener('change',function(){
+    var box=document.getElementById('clientMissing');
+    if(box)box.innerHTML=sel.value?'':'<button type="button" class="ghost full" data-action="new-client">＋ Първо добави нов клиент</button>'
+  });
+  if(sel)sel.dispatchEvent(new Event('change'))
+}
+function saveClient(e){
+  e.preventDefault();var fd=new FormData(e.currentTarget);
+  var id=String(fd.get('id')||'');var list=clients();
+  var name=String(fd.get('name')||'').trim();if(!name)return;
+  var duplicate=list.find(function(c){return c.id!==id&&norm(c.name)===norm(name)});
+  if(duplicate){alert('Вече има клиент с това име. Отвори неговия профил.');return}
+  var data={
+    id:id||uid('C'),name:name,phone:String(fd.get('phone')||'').trim(),instagram:String(fd.get('instagram')||'').trim(),
+    source:String(fd.get('source')||SOURCES[0]),notes:String(fd.get('notes')||'').trim(),
+    createdAt:id?(getClient(id).createdAt||new Date().toISOString()):new Date().toISOString(),updatedAt:new Date().toISOString()
   };
+  if(id)list=list.map(function(c){return c.id===id?data:c});else list.push(data);
+  write(CLIENT_KEY,list);state.modal=null;state.selectedClientId=data.id;state.tab='clients';state.preselectedClientId=null;render();toast(id?'Клиентът е обновен':'Клиентът е добавен')
+}
+function saveSession(e){
+  e.preventDefault();var fd=new FormData(e.currentTarget);
+  var clientId=String(fd.get('clientId')||'');var c=getClient(clientId);
+  if(!c){alert('Първо избери клиент.');return}
+  var price=Number(fd.get('price'))||0,cons=Number(fd.get('consumables'))||0,other=Number(fd.get('otherCosts'))||0;
+  var date=String(fd.get('date')||today());
+  var s={
+    id:uid('S'),clientId:clientId,date:date,zone:String(fd.get('zone')||'').trim(),size:String(fd.get('size')||'').trim(),
+    tattoo:String(fd.get('tattoo')||'').trim(),notes:String(fd.get('notes')||'').trim(),price:price,deposit:Number(fd.get('deposit'))||0,
+    style:String(fd.get('style')||'Black & Grey'),machine:String(fd.get('machine')||MACHINES[0]),needle:String(fd.get('needle')||'7RL'),
+    voltage:String(fd.get('voltage')||''),technique:String(fd.get('technique')||'Whip shading'),skin:String(fd.get('skin')||'Нормална'),
+    handSpeed:String(fd.get('handSpeed')||'Средна'),passes:Number(fd.get('passes'))||1,consumables:cons,otherCosts:other,profit:price-cons-other,
+    healedDue:addDays(date,30),createdAt:new Date().toISOString()
+  };
+  var list=sessions();list.push(s);write(SESSION_KEY,list);
+  var cs=clients().map(function(x){if(x.id===clientId)x.updatedAt=new Date().toISOString();return x});write(CLIENT_KEY,cs);
+  state.tab='clients';state.selectedClientId=clientId;state.preselectedClientId=null;state.duplicateFrom=null;render();toast('Сесията е запазена')
+}
+function saveHealed(e){
+  e.preventDefault();var fd=new FormData(e.currentTarget);
+  var h={
+    id:uid('H'),sessionId:String(fd.get('sessionId')||''),date:String(fd.get('date')||today()),
+    overall:Number(fd.get('overall'))||0,black:Number(fd.get('black'))||0,grey:Number(fd.get('grey'))||0,
+    lines:Number(fd.get('lines'))||0,patch:Number(fd.get('patch'))||0,scar:Number(fd.get('scar'))||0,
+    notes:String(fd.get('notes')||'').trim()
+  };
+  var list=healed();list.push(h);write(HEALED_KEY,list);state.healedSessionId=null;render();toast('Healed проверката е запазена')
+}
+function exportCsv(){
+  var header=['Дата','Клиент','Татуировка','Зона','Размер','Стил','Машина','Игла','Волтаж','Техника','Цена','Капаро','Консумативи','Други разходи','Печалба'];
+  var rows=sessions().map(function(s){var c=getClient(s.clientId);return [s.date,c?c.name:'',s.tattoo,s.zone,s.size,s.style,s.machine,s.needle,s.voltage,s.technique,s.price,s.deposit,s.consumables,s.otherCosts,s.profit]});
+  var csv=[header].concat(rows).map(function(row){return row.map(function(cell){return '"'+String(cell==null?'':cell).replace(/"/g,'""')+'"'}).join(',')}).join('\n');
+  download('DAKO_Studio_Log.csv','\uFEFF'+csv,'text/csv;charset=utf-8')
+}
+function backup(){
+  download('DAKO_Studio_Log_backup.json',JSON.stringify({version:3,clients:clients(),sessions:sessions(),healed:healed(),exportedAt:new Date().toISOString()},null,2),'application/json')
+}
+function importBackup(file){
+  var r=new FileReader();
+  r.onload=function(){
+    try{
+      var d=JSON.parse(r.result);
+      if(!d||!Array.isArray(d.clients)||!Array.isArray(d.sessions)||!Array.isArray(d.healed))throw new Error('bad');
+      write(CLIENT_KEY,d.clients);write(SESSION_KEY,d.sessions);write(HEALED_KEY,d.healed);
+      state.modal=null;state.selectedClientId=null;state.tab='home';render();toast('Backup-ът е импортиран')
+    }catch(err){alert('Този файл не е валиден DAKO Studio Log backup.')}
+    backupInput.value=''
+  };
+  r.readAsText(file)
+}
 
-  function today() { return new Date().toISOString().slice(0, 10); }
-  function esc(value) {
-    return String(value == null ? '' : value)
-      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+document.addEventListener('click',function(e){
+  var t=e.target.closest('[data-action]');if(!t)return;
+  var a=t.getAttribute('data-action');
+  if(a==='tab'){state.tab=t.getAttribute('data-tab');state.selectedClientId=null;state.preselectedClientId=null;state.duplicateFrom=null;render();return}
+  if(a==='new-client'){state.modal='new-client';render();return}
+  if(a==='edit-client'){state.modal='edit-client:'+t.getAttribute('data-id');render();return}
+  if(a==='settings'){state.modal='settings';render();return}
+  if(a==='open-client'){state.selectedClientId=t.getAttribute('data-id');state.tab='clients';render();return}
+  if(a==='back-clients'){state.selectedClientId=null;state.tab='clients';render();return}
+  if(a==='new-session'){state.selectedClientId=null;state.preselectedClientId=null;state.duplicateFrom=null;state.tab='session';render();return}
+  if(a==='new-for-client'){state.selectedClientId=null;state.preselectedClientId=t.getAttribute('data-id');state.duplicateFrom=null;state.tab='session';render();return}
+  if(a==='duplicate-session'){
+    var s=getSession(t.getAttribute('data-id'));if(!s)return;
+    state.selectedClientId=null;state.preselectedClientId=s.clientId;state.duplicateFrom=s.id;state.tab='session';render();return
   }
-  function money(value) { return (Number(value) || 0).toFixed(2) + ' €'; }
-  function normalizeName(value) { return String(value || '').trim().replace(/\s+/g, ' ').toLocaleLowerCase('bg'); }
-  function read(key) {
-    try { return JSON.parse(localStorage.getItem(key) || '[]'); }
-    catch (e) { return []; }
+  if(a==='add-healed'){state.healedSessionId=t.getAttribute('data-id');render();return}
+  if(a==='close-modal'){
+    if(e.target.closest('[data-modal]')&&!t.classList.contains('close'))return;
+    state.modal=null;state.healedSessionId=null;render();return
   }
-  function sessions() { return read(SESSION_KEY); }
-  function healed() { return read(HEALED_KEY); }
-  function writeSessions(value) { localStorage.setItem(SESSION_KEY, JSON.stringify(value)); }
-  function writeHealed(value) { localStorage.setItem(HEALED_KEY, JSON.stringify(value)); }
-  function addDays(date, days) {
-    var d = new Date(date + 'T12:00:00');
-    d.setDate(d.getDate() + days);
-    return d.toISOString().slice(0, 10);
-  }
-  function formatDate(value) {
-    if (!value) return '—';
-    try { return new Intl.DateTimeFormat('bg-BG', { day: '2-digit', month: 'short', year: 'numeric' }).format(new Date(value + 'T12:00:00')); }
-    catch (e) { return value; }
-  }
-  function download(name, content, type) {
-    var a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([content], { type: type }));
-    a.download = name;
-    a.click();
-    setTimeout(function () { URL.revokeObjectURL(a.href); }, 800);
-  }
-  function toast(message) {
-    state.toast = message;
-    render();
-    setTimeout(function () {
-      if (state.toast === message) { state.toast = ''; render(); }
-    }, 1800);
-  }
-
-  function groupClients() {
-    var map = new Map();
-    sessions().forEach(function (s) {
-      var key = normalizeName(s.client || 'Без име');
-      if (!map.has(key)) map.set(key, { key: key, name: s.client || 'Без име', sessions: [] });
-      map.get(key).sessions.push(s);
-    });
-    return Array.from(map.values()).map(function (c) {
-      c.sessions.sort(function (a, b) { return String(b.date).localeCompare(String(a.date)); });
-      c.last = c.sessions[0] || {};
-      c.total = c.sessions.reduce(function (sum, s) { return sum + (Number(s.price) || 0); }, 0);
-      c.profit = c.sessions.reduce(function (sum, s) { return sum + (Number(s.profit) || 0); }, 0);
-      c.phone = c.sessions.map(function (s) { return s.phone; }).find(Boolean) || '';
-      c.instagram = c.sessions.map(function (s) { return s.instagram; }).find(Boolean) || '';
-      c.source = c.sessions.map(function (s) { return s.source; }).find(Boolean) || '';
-      return c;
-    }).sort(function (a, b) { return String(b.last.date || '').localeCompare(String(a.last.date || '')); });
-  }
-
-  function getClientByKey(key) {
-    return groupClients().find(function (c) { return c.key === key; }) || null;
-  }
-
-  function getSession(id) { return sessions().find(function (s) { return s.id === id; }) || null; }
-  function checksForSession(id) {
-    return healed().filter(function (h) { return h.sessionId === id; }).sort(function (a, b) { return String(b.date).localeCompare(String(a.date)); });
-  }
-
-  function monthStats() {
-    var prefix = today().slice(0, 7);
-    var list = sessions().filter(function (s) { return String(s.date || '').slice(0, 7) === prefix; });
-    return {
-      count: list.length,
-      revenue: list.reduce(function (sum, s) { return sum + (Number(s.price) || 0); }, 0),
-      profit: list.reduce(function (sum, s) { return sum + (Number(s.profit) || 0); }, 0)
-    };
-  }
-
-  function allStats() {
-    var list = sessions();
-    var hs = healed();
-    var clients = groupClients();
-    var revenue = list.reduce(function (sum, s) { return sum + (Number(s.price) || 0); }, 0);
-    var profit = list.reduce(function (sum, s) { return sum + (Number(s.profit) || 0); }, 0);
-    return {
-      sessions: list.length,
-      clients: clients.length,
-      revenue: revenue,
-      profit: profit,
-      average: list.length ? revenue / list.length : 0,
-      repeat: clients.filter(function (c) { return c.sessions.length > 1; }).length,
-      healed: hs.length
-    };
-  }
-
-  function optionList(values, selected) {
-    return values.map(function (value) {
-      return '<option value="' + esc(value) + '"' + (value === selected ? ' selected' : '') + '>' + esc(value) + '</option>';
-    }).join('');
-  }
-
-  function monthStrip() {
-    var m = monthStats();
-    return '<div class="month-strip">' +
-      '<div class="mini-stat"><span>Този месец</span><b>' + m.count + ' сесии</b></div>' +
-      '<div class="mini-stat"><span>Оборот</span><b>' + money(m.revenue) + '</b></div>' +
-      '<div class="mini-stat"><span>Печалба</span><b>' + money(m.profit) + '</b></div>' +
-      '</div>';
-  }
-
-  function topbar() {
-    return '<div class="topbar">' +
-      '<div class="brand"><h1>DAKO Tattoo — Studio Log</h1><p>Клиенти · сесии · healed · бизнес</p></div>' +
-      '<button class="quick-add" data-action="new-session">＋ Сесия</button>' +
-      '</div>';
-  }
-
-  function clientsView() {
-    var q = normalizeName(state.query);
-    var list = groupClients().filter(function (c) {
-      if (!q) return true;
-      return normalizeName(c.name).includes(q) || normalizeName(c.instagram).includes(q) || normalizeName(c.phone).includes(q);
-    });
-    var cards = list.map(function (c) {
-      var last = c.last;
-      var healedCount = c.sessions.reduce(function (sum, s) { return sum + checksForSession(s.id).length; }, 0);
-      return '<button class="client-card" data-action="open-client" data-client="' + esc(c.key) + '">' +
-        '<div class="client-top"><div><div class="client-name">' + esc(c.name) + '</div>' +
-        '<div class="subline">Последно: ' + formatDate(last.date) + ' · ' + esc(last.zone || 'без зона') + '</div></div>' +
-        '<div class="client-total">' + money(c.total) + '</div></div>' +
-        '<div class="pill-row"><span class="pill">' + c.sessions.length + ' сесии</span>' +
-        '<span class="pill">' + esc(last.style || '—') + '</span>' +
-        (healedCount ? '<span class="pill green">' + healedCount + ' healed</span>' : '') +
-        '</div></button>';
-    }).join('');
-
-    return topbar() + monthStrip() +
-      '<section class="card"><div class="section-head"><h2>Клиенти</h2><span class="pill">' + groupClients().length + ' общо</span></div>' +
-      '<input id="clientSearch" class="search" type="search" placeholder="Търси име, Instagram или телефон…" value="' + esc(state.query) + '" />' +
-      '<div class="client-list">' + (cards || '<div class="empty">Няма намерени клиенти.<br><br>Добави първата сесия и клиентът ще се появи автоматично тук.</div>') + '</div></section>';
-  }
-
-  function techItem(label, value) {
-    return '<div class="tech-item"><span>' + esc(label) + '</span><b>' + esc(value == null || value === '' ? '—' : value) + '</b></div>';
-  }
-
-  function healedHtml(check) {
-    if (!check) return '<div class="healed-box"><div class="subline" style="margin:0">Няма healed проверка за тази сесия.</div></div>';
-    return '<div class="healed-box"><div class="healed-head"><b>Healed · ' + formatDate(check.date) + '</b><span class="healed-score">' + esc(check.overall) + '/10</span></div>' +
-      '<div class="healed-mini">' +
-      '<div><span>Черно</span><b>' + esc(check.black) + '</b></div>' +
-      '<div><span>Сиво</span><b>' + esc(check.grey) + '</b></div>' +
-      '<div><span>Линии</span><b>' + esc(check.lines) + '</b></div>' +
-      '<div><span>Петна</span><b>' + esc(check.patch) + '</b></div>' +
-      '</div>' + (check.notes ? '<div class="subline">' + esc(check.notes) + '</div>' : '') + '</div>';
-  }
-
-  function sessionCard(s) {
-    var checks = checksForSession(s.id);
-    var latestCheck = checks[0];
-    var extraChecks = checks.slice(1).map(healedHtml).join('');
-    return '<article class="session-card">' +
-      '<div class="session-top"><div><div class="session-title">' + formatDate(s.date) + ' · ' + esc(s.zone || 'Без зона') + '</div>' +
-      '<div class="subline">' + esc(s.style || '—') + ' · ' + esc(s.needle || '—') + ' · ' + esc(s.voltage || '—') + (s.voltage ? 'V' : '') + '</div></div>' +
-      '<div class="session-money">' + money(s.price) + '</div></div>' +
-      '<div class="pill-row"><span class="pill">Сесия №' + esc(s.sessionNo || 1) + '</span><span class="pill">Печалба ' + money(s.profit) + '</span>' +
-      (latestCheck ? '<span class="pill green">Healed ' + esc(latestCheck.overall) + '/10</span>' : '') + '</div>' +
-      '<details class="tech-details"><summary>Всички данни за сесията</summary><div class="tech-grid">' +
-      techItem('Машина', s.machine) + techItem('Игла', s.needle) + techItem('Волтаж', s.voltage ? s.voltage + 'V' : '—') + techItem('Техника', s.technique) +
-      techItem('Размер', s.size) + techItem('Кожа', s.skin) + techItem('Кървене', s.bleeding) + techItem('Чувствителност', s.sensitive) +
-      techItem('Скорост', s.handSpeed) + techItem('Опъване', s.stretch) + techItem('Минавания', s.passes) + techItem('Капаро', money(s.deposit)) +
-      techItem('Консумативи', money(s.consumables)) + techItem('Други разходи', money(s.otherCosts)) + techItem('Източник', s.source) + techItem('Цел / бележка', s.goal) +
-      '</div></details>' +
-      healedHtml(latestCheck) + extraChecks +
-      '<div class="session-actions"><button class="tiny-btn" data-action="add-healed" data-session="' + esc(s.id) + '">＋ Healed проверка</button>' +
-      '<button class="tiny-btn" data-action="new-for-client" data-client="' + esc(normalizeName(s.client)) + '">＋ Нова сесия</button></div>' +
-      '</article>';
-  }
-
-  function clientView() {
-    var c = getClientByKey(state.selectedClient);
-    if (!c) { state.selectedClient = null; return clientsView(); }
-    var last = c.last;
-    var meta = [];
-    if (c.phone) meta.push('Телефон: ' + esc(c.phone));
-    if (c.instagram) meta.push('Instagram: ' + esc(c.instagram));
-    if (c.source) meta.push('Дошъл от: ' + esc(c.source));
-    var checksCount = c.sessions.reduce(function (sum, s) { return sum + checksForSession(s.id).length; }, 0);
-
-    return '<button class="back-btn" data-action="back-clients">← Всички клиенти</button>' +
-      '<section class="card"><h1 class="profile-title">' + esc(c.name) + '</h1>' +
-      '<div class="profile-meta">' + (meta.join('<br>') || 'Няма добавен телефон или Instagram.') + '</div>' +
-      '<div class="profile-stats"><div class="profile-stat"><span>Сесии</span><b>' + c.sessions.length + '</b></div>' +
-      '<div class="profile-stat"><span>Общо</span><b>' + money(c.total) + '</b></div>' +
-      '<div class="profile-stat"><span>Healed</span><b>' + checksCount + '</b></div></div>' +
-      '<button class="primary mt10" data-action="new-for-client" data-client="' + esc(c.key) + '">＋ Нова сесия за ' + esc(c.name) + '</button></section>' +
-      '<section class="card"><div class="section-head"><h2>История</h2><span class="pill">Последно ' + formatDate(last.date) + '</span></div>' +
-      '<div class="session-list">' + c.sessions.map(sessionCard).join('') + '</div></section>';
-  }
-
-  function field(label, html) { return '<label class="field"><span class="label">' + label + '</span>' + html + '</label>'; }
-  function input(name, value, type, placeholder, attrs) {
-    return '<input class="control" name="' + name + '" type="' + (type || 'text') + '" value="' + esc(value || '') + '" placeholder="' + esc(placeholder || '') + '" ' + (attrs || '') + ' />';
-  }
-  function select(name, values, selected, attrs) {
-    return '<select class="control" name="' + name + '" ' + (attrs || '') + '>' + optionList(values, selected) + '</select>';
-  }
-
-  function defaultFormValues() {
-    var client = state.sessionClient ? getClientByKey(state.sessionClient) : null;
-    var last = client ? client.last : {};
-    return {
-      date: today(),
-      client: client ? client.name : '',
-      phone: client ? client.phone : '',
-      instagram: client ? client.instagram : '',
-      source: client ? (client.source || last.source || SOURCES[0]) : SOURCES[0],
-      style: last.style || STYLES[0],
-      zone: '', size: '', sessionNo: client ? client.sessions.length + 1 : 1,
-      goal: '', machine: last.machine || MACHINES[0], needle: last.needle || NEEDLES[0],
-      voltage: last.voltage || '', technique: last.technique || TECHNIQUES[0],
-      skin: last.skin || SKINS[0], bleeding: last.bleeding || 'Слабо', sensitive: last.sensitive || 'Не',
-      handSpeed: last.handSpeed || 'Средна', stretch: last.stretch || 'Средно', passes: last.passes || 1,
-      deposit: 0, price: 0, consumables: 0, otherCosts: 0
-    };
-  }
-
-  function sessionFormView() {
-    var v = defaultFormValues();
-    var clients = groupClients();
-    var dataList = clients.map(function (c) { return '<option value="' + esc(c.name) + '"></option>'; }).join('');
-    return '<button class="back-btn" data-action="back-after-form">← Назад</button>' +
-      '<section class="card form-card"><h2>Нова сесия</h2>' +
-      '<form id="sessionForm">' +
-      '<div class="form-section"><div class="form-section-title">Клиент</div>' +
-      '<div class="grid2">' + field('Дата', input('date', v.date, 'date', '', 'required')) + field('Име', '<input class="control" id="sessionClientName" name="client" list="clientNames" value="' + esc(v.client) + '" placeholder="Име на клиента" required /><datalist id="clientNames">' + dataList + '</datalist>') + '</div>' +
-      '<div id="clientMatch"></div>' +
-      '<div class="grid2 mt10">' + field('Телефон', input('phone', v.phone, 'tel', 'по желание')) + field('Instagram', input('instagram', v.instagram, 'text', '@профил')) + '</div>' +
-      '<div class="mt10">' + field('Откъде дойде', select('source', SOURCES, v.source)) + '</div></div>' +
-
-      '<div class="form-section"><div class="form-section-title">Татуировка</div>' +
-      '<div class="grid2">' + field('Зона', input('zone', v.zone, 'text', 'напр. предмишница', 'required')) + field('Стил', select('style', STYLES, v.style)) + '</div>' +
-      '<div class="grid2 mt10">' + field('Размер', input('size', v.size, 'text', 'напр. 18 × 10 cm')) + field('№ сесия', input('sessionNo', v.sessionNo, 'number', '', 'min="1"')) + '</div>' +
-      '<div class="mt10">' + field('Цел / бележка', '<textarea class="control" name="goal" placeholder="Какво искаш да запомниш за тази сесия">' + esc(v.goal) + '</textarea>') + '</div></div>' +
-
-      '<div class="form-section"><div class="form-section-title">Настройки</div>' +
-      '<div class="grid2">' + field('Машина', select('machine', MACHINES, v.machine)) + field('Игла', select('needle', NEEDLES, v.needle)) + '</div>' +
-      '<div class="grid2 mt10">' + field('Волтаж', input('voltage', v.voltage, 'number', '6.4', 'step="0.1"')) + field('Техника', select('technique', TECHNIQUES, v.technique)) + '</div>' +
-      '<details class="advanced"><summary>Допълнителни технически данни</summary><div class="advanced-body">' +
-      '<div class="grid2">' + field('Тип кожа', select('skin', SKINS, v.skin)) + field('Кървене', select('bleeding', ['Слабо','Средно','Силно'], v.bleeding)) + '</div>' +
-      '<div class="grid2 mt10">' + field('Чувствителност', select('sensitive', ['Не','Да'], v.sensitive)) + field('Скорост на ръката', select('handSpeed', ['Бавна','Средна','Бърза'], v.handSpeed)) + '</div>' +
-      '<div class="grid2 mt10">' + field('Опъване', select('stretch', ['Слабо','Средно','Силно'], v.stretch)) + field('Брой минавания', input('passes', v.passes, 'number', '', 'min="1"')) + '</div>' +
-      '</div></details></div>' +
-
-      '<div class="form-section"><div class="form-section-title">Цена</div>' +
-      '<div class="grid2">' + field('Крайна цена €', input('price', v.price, 'number', '0', 'step="0.01"')) + field('Капаро €', input('deposit', v.deposit, 'number', '0', 'step="0.01"')) + '</div>' +
-      '<div class="grid2 mt10">' + field('Консумативи €', input('consumables', v.consumables, 'number', '0', 'step="0.01"')) + field('Други разходи €', input('otherCosts', v.otherCosts, 'number', '0', 'step="0.01"')) + '</div></div>' +
-      '<button class="primary" type="submit" style="margin-top:18px">ЗАПАЗИ СЕСИЯТА</button>' +
-      '</form></section>';
-  }
-
-  function dueSessions() {
-    var done = new Set(healed().map(function (h) { return h.sessionId; }));
-    return sessions().filter(function (s) { return s.healedDue && s.healedDue <= today() && !done.has(s.id); }).sort(function (a, b) { return String(a.healedDue).localeCompare(String(b.healedDue)); });
-  }
-
-  function dataView() {
-    var a = allStats();
-    var due = dueSessions();
-    var dueHtml = due.map(function (s) {
-      return '<div class="due-item"><b>' + esc(s.client) + '</b><span>' + formatDate(s.healedDue) + ' · ' + esc(s.zone || 'без зона') + '</span></div>';
-    }).join('');
-    return topbar() + monthStrip() +
-      '<section class="card"><h2>Данни</h2><div class="stats-grid">' +
-      '<div class="stat-box"><span>Клиенти</span><b>' + a.clients + '</b></div>' +
-      '<div class="stat-box"><span>Общо сесии</span><b>' + a.sessions + '</b></div>' +
-      '<div class="stat-box"><span>Оборот</span><b>' + money(a.revenue) + '</b></div>' +
-      '<div class="stat-box"><span>Печалба</span><b>' + money(a.profit) + '</b></div>' +
-      '<div class="stat-box"><span>Средна цена</span><b>' + money(a.average) + '</b></div>' +
-      '<div class="stat-box"><span>Повторни клиенти</span><b>' + a.repeat + '</b></div>' +
-      '</div></section>' +
-      '<section class="card"><div class="section-head"><h2>Healed за проверка</h2><span class="pill">' + due.length + '</span></div>' +
-      '<div class="due-list">' + (dueHtml || '<div class="empty">Няма просрочени healed проверки.</div>') + '</div></section>' +
-      '<section class="card"><h2>Backup и експорт</h2><div class="data-actions">' +
-      '<button class="secondary" data-action="export-csv">Експорт на сесиите (CSV)</button>' +
-      '<button class="secondary" data-action="backup">Backup (JSON)</button>' +
-      '<button class="secondary" data-action="import">Импортирай backup (JSON)</button>' +
-      '</div><details class="danger-zone"><summary>Опасна зона</summary><p class="warning">Изтриването премахва всички сесии и healed проверки от този телефон.</p><button class="danger" data-action="delete-all">Изтрий всички данни</button></details></section>';
-  }
-
-  function healedModal() {
-    if (!state.healedSessionId) return '';
-    var s = getSession(state.healedSessionId);
-    if (!s) return '';
-    return '<div class="modal-backdrop" data-action="close-modal"><div class="modal" data-modal="1">' +
-      '<div class="modal-head"><div><h2>Healed проверка</h2><div class="subline">' + esc(s.client) + ' · ' + esc(s.zone || 'без зона') + ' · ' + formatDate(s.date) + '</div></div><button class="close-btn" data-action="close-modal">×</button></div>' +
-      '<form id="healedForm"><input type="hidden" name="sessionId" value="' + esc(s.id) + '" />' +
-      field('Дата на проверка', input('date', today(), 'date', '', 'required')) +
-      '<div class="score-grid mt10">' +
-      scoreRow('Наситеност', 'saturation', 8, 1) + scoreRow('Запазване на черното', 'black', 8, 1) + scoreRow('Плавност на сивото', 'grey', 8, 1) + scoreRow('Линии', 'lines', 8, 1) + scoreRow('Петна (0 = няма)', 'patch', 0, 0) + scoreRow('Белези (0 = няма)', 'scar', 0, 0) + scoreRow('Общо заздравяване', 'overall', 8, 1) +
-      '</div>' +
-      '<div class="mt10">' + field('Бележки', '<textarea class="control" name="notes" placeholder="Как е заздравяла татуировката"></textarea>') + '</div>' +
-      '<button class="primary" type="submit" style="margin-top:14px">ЗАПАЗИ HEALED CHECK</button></form></div></div>';
-  }
-
-  function scoreRow(label, name, value, min) {
-    return '<label class="score-row"><span>' + label + '</span><input class="control" type="number" min="' + min + '" max="10" name="' + name + '" value="' + value + '" /></label>';
-  }
-
-  function nav() {
-    return '<nav class="bottom-nav" aria-label="Основна навигация">' +
-      '<button data-action="tab" data-tab="clients" class="' + (state.tab === 'clients' ? 'active' : '') + '"><span class="nav-icon">◉</span>Клиенти</button>' +
-      '<button data-action="new-session" class="' + (state.tab === 'session' ? 'active' : '') + '"><span class="nav-icon">＋</span>Сесия</button>' +
-      '<button data-action="tab" data-tab="data" class="' + (state.tab === 'data' ? 'active' : '') + '"><span class="nav-icon">▥</span>Данни</button>' +
-      '</nav>';
-  }
-
-  function render() {
-    var content = '';
-    if (state.tab === 'clients') content = state.selectedClient ? clientView() : clientsView();
-    if (state.tab === 'session') content = sessionFormView();
-    if (state.tab === 'data') content = dataView();
-    root.innerHTML = '<div class="app-shell"><div class="container">' + content + '</div></div>' + nav() + healedModal() + (state.toast ? '<div class="toast">' + esc(state.toast) + '</div>' : '');
-    bindDynamicInputs();
-  }
-
-  function bindDynamicInputs() {
-    var search = document.getElementById('clientSearch');
-    if (search) search.addEventListener('input', function (e) {
-      state.query = e.target.value;
-      var pos = e.target.selectionStart;
-      render();
-      var next = document.getElementById('clientSearch');
-      if (next) { next.focus(); try { next.setSelectionRange(pos, pos); } catch (err) {} }
-    });
-
-    var clientName = document.getElementById('sessionClientName');
-    if (clientName) {
-      clientName.addEventListener('input', updateClientMatch);
-      clientName.addEventListener('change', function () {
-        var c = groupClients().find(function (x) { return x.key === normalizeName(clientName.value); });
-        if (!c) return updateClientMatch();
-        var form = document.getElementById('sessionForm');
-        if (!form) return;
-        if (form.elements.phone && !form.elements.phone.value) form.elements.phone.value = c.phone || '';
-        if (form.elements.instagram && !form.elements.instagram.value) form.elements.instagram.value = c.instagram || '';
-        if (form.elements.source) form.elements.source.value = c.source || c.last.source || SOURCES[0];
-        if (form.elements.machine) form.elements.machine.value = c.last.machine || MACHINES[0];
-        if (form.elements.needle) form.elements.needle.value = c.last.needle || NEEDLES[0];
-        if (form.elements.voltage) form.elements.voltage.value = c.last.voltage || '';
-        if (form.elements.technique) form.elements.technique.value = c.last.technique || TECHNIQUES[0];
-        if (form.elements.sessionNo) form.elements.sessionNo.value = c.sessions.length + 1;
-        updateClientMatch();
-      });
-      updateClientMatch();
+  if(a==='export-csv'){exportCsv();return}
+  if(a==='backup'){backup();return}
+  if(a==='import'){backupInput.click();return}
+  if(a==='delete-all'){
+    if(confirm('Сигурен ли си? Това ще изтрие всички клиенти, сесии и healed проверки в новия Studio Log.')){
+      localStorage.removeItem(CLIENT_KEY);localStorage.removeItem(SESSION_KEY);localStorage.removeItem(HEALED_KEY);
+      state.modal=null;state.selectedClientId=null;state.tab='home';render();toast('Данните са изтрити')
     }
-
-    var sessionForm = document.getElementById('sessionForm');
-    if (sessionForm) sessionForm.addEventListener('submit', saveSession);
-    var healedForm = document.getElementById('healedForm');
-    if (healedForm) healedForm.addEventListener('submit', saveHealed);
   }
+});
 
-  function updateClientMatch() {
-    var inputEl = document.getElementById('sessionClientName');
-    var out = document.getElementById('clientMatch');
-    if (!inputEl || !out) return;
-    var c = groupClients().find(function (x) { return x.key === normalizeName(inputEl.value); });
-    out.innerHTML = c ? '<p class="match-note">✓ Повторен клиент · ' + c.sessions.length + ' предишни сесии. Последно: ' + esc(c.last.needle || '—') + ' · ' + esc(c.last.voltage || '—') + (c.last.voltage ? 'V' : '') + '</p>' : '';
-  }
-
-  function num(fd, key) { return Number(fd.get(key)) || 0; }
-
-  function saveSession(event) {
-    event.preventDefault();
-    var form = event.currentTarget;
-    var fd = new FormData(form);
-    var clientName = String(fd.get('client') || '').trim() || 'Без име';
-    var existing = groupClients().find(function (c) { return c.key === normalizeName(clientName); });
-    var date = String(fd.get('date') || today());
-    var price = num(fd, 'price');
-    var consumables = num(fd, 'consumables');
-    var otherCosts = num(fd, 'otherCosts');
-    var s = {
-      id: 'S' + Date.now(),
-      date: date,
-      client: clientName,
-      phone: String(fd.get('phone') || '').trim(),
-      instagram: String(fd.get('instagram') || '').trim(),
-      clientType: existing ? 'Повторен' : 'Нов',
-      source: String(fd.get('source') || SOURCES[0]),
-      style: String(fd.get('style') || STYLES[0]),
-      zone: String(fd.get('zone') || '').trim(),
-      size: String(fd.get('size') || '').trim(),
-      sessionNo: num(fd, 'sessionNo') || 1,
-      goal: String(fd.get('goal') || '').trim(),
-      skin: String(fd.get('skin') || SKINS[0]),
-      bleeding: String(fd.get('bleeding') || 'Слабо'),
-      sensitive: String(fd.get('sensitive') || 'Не'),
-      machine: String(fd.get('machine') || MACHINES[0]),
-      needle: String(fd.get('needle') || NEEDLES[0]),
-      voltage: String(fd.get('voltage') || ''),
-      technique: String(fd.get('technique') || TECHNIQUES[0]),
-      handSpeed: String(fd.get('handSpeed') || 'Средна'),
-      stretch: String(fd.get('stretch') || 'Средно'),
-      passes: num(fd, 'passes') || 1,
-      deposit: num(fd, 'deposit'),
-      price: price,
-      consumables: consumables,
-      otherCosts: otherCosts,
-      profit: price - consumables - otherCosts,
-      healedDue: addDays(date, 30)
-    };
-    var list = sessions();
-    list.push(s);
-    writeSessions(list);
-    state.tab = 'clients';
-    state.sessionClient = '';
-    state.selectedClient = normalizeName(clientName);
-    toast('Сесията е запазена');
-  }
-
-  function saveHealed(event) {
-    event.preventDefault();
-    var fd = new FormData(event.currentTarget);
-    var check = {
-      id: 'H' + Date.now(),
-      sessionId: String(fd.get('sessionId') || ''),
-      date: String(fd.get('date') || today()),
-      saturation: num(fd, 'saturation'),
-      black: num(fd, 'black'),
-      grey: num(fd, 'grey'),
-      lines: num(fd, 'lines'),
-      patch: num(fd, 'patch'),
-      scar: num(fd, 'scar'),
-      overall: num(fd, 'overall'),
-      notes: String(fd.get('notes') || '').trim()
-    };
-    var list = healed();
-    list.push(check);
-    writeHealed(list);
-    state.healedSessionId = null;
-    toast('Healed проверката е запазена');
-  }
-
-  function exportCsv() {
-    var header = ['Дата','Клиент','Телефон','Instagram','Стил','Зона','Машина','Игла','Волтаж','Техника','Капаро','Цена','Консумативи','Други разходи','Печалба'];
-    var rows = sessions().map(function (s) {
-      return [s.date,s.client,s.phone || '',s.instagram || '',s.style,s.zone,s.machine,s.needle,s.voltage,s.technique,s.deposit,s.price,s.consumables,s.otherCosts,s.profit];
-    });
-    var csv = [header].concat(rows).map(function (row) {
-      return row.map(function (cell) { return '"' + String(cell == null ? '' : cell).replace(/"/g, '""') + '"'; }).join(',');
-    }).join('\n');
-    download('DAKO_Tech_Log_sessions.csv', '\uFEFF' + csv, 'text/csv;charset=utf-8');
-  }
-
-  function backup() {
-    download('DAKO_Tech_Log_backup.json', JSON.stringify({ sessions: sessions(), healed: healed(), exportedAt: new Date().toISOString() }, null, 2), 'application/json');
-  }
-
-  function importBackup(file) {
-    var reader = new FileReader();
-    reader.onload = function () {
-      try {
-        var data = JSON.parse(reader.result);
-        if (!data || !Array.isArray(data.sessions) || !Array.isArray(data.healed)) throw new Error('Невалиден backup');
-        var currentSessions = sessions();
-        var currentHealed = healed();
-        var sessionMap = new Map(currentSessions.map(function (s) { return [s.id, s]; }));
-        data.sessions.forEach(function (s) { sessionMap.set(s.id || ('S' + Date.now() + Math.random()), s); });
-        var healedMap = new Map(currentHealed.map(function (h) { return [h.id, h]; }));
-        data.healed.forEach(function (h) { healedMap.set(h.id || ('H' + Date.now() + Math.random()), h); });
-        writeSessions(Array.from(sessionMap.values()));
-        writeHealed(Array.from(healedMap.values()));
-        state.tab = 'clients';
-        state.selectedClient = null;
-        toast('Backup-ът е импортиран');
-      } catch (err) {
-        alert('Този файл не е валиден DAKO Tech Log backup.');
-      }
-      backupInput.value = '';
-    };
-    reader.readAsText(file);
-  }
-
-  document.addEventListener('click', function (event) {
-    var target = event.target.closest('[data-action]');
-    if (!target) return;
-    var action = target.getAttribute('data-action');
-
-    if (action === 'tab') {
-      state.tab = target.getAttribute('data-tab');
-      state.selectedClient = null;
-      state.sessionClient = '';
-      render();
-      return;
-    }
-    if (action === 'new-session') {
-      state.tab = 'session'; state.sessionClient = ''; render(); return;
-    }
-    if (action === 'open-client') {
-      state.tab = 'clients'; state.selectedClient = target.getAttribute('data-client'); render(); return;
-    }
-    if (action === 'back-clients') {
-      state.selectedClient = null; render(); return;
-    }
-    if (action === 'new-for-client') {
-      state.sessionClient = target.getAttribute('data-client'); state.tab = 'session'; render(); return;
-    }
-    if (action === 'back-after-form') {
-      state.tab = 'clients'; state.sessionClient = ''; render(); return;
-    }
-    if (action === 'add-healed') {
-      state.healedSessionId = target.getAttribute('data-session'); render(); return;
-    }
-    if (action === 'close-modal') {
-      if (event.target.closest('[data-modal]') && !target.classList.contains('close-btn')) return;
-      state.healedSessionId = null; render(); return;
-    }
-    if (action === 'export-csv') { exportCsv(); return; }
-    if (action === 'backup') { backup(); return; }
-    if (action === 'import') { backupInput.click(); return; }
-    if (action === 'delete-all') {
-      if (confirm('Сигурен ли си? Това ще изтрие всички сесии и healed проверки от този телефон.')) {
-        localStorage.removeItem(SESSION_KEY); localStorage.removeItem(HEALED_KEY); state.selectedClient = null; render();
-      }
-    }
-  });
-
-  backupInput.addEventListener('change', function () {
-    if (backupInput.files && backupInput.files[0]) importBackup(backupInput.files[0]);
-  });
-
-  render();
+backupInput.addEventListener('change',function(){if(backupInput.files&&backupInput.files[0])importBackup(backupInput.files[0])});
+render();
 })();
-
 </script>
 </body>
 </html>
