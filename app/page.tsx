@@ -126,6 +126,10 @@ export default function Home() {
                 <span className="credentialSeal">✓</span>
                 <span><b>Formación Higiénico-Sanitaria</b><small>56 h · Homologado por EVES</small></span>
               </div>
+              <a className="sanitaryBadge aftercareBadge" href="#cuidados" aria-label="Ver cuidados del tatuaje">
+                <span className="credentialSeal">+</span>
+                <span><b>Cuidados del tatuaje</b><small>Limpieza · hidratación · sol · piscina</small></span>
+              </a>
             </div>
           </div>
           <div className="navLinks">
