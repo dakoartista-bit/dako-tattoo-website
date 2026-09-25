@@ -138,6 +138,22 @@ export default function Home() {
         </nav>
 
         <div className="heroContent">
+          <a
+            id="fidelidad"
+            className="loyaltyOffer"
+            href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hola Dako Tattoo, quiero información sobre la tarjeta de fidelidad: por 4 sesiones, la 5.ª es GRATIS.")}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span className="loyaltyOfferBadge">5.ª</span>
+            <span className="loyaltyOfferCopy">
+              <small>Tarjeta de fidelidad</small>
+              <b>Por 4 sesiones, la 5.ª es GRATIS</b>
+              <em>Pide tu tarjeta, completa tus 4 sellos y consulta los detalles por WhatsApp.</em>
+            </span>
+            <strong>Quiero mi tarjeta →</strong>
+          </a>
+
           <a className="healingPrompt" href="#seguimiento">
             <span className="healingPromptIcon">+</span>
             <span><b>Seguimiento de tu tatuaje</b><small>Envíame fotos los días 3, 7, 14 y 30 para revisar cómo cicatriza.</small></span>
