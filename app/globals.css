@@ -195,6 +195,9 @@ h3 {
   grid-template-columns: repeat(4, 1fr);
   gap: 14px;
 }
+.retouchGrid {
+  grid-template-columns: repeat(3, 1fr);
+}
 .processGrid article,
 .whyGrid article,
 .faqGrid details {
@@ -557,6 +560,7 @@ select {
   .credentialPanel { max-width: 560px; }
   .processGrid,
   .whyGrid { grid-template-columns: repeat(2, 1fr); }
+  .retouchGrid { grid-template-columns: 1fr; }
   .bookingIntro { position: static; }
   .clarityCard { gap: 18px; }
 }
