@@ -134,10 +134,7 @@ export default function Home() {
       "Hola Dako Tattoo, te envío el seguimiento de cicatrización.",
       "",
       "Nombre: " + (data.get("healingName") || ""),
-      "Fecha de la sesión: " + (data.get("sessionDate") || ""),
       "Zona tatuada: " + (data.get("tattooArea") || ""),
-      "Control: " + (data.get("healingDay") || ""),
-      "Observaciones: " + (data.get("healingNotes") || "Sin observaciones."),
       "Fotos adjuntas: " + healingFiles.length + " archivo(s)."
     ].join("\n");
 
@@ -356,10 +353,7 @@ export default function Home() {
           <span className="formStep">Seguimiento</span>
           <h3>Enviar fotos de cicatrización</h3>
           <input placeholder="Nombre completo" required name="healingName" />
-          <label><span>Fecha de la sesión</span><input type="date" required name="sessionDate" /></label>
           <input placeholder="Zona tatuada" required name="tattooArea" />
-          <select name="healingDay" required defaultValue=""><option value="" disabled>Selecciona el control</option><option>Día 3</option><option>Día 7</option><option>Día 14</option><option>Día 30</option><option>Otra revisión</option></select>
-          <textarea name="healingNotes" placeholder="Cuéntame si notas irritación, dolor, pérdida de pigmento u otra cosa" />
           <label className="healingPhotoUpload">
             <span className="bookingPhotoTitle"><b>Fotos del tatuaje</b><small>Añade de 1 a 3 fotos claras, con buena luz y sin filtros.</small></span>
             <input type="file" accept="image/jpeg,image/png,image/webp" multiple required name="healingPhotos" onChange={(event) => {
@@ -380,10 +374,9 @@ export default function Home() {
       <section id="retoques" className="section shell">
         <p className="eyebrow">Condiciones claras</p><h2>Política de retoques</h2>
         <div className="whyGrid retouchGrid">
-          <article><b>Retoque pequeño gratuito</b><p>Dentro de las primeras 8 semanas cuando el tatuaje ha cicatrizado con normalidad, se han seguido los cuidados y se ha realizado el seguimiento.</p></article>
-          <article><b>Cuidados inadecuados</b><p>Si la pérdida de pigmento está relacionada con rascado, sol, piscina, exceso de crema u otras indicaciones no respetadas, el retoque tendrá coste.</p></article>
-          <article><b>No incluye cambios</b><p>Un retoque no cubre modificaciones del diseño, elementos nuevos, ampliaciones o cambios solicitados después de la cicatrización.</p></article>
-          <article><b>Valoración final</b><p>La necesidad real de retoque se decide cuando la piel está completamente cicatrizada y se puede ver el resultado estable.</p></article>
+          <article><b>Control después de 1 mes</b><p>Cuando el tatuaje esté completamente cicatrizado, revisamos juntos el resultado final.</p></article>
+          <article><b>Retoque o refuerzo · 50 €</b><p>Si después de la cicatrización hay alguna zona que necesita refuerzo de líneas, sombras o pigmento, el retoque tiene un precio de 50 €.</p></article>
+          <article><b>No incluye cambios de diseño</b><p>El retoque es para reforzar el trabajo realizado. Elementos nuevos, ampliaciones o cambios del diseño se valoran aparte.</p></article>
         </div>
       </section>
 
