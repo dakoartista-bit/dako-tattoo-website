@@ -1,102 +1,144 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useMemo, useState } from "react";
 
 const whatsappNumber = "34643922673";
 const instagramUrl = "https://www.instagram.com/dako.tattoo.art?igsh=MTA3NWczMDllemp1ZA%3D%3D&utm_source=qr";
 const facebookUrl = "https://www.facebook.com/share/1BNmFXcvEQ/?mibextid=wwXIfr";
-const vicmanCertificate = "data:image/webp;base64,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[... ELLIPSIZATION ...]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";
 
 const gallery = [
-  { src: "/gallery/cross-lettering-back.jpeg", title: "Cruz y lettering en espalda", category: "Blackwork / Lettering" },
+  { src: "/gallery/cross-lettering-back.jpeg", title: "Cruz y lettering", category: "Blackwork / Lettering" },
   { src: "/gallery/IMG_3331.jpeg", title: "Japanese Mandala Sleeve", category: "Black & Grey" },
   { src: "/gallery/IMG_3790.jpeg", title: "Eagle Forearm", category: "Black & Grey" },
   { src: "/gallery/IMG_3927.jpeg", title: "Rose Neck Tattoo", category: "Floral" },
   { src: "/gallery/IMG_4085.jpeg", title: "Traditional Eagle Chest", category: "Color" },
   { src: "/gallery/IMG_5072.jpeg", title: "Razor Custom Tattoo", category: "Traditional" },
-  { src: "/gallery/IMG_6057.jpeg", title: "Polynesian Tribal Sleeve", category: "Tribal" },
+  { src: "/gallery/IMG_6057.jpeg", title: "Polynesian Tribal Sleeve", category: "Tribal" }
 ];
 
-const allowedReferenceTypes = ["image/jpeg", "image/png", "image/webp"];
-const maxReferenceSize = 10 * 1024 * 1024;
+const acceptedImageTypes = ["image/jpeg", "image/png", "image/webp"];
+type GalleryItem = (typeof gallery)[number];
 
-type SelectedImage = { src: string; title: string; category: string };
+function validateFiles(files: File[]) {
+  if (files.length > 3) return "Puedes añadir un máximo de 3 fotos.";
+  if (files.some((file) => !acceptedImageTypes.includes(file.type))) return "Las fotos deben ser JPG, PNG o WEBP.";
+  if (files.some((file) => file.size > 10 * 1024 * 1024)) return "Cada foto debe ocupar como máximo 10 MB.";
+  return "";
+}
 
 export default function Home() {
-  const [selected, setSelected] = useState<SelectedImage | null>(null);
-  const [photoError, setPhotoError] = useState("");
-  const [photoNames, setPhotoNames] = useState<string[]>([]);
-  const [healingPhotoError, setHealingPhotoError] = useState("");
-  const [healingPhotoNames, setHealingPhotoNames] = useState<string[]>([]);
+  const [selected, setSelected] = useState<GalleryItem | null>(null);
+  const [bookingStep, setBookingStep] = useState(1);
+  const [bookingFiles, setBookingFiles] = useState<File[]>([]);
+  const [bookingFileNames, setBookingFileNames] = useState<string[]>([]);
+  const [bookingError, setBookingError] = useState("");
+  const [bookingSent, setBookingSent] = useState(false);
+  const [healingFiles, setHealingFiles] = useState<File[]>([]);
+  const [healingFileNames, setHealingFileNames] = useState<string[]>([]);
+  const [healingError, setHealingError] = useState("");
 
-  function validateReferenceFiles(files: File[]) {
-    if (files.length > 3) return "Puedes añadir un máximo de 3 fotos.";
-    if (files.some((file) => !allowedReferenceTypes.includes(file.type))) return "Las referencias deben ser JPG, PNG o WEBP.";
-    if (files.some((file) => file.size > maxReferenceSize)) return "Cada foto debe ocupar como máximo 10 MB.";
-    return "";
+  const progress = useMemo(() => bookingStep + "/5", [bookingStep]);
+
+  function validateStep(step: number) {
+    const container = document.querySelector('[data-booking-step="' + step + '"]');
+    if (!container) return true;
+    const required = Array.from(container.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>("[required]"));
+    for (const field of required) {
+      if (!field.checkValidity()) {
+        field.reportValidity();
+        field.focus();
+        return false;
+      }
+    }
+    if (step === 4 && bookingFiles.length === 0) {
+      setBookingError("Añade al menos una foto clara de la zona del cuerpo o una referencia.");
+      return false;
+    }
+    return true;
   }
 
-  async function sendBooking(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const data = new FormData(form);
-    const input = form.elements.namedItem("references") as HTMLInputElement | null;
-    const files = input?.files ? Array.from(input.files) : [];
-    const validationError = validateReferenceFiles(files);
-    if (validationError) { setPhotoError(validationError); return; }
+  function nextStep() {
+    setBookingError("");
+    if (!validateStep(bookingStep)) return;
+    setBookingStep((step) => Math.min(5, step + 1));
+    setTimeout(() => document.getElementById("booking")?.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
+  }
 
+  function previousStep() {
+    setBookingError("");
+    setBookingStep((step) => Math.max(1, step - 1));
+    setTimeout(() => document.getElementById("booking")?.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
+  }
+
+  async function submitBooking(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!validateStep(5)) return;
+
+    const data = new FormData(event.currentTarget);
     const message = [
-      "Hola Dako Tattoo, quiero pedir una cita.", "", "Nombre:", `${data.get("name") || ""}`, "", "WhatsApp:", `${data.get("whatsapp") || ""}`, "", "Instagram / Facebook:", `${data.get("instagram") || ""}`, "", "Zona del cuerpo:", `${data.get("bodyArea") || ""}`, "", "Tamaño aproximado:", `${data.get("size") || ""}`, "", "Estilo:", `${data.get("style") || ""}`, "", "¿Cómo conociste Dako Tattoo?", `${data.get("source") || ""}`, "", "Idea del tatuaje:", `${data.get("idea") || ""}`, "", "Fotos para preparar el diseño:", files.length > 0 ? `${files.length} foto(s) seleccionada(s): zona del cuerpo + referencias.` : "Sin fotos adjuntas."
+      "Hola Dako Tattoo, quiero empezar un proyecto.",
+      "",
+      "Nombre: " + (data.get("name") || ""),
+      "WhatsApp: " + (data.get("whatsapp") || ""),
+      "Instagram / Facebook: " + (data.get("instagram") || "No indicado"),
+      "",
+      "Tipo de proyecto: " + (data.get("projectType") || ""),
+      "Zona del cuerpo: " + (data.get("bodyArea") || ""),
+      "Tamaño aproximado: " + (data.get("size") || ""),
+      "Estilo: " + (data.get("style") || ""),
+      "",
+      "Idea: " + (data.get("idea") || ""),
+      "Lo más importante para mí: " + (data.get("priority") || ""),
+      "Quiero evitar: " + (data.get("avoid") || "Nada específico"),
+      "",
+      "Cuándo me gustaría empezar: " + (data.get("timing") || ""),
+      "Disponibilidad: " + (data.get("availability") || ""),
+      "Presupuesto aproximado: " + (data.get("budget") || "Prefiero hablarlo contigo"),
+      "Cómo conocí Dako Tattoo: " + (data.get("source") || ""),
+      "",
+      "Fotos seleccionadas: " + bookingFiles.length + " archivo(s)."
     ].join("\n");
 
-    if (files.length > 0) {
-      const shareData = { text: message, files };
-      try {
-        if (navigator.canShare?.(shareData)) { await navigator.share(shareData); return; }
-      } catch (error) {
-        if (error instanceof DOMException && error.name === "AbortError") return;
+    const shareData = { text: message, files: bookingFiles };
+    try {
+      if (bookingFiles.length > 0 && navigator.canShare?.(shareData)) {
+        await navigator.share(shareData);
+        setBookingSent(true);
+        return;
       }
-      window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank");
-      alert("Tu dispositivo no permite adjuntar las fotos automáticamente desde la web. WhatsApp se abrirá con el texto preparado; añade allí las fotos seleccionadas antes de enviarlo.");
-      return;
+    } catch (error) {
+      if (error instanceof DOMException && error.name === "AbortError") return;
     }
-    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank");
+
+    window.open("https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(message), "_blank");
+    if (bookingFiles.length > 0) {
+      setBookingError("WhatsApp se ha abierto con el mensaje preparado. Añade allí las fotos seleccionadas antes de enviarlo.");
+    }
+    setBookingSent(true);
   }
 
-  async function sendHealingCheck(event: FormEvent<HTMLFormElement>) {
+  async function submitHealing(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const form = event.currentTarget;
-    const data = new FormData(form);
-    const input = form.elements.namedItem("healingPhotos") as HTMLInputElement | null;
-    const files = input?.files ? Array.from(input.files) : [];
-    const validationError = validateReferenceFiles(files);
-
-    if (files.length === 0) {
-      setHealingPhotoError("Añade al menos una foto clara del tatuaje.");
+    const data = new FormData(event.currentTarget);
+    if (healingFiles.length === 0) {
+      setHealingError("Añade al menos una foto clara del tatuaje.");
       return;
     }
-    if (validationError) {
-      setHealingPhotoError(validationError);
+    const fileError = validateFiles(healingFiles);
+    if (fileError) {
+      setHealingError(fileError);
       return;
     }
 
     const message = [
       "Hola Dako Tattoo, te envío el seguimiento de cicatrización.",
       "",
-      "Nombre:", `${data.get("healingName") || ""}`,
-      "",
-      "Fecha de la sesión:", `${data.get("sessionDate") || ""}`,
-      "",
-      "Zona tatuada:", `${data.get("tattooArea") || ""}`,
-      "",
-      "Control:", `${data.get("healingDay") || ""}`,
-      "",
-      "Observaciones:", `${data.get("healingNotes") || "Sin observaciones."}`,
-      "",
-      "Fotos adjuntas:", `${files.length} foto(s).`
+      "Nombre: " + (data.get("healingName") || ""),
+      "Zona tatuada: " + (data.get("tattooArea") || ""),
+      "Fotos adjuntas: " + healingFiles.length + " archivo(s)."
     ].join("\n");
 
-    const shareData = { text: message, files };
+    const shareData = { text: message, files: healingFiles };
     try {
       if (navigator.canShare?.(shareData)) {
         await navigator.share(shareData);
@@ -106,123 +148,267 @@ export default function Home() {
       if (error instanceof DOMException && error.name === "AbortError") return;
     }
 
-    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank");
-    alert("WhatsApp se abrirá con el mensaje preparado. Añade allí las fotos seleccionadas antes de enviarlo.");
+    window.open("https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(message), "_blank");
+    setHealingError("WhatsApp se ha abierto con el mensaje preparado. Añade allí las fotos seleccionadas antes de enviarlo.");
   }
 
   return (
     <main>
       <section className="hero">
-        <nav className="nav">
-          <div className="brandColumn">
-            <strong>DAKO TATTOO</strong>
-            <div className="heroCredentials">
-              <p className="credentialEyebrow">Formación certificada</p>
-              <button className="certificatePreview" type="button" onClick={() => setSelected({ src: vicmanCertificate, title: "Secretos del Diseño y Composición del Tatuaje", category: "Vicman Tattoo · 2026" })}>
-                <img src={vicmanCertificate} alt="Certificado de diseño y composición del tatuaje" />
-                <span><b>Diseño y Composición del Tatuaje</b><small>Vicman Tattoo · 2026</small></span>
-              </button>
-              <div className="sanitaryBadge">
-                <span className="credentialSeal">✓</span>
-                <span><b>Formación Higiénico-Sanitaria</b><small>56 h · Homologado por EVES</small></span>
-              </div>
-              <a className="sanitaryBadge aftercareBadge" href="#cuidados" aria-label="Ver cuidados del tatuaje">
-                <span className="credentialSeal">+</span>
-                <span><b>Cuidados del tatuaje</b><small>Limpieza · hidratación · sol · piscina</small></span>
-              </a>
-            </div>
-          </div>
+        <nav className="nav shell">
+          <a className="brand" href="#top">DAKO TATTOO</a>
           <div className="navLinks">
-            <a href="#gallery">Galería</a><a href="#booking">Cita</a><a href="#seguimiento">Seguimiento</a><a href="#retoques">Retoques</a><a href="#cuidados">Cuidados</a><a href="#contact">Contacto</a><a href={instagramUrl} target="_blank" rel="noreferrer">Instagram</a><a href={facebookUrl} target="_blank" rel="noreferrer">Facebook</a>
+            <a href="#gallery">Trabajos</a>
+            <a href="#process">Cómo funciona</a>
+            <a href="#booking">Reservar</a>
+            <a href="#seguimiento">Seguimiento</a>
           </div>
         </nav>
 
-        <div className="heroContent">
-          <a
-            id="fidelidad"
-            className="loyaltyOffer"
-            href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hola Dako Tattoo, quiero información sobre la tarjeta de fidelidad: por 4 sesiones, la 5.ª es GRATIS.")}`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <span className="loyaltyOfferBadge">5.ª</span>
-            <span className="loyaltyOfferCopy">
-              <small>Tarjeta de fidelidad</small>
-              <b>Por 4 sesiones, la 5.ª es GRATIS</b>
-              <em>Pide tu tarjeta, completa tus 4 sellos y consulta los detalles por WhatsApp.</em>
-            </span>
-            <strong>Quiero mi tarjeta →</strong>
-          </a>
+        <div id="top" className="heroGrid shell">
+          <div className="heroCopy">
+            <p className="eyebrow">Calatorao · Zaragoza</p>
+            <h1>Tu idea, convertida en un tatuaje que funcione en tu cuerpo.</h1>
+            <p className="lead">
+              Diseño personalizado, composición adaptada a la anatomía y una consulta clara antes de reservar.
+              Envíame tu idea, la zona y referencias. Te diré cómo la trabajaría y qué opción tiene más sentido para ti.
+            </p>
+            <div className="heroActions">
+              <a className="button primary" href="#booking">Empezar mi proyecto</a>
+              <a className="button ghost" href="#gallery">Ver trabajos</a>
+            </div>
+            <div className="heroTrust">
+              <span>Black & Grey</span>
+              <span>Diseño personalizado</span>
+              <span>Seguimiento de cicatrización</span>
+            </div>
+          </div>
 
-          <a className="healingPrompt" href="#seguimiento">
-            <span className="healingPromptIcon">+</span>
-            <span><b>Seguimiento de tu tatuaje</b><small>Envíame fotos los días 3, 7, 14 y 30 para revisar cómo cicatriza.</small></span>
-            <strong>Enviar fotos →</strong>
-          </a>
-          <p className="eyebrow">Calatorao / Zaragoza</p>
-          <h1>Black & Grey Tattoo Studio</h1>
-          <p className="lead">Diseños personalizados, composición adaptada al cuerpo y tatuajes pensados para verse bien hoy y en el futuro.</p>
-          <div className="actions"><a className="button primary" href="#booking">Reservar consulta</a><a className="button" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer">WhatsApp</a><a className="button" href={instagramUrl} target="_blank" rel="noreferrer">Instagram</a><a className="button" href={facebookUrl} target="_blank" rel="noreferrer">Facebook</a></div>
+          <aside className="credentialPanel">
+            <p className="credentialEyebrow">Formación certificada</p>
+            <div className="certificateCard">
+              <img src="/vicman-certificate.svg" alt="Certificado de diseño y composición del tatuaje" />
+              <div><b>Diseño y Composición del Tatuaje</b><small>Vicman Tattoo · 2026</small></div>
+            </div>
+            <div className="sanitaryBadge">
+              <span className="credentialSeal">✓</span>
+              <div><b>Formación Higiénico-Sanitaria</b><small>56 h · Homologado por EVES</small></div>
+            </div>
+          </aside>
         </div>
       </section>
 
-      <section id="seguimiento" className="section healingSection">
-        <div className="healingIntro">
-          <p className="eyebrow">Cicatrización controlada</p>
-          <h2>Tu tatuaje no termina al salir del estudio</h2>
-          <p className="sectionIntro">Envíame una foto clara los días <b>3, 7, 14 y 30</b>. Así puedo comprobar la evolución, detectar a tiempo un cuidado incorrecto y valorar el resultado una vez cicatrizado.</p>
-          <div className="healingDays" aria-label="Días de seguimiento">
-            <span><b>03</b><small>Primer control</small></span>
-            <span><b>07</b><small>Evolución</small></span>
-            <span><b>14</b><small>Cicatrización</small></span>
-            <span><b>30</b><small>Resultado</small></span>
-          </div>
-          <div className="retouchNotice">
-            <p><b>Retoque pequeño gratuito:</b> dentro de las primeras 8 semanas, cuando se hayan seguido los cuidados indicados y se haya realizado el seguimiento con fotos.</p>
-            <p><b>Si no se cumplen los cuidados:</b> cuando el retoque sea necesario por rascado, sol, piscina, exceso de crema u otras indicaciones no respetadas, tendrá un coste del 50% del precio habitual del retoque.</p>
-          </div>
+      <section id="process" className="section shell processSection">
+        <p className="eyebrow">Sin vueltas</p>
+        <h2>Así empieza tu tatuaje</h2>
+        <p className="sectionIntro">Antes de hablar de una fecha, necesito entender bien el proyecto. Así puedo recomendarte un tamaño, composición y plan de sesiones que tengan sentido.</p>
+        <div className="processGrid">
+          <article><span>01</span><b>Cuéntame tu idea</b><p>Qué quieres representar, qué estilo buscas y qué es lo más importante para ti.</p></article>
+          <article><span>02</span><b>Vemos zona y tamaño</b><p>Una foto clara del cuerpo me ayuda a valorar anatomía, flow y proporción.</p></article>
+          <article><span>03</span><b>Recibes propuesta y precio</b><p>Te explico cómo lo trabajaría, el tamaño recomendado y si conviene dividirlo en sesiones.</p></article>
+          <article><span>04</span><b>Elegimos fecha</b><p>Cuando todo está claro, acordamos el día. La cita queda confirmada con la reserva.</p></article>
         </div>
-
-        <form className="form healingForm" onSubmit={sendHealingCheck}>
-          <span className="formTitle">Enviar control de cicatrización</span>
-          <input name="healingName" placeholder="Nombre completo" required />
-          <label><span>Fecha de la sesión</span><input name="sessionDate" type="date" required /></label>
-          <input name="tattooArea" placeholder="Zona tatuada" required />
-          <select name="healingDay" required defaultValue=""><option value="" disabled>Selecciona el control</option><option>Día 3</option><option>Día 7</option><option>Día 14</option><option>Día 30</option><option>Otra revisión</option></select>
-          <textarea name="healingNotes" placeholder="Cuéntame si notas irritación, dolor, pérdida de pigmento u otra cosa" />
-          <label className="healingPhotoUpload"><span className="healingPhotoTitle"><b>📸 ENVÍA FOTOS DEL TATUAJE</b><small>Es importante ver cómo está cicatrizando. Añade de 1 a 3 fotos claras, con buena luz y sin filtros.</small></span><input name="healingPhotos" type="file" accept="image/jpeg,image/png,image/webp" multiple required onChange={(event) => { const files = event.currentTarget.files ? Array.from(event.currentTarget.files) : []; const error = validateReferenceFiles(files); setHealingPhotoError(error); setHealingPhotoNames(error ? [] : files.map((file) => file.name)); if (error) event.currentTarget.value = ""; }} /></label>
-          {healingPhotoNames.length > 0 && (<p className="formNote">Seleccionadas: {healingPhotoNames.join(", ")}</p>)}
-          {healingPhotoError && (<p className="formNote formError">{healingPhotoError}</p>)}
-          <button className="healingSubmit" type="submit">📲 ENVIAR FOTOS POR WHATSAPP</button>
-          <p className="formNote healingReminder"><b>Seguimiento importante:</b> las fotos permiten comprobar la evolución y valorar correctamente el resultado final.</p>
-        </form>
       </section>
 
       <section id="gallery" className="section gallerySection">
-        <p className="eyebrow">Portfolio</p><h2>Galería de trabajos</h2><p className="sectionIntro">Selección de tatuajes realizados por Dako Tattoo: piezas black & grey, floral, traditional, cuello y diseños personalizados.</p>
-        <div className="masonry">{gallery.map((item) => (<button className="galleryItem" key={item.src} onClick={() => setSelected(item)}><img src={item.src} alt={item.title} loading="lazy" onError={(event) => { event.currentTarget.parentElement?.remove(); }} /><span className="galleryOverlay"><b>{item.title}</b><small>{item.category}</small></span></button>))}</div>
+        <div className="shell">
+          <p className="eyebrow">Portfolio</p>
+          <div className="sectionHeadingRow">
+            <h2>Trabajos realizados</h2>
+            <a className="textLink" href="#booking">Quiero algo personalizado →</a>
+          </div>
+          <p className="sectionIntro">Una selección de proyectos reales. El diseño final siempre se adapta a la anatomía, tamaño y objetivo de cada cliente.</p>
+          <div className="masonry">
+            {gallery.map((item) => (
+              <button className="galleryItem" type="button" key={item.src} onClick={() => setSelected(item)}>
+                <img src={item.src} alt={item.title} loading="lazy" />
+                <span className="galleryOverlay"><b>{item.title}</b><small>{item.category}</small></span>
+              </button>
+            ))}
+          </div>
+        </div>
       </section>
 
-      <section id="booking" className="section split bookingSection">
-        <div className="bookingIntro"><p className="eyebrow">📅 Reserva</p><h2>Reserva tu cita</h2><p>Envíame tu idea, zona del cuerpo, tamaño aproximado y referencias. Te responderé con una propuesta profesional.</p><div className="bookingCallout"><span>✍️</span><b>Completa el formulario y envía tu solicitud por WhatsApp.</b></div></div>
-        <form className="form bookingForm" onSubmit={sendBooking}>
-          <input name="name" placeholder="Nombre completo" required /><input name="whatsapp" placeholder="WhatsApp" required /><input name="instagram" placeholder="Instagram / Facebook" /><input name="bodyArea" placeholder="Zona del cuerpo" required /><input name="size" placeholder="Tamaño aproximado (ej. 15 cm)" required />
-          <select name="style" required defaultValue=""><option value="" disabled>Selecciona un estilo</option><option>Black & Grey</option><option>Color</option><option>Fine Line</option><option>Tribal</option><option>Realismo</option><option>Lettering</option><option>Ornamental</option><option>Personalizado</option></select>
-          <select name="source" required defaultValue=""><option value="" disabled>¿Cómo conociste Dako Tattoo?</option><option>Instagram</option><option>Facebook</option><option>TikTok</option><option>Google</option><option>Un amigo me recomendó</option><option>Ya soy cliente</option><option>Otro</option></select>
-          <textarea name="idea" placeholder="Describe tu idea" required />
-          <label className="bookingPhotoUpload"><span className="bookingPhotoTitle"><b>📸 AÑADE FOTOS PARA TU DISEÑO</b><small>Sube 1 foto clara de la zona del cuerpo y 1–2 imágenes de referencia. Así podré preparar mejor el tamaño, el diseño y la composición.</small></span><input name="references" type="file" accept="image/jpeg,image/png,image/webp" multiple onChange={(event) => { const files = event.currentTarget.files ? Array.from(event.currentTarget.files) : []; const error = validateReferenceFiles(files); setPhotoError(error); setPhotoNames(error ? [] : files.map((file) => file.name)); if (error) event.currentTarget.value = ""; }} /></label>
-          {photoNames.length > 0 && (<p className="formNote">Seleccionadas: {photoNames.join(", ")}</p>)}{photoError && (<p className="formNote" style={{ color: "#d9a2a2" }}>{photoError}</p>)}
-          <button className="bookingSubmit" type="submit">📅 SOLICITAR CITA POR WHATSAPP</button><p className="formNote bookingReminder"><b>IMPORTANTE:</b> Pulsa el botón, selecciona WhatsApp y envía la solicitud a Dako Tattoo. Si añades fotos, se prepararán junto con tu mensaje.</p>
+      <section className="section shell whySection">
+        <p className="eyebrow">La diferencia está en el diseño</p>
+        <h2>No es solo “hacer el dibujo”.</h2>
+        <div className="whyGrid">
+          <article><b>Adaptado a tu anatomía</b><p>El diseño se construye para seguir la forma del cuerpo y no quedarse plano sobre la piel.</p></article>
+          <article><b>Contraste y lectura</b><p>Se decide dónde poner negro, luz y espacio negativo para que el tatuaje se entienda también a distancia.</p></article>
+          <article><b>Pensado para envejecer</b><p>No fuerzo microdetalle cuando el tamaño no lo permite. Prefiero un resultado que siga funcionando con los años.</p></article>
+          <article><b>Seguimiento real</b><p>Después de la sesión revisamos la cicatrización y el resultado final antes de valorar cualquier retoque.</p></article>
+        </div>
+      </section>
+
+      <section className="section shell claritySection">
+        <div className="clarityCard">
+          <div><p className="eyebrow">Antes de reservar</p><h2>Precio claro, proyecto claro.</h2></div>
+          <div className="clarityCopy">
+            <p>El precio depende de tamaño, zona, nivel de detalle y número de sesiones. Primero definimos bien el proyecto y después te doy una propuesta concreta.</p>
+            <p><b>Proyectos grandes:</b> pueden dividirse en varias sesiones para que el proceso sea más cómodo y cada parte se pueda trabajar con tiempo.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="booking" className="section shell bookingSection">
+        <div className="bookingIntro">
+          <p className="eyebrow">Solicitud de proyecto</p>
+          <h2>Empezamos por entender tu idea.</h2>
+          <p>Son 5 pasos cortos. Al final se prepara un mensaje con toda la información para enviarlo por WhatsApp.</p>
+          <div className="bookingProgress" aria-label={"Paso " + progress}>
+            {[1,2,3,4,5].map((step) => <span key={step} className={step <= bookingStep ? "active" : ""}>{step}</span>)}
+          </div>
+          <div className="bookingSideNote"><b>Qué necesito para darte una buena respuesta</b><p>Idea + zona del cuerpo + tamaño aproximado + foto clara + 1–2 referencias si las tienes.</p></div>
+        </div>
+
+        <form className="form bookingForm" onSubmit={submitBooking}>
+          <div data-booking-step="1" hidden={bookingStep !== 1}>
+            <span className="formStep">Paso 1 · El proyecto</span>
+            <h3>¿Qué quieres hacerte?</h3>
+            <select name="projectType" required defaultValue=""><option value="" disabled>Tipo de proyecto</option><option>Tatuaje nuevo</option><option>Cover-up / tapar tatuaje</option><option>Continuar una pieza existente</option><option>Retoque / revisión</option></select>
+            <select name="style" required defaultValue=""><option value="" disabled>Estilo</option><option>Black & Grey</option><option>Realismo</option><option>Fine Line</option><option>Lettering</option><option>Tribal</option><option>Ornamental</option><option>Color</option><option>No estoy seguro</option></select>
+            <textarea name="idea" placeholder="Cuéntame la idea con tus palabras" required />
+            <textarea name="priority" placeholder="¿Qué es lo más importante para ti en este tatuaje?" required />
+            <textarea name="avoid" placeholder="¿Hay algo que no quieres que tenga? (opcional)" />
+          </div>
+
+          <div data-booking-step="2" hidden={bookingStep !== 2}>
+            <span className="formStep">Paso 2 · Zona y tamaño</span>
+            <h3>¿Dónde va y qué tamaño imaginas?</h3>
+            <input name="bodyArea" placeholder="Zona del cuerpo (ej. antebrazo exterior)" required />
+            <input name="size" placeholder="Tamaño aproximado (ej. 15–20 cm)" required />
+            <p className="formHint">Si no sabes el tamaño exacto, pon una aproximación. Después te recomendaré el tamaño que mejor funcione para el diseño y la anatomía.</p>
+          </div>
+
+          <div data-booking-step="3" hidden={bookingStep !== 3}>
+            <span className="formStep">Paso 3 · Momento y disponibilidad</span>
+            <h3>¿Cuándo te gustaría empezar?</h3>
+            <select name="timing" required defaultValue=""><option value="" disabled>Cuándo te gustaría hacerlo</option><option>Lo antes posible</option><option>Durante este mes</option><option>En 1–2 meses</option><option>Más adelante, todavía estoy mirando ideas</option></select>
+            <select name="availability" required defaultValue=""><option value="" disabled>Qué horario te viene mejor</option><option>Entre semana por la mañana</option><option>Entre semana por la tarde</option><option>Fin de semana</option><option>Soy flexible</option></select>
+            <input name="budget" placeholder="Presupuesto aproximado (opcional)" />
+            <p className="formHint">El presupuesto es opcional. Sirve para saber si conviene ajustar tamaño, detalle o dividir el proyecto en varias sesiones.</p>
+          </div>
+
+          <div data-booking-step="4" hidden={bookingStep !== 4}>
+            <span className="formStep">Paso 4 · Fotos</span>
+            <h3>Enséñame la zona y tus referencias.</h3>
+            <label className="bookingPhotoUpload">
+              <span className="bookingPhotoTitle"><b>Añade hasta 3 fotos</b><small>Ideal: 1 foto clara de la zona del cuerpo + 1–2 referencias. Sin filtros y con buena luz.</small></span>
+              <input name="references" type="file" accept="image/jpeg,image/png,image/webp" multiple onChange={(event) => {
+                const files = event.currentTarget.files ? Array.from(event.currentTarget.files) : [];
+                const error = validateFiles(files);
+                setBookingError(error);
+                setBookingFiles(error ? [] : files);
+                setBookingFileNames(error ? [] : files.map((file) => file.name));
+                if (error) event.currentTarget.value = "";
+              }} />
+            </label>
+            {bookingFileNames.length > 0 && <p className="formNote">Seleccionadas: {bookingFileNames.join(", ")}</p>}
+          </div>
+
+          <div data-booking-step="5" hidden={bookingStep !== 5}>
+            <span className="formStep">Paso 5 · Contacto</span>
+            <h3>¿Dónde te respondo?</h3>
+            <input name="name" placeholder="Nombre completo" required />
+            <input name="whatsapp" placeholder="WhatsApp" required />
+            <input name="instagram" placeholder="Instagram / Facebook (opcional)" />
+            <select name="source" required defaultValue=""><option value="" disabled>¿Cómo conociste Dako Tattoo?</option><option>Instagram</option><option>Facebook</option><option>TikTok</option><option>Google</option><option>Un amigo me recomendó</option><option>Ya soy cliente</option><option>Otro</option></select>
+            <div className="whatNext">
+              <b>Qué pasa después</b>
+              <ol><li>Reviso idea, zona, tamaño y referencias.</li><li>Te explico cómo lo trabajaría y te doy el precio.</li><li>Si todo encaja, elegimos fecha.</li><li>La cita queda confirmada con la reserva.</li></ol>
+            </div>
+            <button className="bookingSubmit" type="submit">Enviar solicitud por WhatsApp</button>
+            <p className="formNote">Tus datos se utilizan únicamente para responder a esta solicitud y organizar tu cita.</p>
+            {bookingSent && <p className="successNote">Solicitud preparada. Si WhatsApp ya se abrió, revisa el mensaje, añade las fotos si hace falta y envíalo.</p>}
+          </div>
+
+          {bookingError && <p className="formError">{bookingError}</p>}
+          <div className="formNavigation">
+            {bookingStep > 1 && <button className="button ghost" type="button" onClick={previousStep}>Atrás</button>}
+            {bookingStep < 5 && <button className="button primary" type="button" onClick={nextStep}>Continuar</button>}
+          </div>
         </form>
       </section>
 
-      <section id="contact" className="section contact"><h2>Contacto</h2><p>Para consultas rápidas, escribe por WhatsApp, Instagram o Facebook.</p><div className="actions" style={{ justifyContent: "center" }}><a className="button primary" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer">WhatsApp</a><a className="button" href={instagramUrl} target="_blank" rel="noreferrer">Instagram</a><a className="button" href={facebookUrl} target="_blank" rel="noreferrer">Facebook</a></div><p style={{ marginTop: 24 }}>WhatsApp: +34 643 922 673<br />Instagram: @dako.tattoo.art<br />Facebook: Yordan Georgiev</p></section>
+      <section className="section shell faqSection">
+        <p className="eyebrow">Preguntas habituales</p>
+        <h2>Antes de escribir, esto te interesa.</h2>
+        <div className="faqGrid">
+          <details><summary>¿Cuánto cuesta un tatuaje?</summary><p>Depende de tamaño, zona, detalle y tiempo de trabajo. Con la información del formulario puedo darte una propuesta mucho más precisa.</p></details>
+          <details><summary>¿Puedo hacer un proyecto grande por partes?</summary><p>Sí. En proyectos grandes podemos planificar varias sesiones y construir el tatuaje paso a paso sin tener que hacerlo todo en un solo día.</p></details>
+          <details><summary>¿Tengo que traer el diseño terminado?</summary><p>No. Puedes venir con una idea o referencias. La composición final se adapta a tu cuerpo y al tamaño real que vaya a tener.</p></details>
+          <details><summary>¿Y si todavía no sé exactamente lo que quiero?</summary><p>No pasa nada. Indica qué elementos te gustan, la zona y el estilo. La consulta sirve precisamente para ordenar la idea antes de tatuar.</p></details>
+        </div>
+      </section>
 
-      <section id="retoques" className="section"><p className="eyebrow">Condiciones claras</p><h2>Política de retoques</h2><p className="sectionIntro">El resultado final se valora cuando la piel está completamente cicatrizada. Cada caso se revisa mediante las fotos de seguimiento.</p><div className="grid retouchGrid"><article className="card"><span>Retoque pequeño gratuito</span><p>Incluye un pequeño retoque dentro de las 8 semanas posteriores a la sesión si el tatuaje ha cicatrizado con normalidad, se han respetado los cuidados y se han enviado las fotos de seguimiento.</p></article><article className="card"><span>Retoque al 50%</span><p>Si la pérdida de pigmento está relacionada con cuidados inadecuados —rascado, sol, piscina, exceso de crema o indicaciones no respetadas— el retoque tendrá un coste del 50% de su precio habitual.</p></article><article className="card"><span>No incluye cambios</span><p>El retoque gratuito no cubre modificaciones del diseño, elementos nuevos, ampliaciones ni solicitudes realizadas después de las primeras 8 semanas.</p></article></div><p className="sectionIntro" style={{ marginTop: 24 }}>La valoración final depende del estado real de la piel y del tatuaje. Si aparece dolor intenso, calor creciente, pus, fiebre o enrojecimiento que se extiende, consulta con un profesional sanitario.</p></section>
+      <section id="seguimiento" className="section shell healingSection">
+        <div className="healingIntro">
+          <p className="eyebrow">Cicatrización controlada</p>
+          <h2>Tu tatuaje no termina al salir.</h2>
+          <p className="sectionIntro">Envíame una foto clara los días 3, 7, 14 y 30. Así puedo comprobar la evolución y valorar el resultado una vez cicatrizado.</p>
+          <div className="healingDays"><span><b>03</b><small>Primer control</small></span><span><b>07</b><small>Evolución</small></span><span><b>14</b><small>Cicatrización</small></span><span><b>30</b><small>Resultado</small></span></div>
+        </div>
 
-      <section id="cuidados" className="section"><p className="eyebrow">Aftercare</p><h2>Cuidados después del tatuaje</h2><p className="sectionIntro">Un buen cuidado durante la cicatrización ayuda a proteger la piel y a conservar mejor el resultado del tatuaje.</p><div className="grid"><article className="card"><span>Limpieza</span><p>Lava el tatuaje con las manos limpias y un jabón suave, sin frotar. Seca la zona con pequeños toques usando papel limpio o una toalla limpia, sin arrastrar sobre la piel.</p></article><article className="card"><span>Hidratación</span><p>Cuando la piel esté seca, aplica una capa fina del producto de cuidado recomendado. Evita dejar una capa gruesa y húmeda sobre el tatuaje.</p></article><article className="card"><span>Durante la cicatrización</span><p>No rasques, no arranques costras ni piel descamada y evita el roce innecesario. No sumerjas el tatuaje en piscina, jacuzzi, bañera o agua compartida hasta que la piel esté completamente cicatrizada.</p></article><article className="card"><span>Sol y resultado a largo plazo</span><p>Evita la exposición directa al sol mientras el tatuaje está cicatrizando. Una vez curado, protege la zona del sol para ayudar a conservar el contraste y el pigmento durante más tiempo.</p></article></div></section>
+        <form className="form healingForm" onSubmit={submitHealing}>
+          <span className="formStep">Seguimiento</span>
+          <h3>Enviar fotos de cicatrización</h3>
+          <input placeholder="Nombre completo" required name="healingName" />
+          <input placeholder="Zona tatuada" required name="tattooArea" />
+          <label className="healingPhotoUpload">
+            <span className="bookingPhotoTitle"><b>Fotos del tatuaje</b><small>Añade de 1 a 3 fotos claras, con buena luz y sin filtros.</small></span>
+            <input type="file" accept="image/jpeg,image/png,image/webp" multiple required name="healingPhotos" onChange={(event) => {
+              const files = event.currentTarget.files ? Array.from(event.currentTarget.files) : [];
+              const error = validateFiles(files);
+              setHealingError(error);
+              setHealingFiles(error ? [] : files);
+              setHealingFileNames(error ? [] : files.map((file) => file.name));
+              if (error) event.currentTarget.value = "";
+            }} />
+          </label>
+          {healingFileNames.length > 0 && <p className="formNote">Seleccionadas: {healingFileNames.join(", ")}</p>}
+          {healingError && <p className="formError">{healingError}</p>}
+          <button className="bookingSubmit" type="submit">Enviar seguimiento por WhatsApp</button>
+        </form>
+      </section>
 
-      {selected && (<div className="lightbox" onClick={() => setSelected(null)}><button className="closeLightbox" type="button" aria-label="Cerrar">×</button><img src={selected.src} alt={selected.title} /><div className="lightboxCaption"><b>{selected.title}</b><span>{selected.category}</span></div></div>)}
+      <section id="retoques" className="section shell">
+        <p className="eyebrow">Condiciones claras</p><h2>Política de retoques</h2>
+        <div className="whyGrid retouchGrid">
+          <article><b>Control después de 1 mes</b><p>Cuando el tatuaje esté completamente cicatrizado, revisamos juntos el resultado final.</p></article>
+          <article><b>Retoque o refuerzo · 50 €</b><p>Si después de la cicatrización hay alguna zona que necesita refuerzo de líneas, sombras o pigmento, el retoque tiene un precio de 50 €.</p></article>
+          <article><b>No incluye cambios de diseño</b><p>El retoque es para reforzar el trabajo realizado. Elementos nuevos, ampliaciones o cambios del diseño se valoran aparte.</p></article>
+        </div>
+      </section>
+
+      <section id="cuidados" className="section shell">
+        <p className="eyebrow">Aftercare</p><h2>Cuidados después del tatuaje</h2>
+        <div className="whyGrid">
+          <article><b>Limpieza</b><p>Lava la zona con las manos limpias y jabón suave, sin frotar. Seca con pequeños toques.</p></article>
+          <article><b>Hidratación</b><p>Aplica una capa fina del producto recomendado. Evita dejar la piel cubierta por una capa gruesa de crema.</p></article>
+          <article><b>Durante la cicatrización</b><p>No rasques ni arranques piel. Evita piscina, jacuzzi, baños largos y roce innecesario hasta que esté cicatrizado.</p></article>
+          <article><b>Sol</b><p>Evita exposición directa durante la curación. Una vez cicatrizado, protege la zona para conservar mejor el pigmento y contraste.</p></article>
+        </div>
+      </section>
+
+      <section id="contact" className="section shell contactSection">
+        <p className="eyebrow">Contacto</p><h2>¿Tienes una duda rápida?</h2>
+        <p>Para una consulta completa usa el formulario de proyecto. Para algo puntual, escríbeme directamente.</p>
+        <div className="heroActions centerActions">
+          <a className="button primary" href={"https://wa.me/" + whatsappNumber} target="_blank" rel="noreferrer">WhatsApp</a>
+          <a className="button ghost" href={instagramUrl} target="_blank" rel="noreferrer">Instagram</a>
+          <a className="button ghost" href={facebookUrl} target="_blank" rel="noreferrer">Facebook</a>
+        </div>
+      </section>
+
+      <a className="mobileBookingCta" href="#booking">Empezar mi proyecto</a>
+
+      {selected && (
+        <div className="lightbox" onClick={() => setSelected(null)}>
+          <button className="closeLightbox" type="button" aria-label="Cerrar">×</button>
+          <img src={selected.src} alt={selected.title} />
+          <div className="lightboxCaption"><b>{selected.title}</b><span>{selected.category}</span></div>
+        </div>
+      )}
     </main>
   );
 }
